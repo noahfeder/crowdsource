@@ -34,12 +34,10 @@ const style = StyleSheet.create({
   },
   binary: {
     flex: 1,
-    flexDirection: 'row'
+    height: 100
   },
-  binaryA: {
-    borderRightWidth: 1,
-    borderRightColor: 'black',
-    flex: 0.5
+  binaryText: {
+    position: 'absolute'
   }
 })
 

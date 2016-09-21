@@ -2,19 +2,18 @@
 import React, {Component} from 'react';
 import {Image, View, Text} from 'react-native';
 import style from '../public/styles/style';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class Binary extends Component {
   render() {
     let hue = this.props.color;
+    let breakPoint = Math.random();
     return (
-        <View style={style.binary}>
-          <View style={[style.binaryA, {backgroundColor: `hsl(${hue},75%,65%)`}]}>
-            <Text style={style.redText}>A</Text>
-          </View>
-          <View style={{flex: Math.random(), backgroundColor: `hsl(${(hue + 60) % 360},75%,65%)`}}>
-            <Text style={style.greenText}>B</Text>
-          </View>
-        </View>
+          <LinearGradient
+            start={[0.0,0.0]} end={[1.0,0.0]}
+            locations={[0,breakPoint,(breakPoint + 0.1),1]}
+            colors={[`hsl(${hue},75%,75%)`,`hsl(${hue},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`]}
+            style={style.binary} />
       )
   }
 }
