@@ -8,10 +8,10 @@ export default class Binary extends Component {
     let hue = this.props.color;
     return (
         <View style={style.binary}>
-          <View style={[style.binaryA, {backgroundImage: `linear-gradient(90deg, hsl(${hue},75%,75%) 90%, hsl(${(hue + 90) % 360},75%,75%)`}]}>
+          <View style={[style.binaryA, {backgroundColor: `hsl(${hue},75%,65%)`}]}>
             <Text style={style.redText}>A</Text>
           </View>
-          <View style={{flex: Math.random(), backgroundColor: `hsl(${(hue + 90) % 360},75%,75%)`}}>
+          <View style={{flex: Math.random(), backgroundColor: `hsl(${(hue + 60) % 360},75%,65%)`}}>
             <Text style={style.greenText}>B</Text>
           </View>
         </View>
