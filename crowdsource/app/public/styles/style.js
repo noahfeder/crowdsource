@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 let { height, width } = Dimensions.get('window');
+
 const style = StyleSheet.create({
   wrapper: {
     height: height,
@@ -16,8 +17,11 @@ const style = StyleSheet.create({
   greenText: {
     color: 'green'
   },
-  decision: {
+  decisionWrapper: {
     flex: 1
+  },
+  decision: {
+    height: 100
   },
   header: {
     height: 50,
@@ -27,6 +31,15 @@ const style = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 24
+  },
+  binary: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  binaryA: {
+    borderRightWidth: 1,
+    borderRightColor: 'black',
+    flex: 0.5
   }
 })
 
