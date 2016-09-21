@@ -21,11 +21,11 @@ const style = StyleSheet.create({
     flex: 1
   },
   decision: {
-    height: 100
+    height: 150
   },
   header: {
     height: 50,
-    backgroundColor: "red"
+    backgroundColor: 'red'
   },
   headerText: {
     color: 'black',
@@ -33,11 +33,28 @@ const style = StyleSheet.create({
     fontSize: 24
   },
   binary: {
-    flex: 1,
     height: 100
   },
   binaryText: {
-    position: 'absolute'
+    textAlign: 'center',
+    height: 50,
+    fontSize: 40
+  },
+  optionA: {
+    fontSize: 18,
+    position: 'absolute',
+    top: 60,
+    textAlign: 'left',
+    width: width,
+    backgroundColor: 'transparent'
+  },
+  optionB: {
+    fontSize: 18,
+    position: 'absolute',
+    top: 60,
+    textAlign: 'right',
+    width: width,
+    backgroundColor: 'transparent'
   }
 })
 

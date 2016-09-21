@@ -9,10 +9,10 @@ import style from '../public/styles/style';
 class Crowdsource extends Component {
   decisions() {
     let hue = Math.floor(Math.random() * 360);
-    return this.props.decisions.map( (el,ind) => {
+    return this.props.items.map( (el,ind) => {
       let thisBackgroundColor = hue;
       hue = (hue + 90) % 360;
-      return <Decision key={ind} ord={el.ord} text={el.text} color={hue}/>
+      return <Decision key={ind} data={el} color={hue}/>
     });
   }
 
@@ -30,7 +30,7 @@ class Crowdsource extends Component {
 
 function mapStateToProps(state) {
   return {
-    decisions: state.decisions
+    items: state.binaries.items
   };
 }
 
