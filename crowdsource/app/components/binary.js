@@ -6,7 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 export default class Binary extends Component {
   render() {
     let hue = this.props.color;
-    let a = this.props.data.votesA, b = this.props.data.votesB;
+    let a = this.props.data.votesA;
+    let b = this.props.data.votesB;
     let breakPoint = a / (a + b);
     return (
           <LinearGradient
