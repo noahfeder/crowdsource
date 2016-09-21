@@ -5,14 +5,17 @@ import { connect } from 'react-redux';
 import Decision from '../components/decision_index';
 import Header from '../components/header';
 import style from '../public/styles/style';
+import DecisionShow from '../wrappers/decision_show';
 
-class Crowdsource extends Component {
+class IndexPage extends Component {
   decisions() {
     let hue = Math.floor(Math.random() * 360);
-    return this.props.items.map( (el,ind) => {
+    return this.props.items.map( el => {
       let thisBackgroundColor = hue;
       hue = (hue + 90) % 360;
-      return <Decision key={ind} data={el} color={hue}/>
+      return (
+        <Decision key={el.id} data={el} color={hue} />
+      )
     });
   }
 
@@ -34,4 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Crowdsource);
+export default connect(mapStateToProps)(IndexPage);
