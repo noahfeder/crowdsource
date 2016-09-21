@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  active: false
+  name: MyString
+  content: MyText
+  votesA: 1
+  votesB: 1
+
+two:
+  user: two
+  active: false
+  name: MyString
+  content: MyText
+  votesA: 1
+  votesB: 1
