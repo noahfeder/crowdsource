@@ -1,4 +1,9 @@
 /**
+ Resources: https://shift.infinite.red/a-tour-of-react-native-part-1-the-visuals-7822f48151f6#.hp7gicopq
+
+ */
+
+/**
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
@@ -11,43 +16,6 @@ import {
   Text,
   View
 } from 'react-native';
+import App from './app/wrappers/app';
 
-class crowdsource extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          FUCKING FINALLY ANDROID
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('crowdsource', () => crowdsource);
+AppRegistry.registerComponent('crowdsource', () => App);
