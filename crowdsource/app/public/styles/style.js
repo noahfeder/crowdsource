@@ -17,11 +17,12 @@ const style = StyleSheet.create({
   greenText: {
     color: 'green'
   },
-  decisionWrapper: {
+  wrapper: {
     flex: 1
   },
   decision: {
-    height: 150
+    height: 150,
+    marginBottom: 15
   },
   header: {
     height: 50,
@@ -33,28 +34,25 @@ const style = StyleSheet.create({
     fontSize: 24
   },
   binary: {
-    height: 100
+    height: 100,
+    margin: 10
   },
   binaryText: {
     textAlign: 'center',
     height: 50,
     fontSize: 40
   },
-  optionA: {
+  option: {
     fontSize: 18,
     position: 'absolute',
-    top: 60,
-    textAlign: 'left',
+    top: 100,
+    marginLeft: 15,
     width: width,
     backgroundColor: 'transparent'
   },
   optionB: {
-    fontSize: 18,
-    position: 'absolute',
-    top: 60,
     textAlign: 'right',
-    width: width,
-    backgroundColor: 'transparent'
+    marginLeft: -15
   },
   backButton: {
     width: 80,

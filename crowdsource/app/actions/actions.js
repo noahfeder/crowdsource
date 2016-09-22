@@ -6,15 +6,6 @@ export function requestBinaries() {
   }
 }
 
-export const REQUEST_BINARY = 'REQUEST_BINARY';
-
-export function requestBinary(id) {
-  return {
-    type: REQUEST_BINARY,
-    id: id
-  }
-}
-
 export const RECEIVE_BINARIES = 'RECEIVE_BINARIES'
 
 export function receiveBinaries(json) {
@@ -22,6 +13,27 @@ export function receiveBinaries(json) {
     type: RECEIVE_BINARIES,
     data: json,
     receivedAt: Date.now()
+  }
+}
+
+export function fetchBinaries() {
+  return function (dispatch) {
+    dispatch(requestBinaries());
+    return fetch('https://b345028d.ngrok.io/')
+      .then(response => response.json())
+      .then(json => dispatch(receiveBinaries(json)));
+  }
+}
+
+
+
+
+export const REQUEST_BINARY = 'REQUEST_BINARY';
+
+export function requestBinary(id) {
+  return {
+    type: REQUEST_BINARY,
+    id: id
   }
 }
 
@@ -36,33 +48,44 @@ export function receiveBinary(json, id) {
   }
 }
 
-export function fetchBinaries() {
-  return function (dispatch) {
-    dispatch(requestBinaries());
-    return fetch('https://f5b1d29b.ngrok.io/')
-      .then(response => response.json())
-      .then(json => dispatch(receiveBinaries(json)));
-  }
-}
-/****************************
-* TODO UPDATE NGROK ADDRESS *
-****************************/
-
-
-
 export function fetchBinary(id) {
   return function (dispatch) {
     dispatch(requestBinary(id));
-    return fetch(`https://f5b1d29b.ngrok.io/${id}`)
+    return fetch(`https://b345028d.ngrok.io/binaries/${id}`)
       .then(response => response.json())
-      .then(dispatch => dispatch(receiveBinary(json, id)))
+      .then(json => dispatch(receiveBinary(json, id)))
   }
 }
 
-export function newScene(scene) {
+export const VOTING = 'VOTING';
+
+export function sendVote(id, choice) {
   return {
-   type: 'NEW_SCENE',
-   payload: scene
-  };
+    type: VOTING,
+    id: id,
+    choice: choice
+  }
+}
+
+export const VOTED = 'VOTED';
+
+export function confirmedVote(id, choice, json) {
+  return {
+    type: VOTED,
+    id: id,
+    choice: choice,
+    data: json
+  }
+}
+
+export function vote(id, choice) {
+  return function (dispatch) {
+    dispatch(sendVote(id, choice));
+    return fetch(`https://b345028d.ngrok.io/binaries/${id}?choice=${choice}`, {
+      method: 'PATCH'
+    })
+    .then(response => response.json())
+    .then(json => dispatch(confirmedVote(id, choice, json)))
+  }
 }
 

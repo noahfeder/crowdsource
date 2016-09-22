@@ -1,29 +1,30 @@
 'use strict';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
 import { TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Decision from '../components/decision';
 import Header from '../components/header';
 import style from '../public/styles/style';
 import  { newScene } from '../actions/actions';
-
+import Reactotron from 'reactotron-react-native';
+import '../../ReactotronConfig';
 class IndexPage extends Component {
 
   decisions() {
     let color = Math.floor(Math.random() * 360);
-    return this.props.items.map( el => {
+    let items = [];
+    for (var id in this.props.items) {
+      items.push(this.props.items[id])
+    }
+    return items.map( el => {
       let thisBackgroundColor = color;
       color = (color + 90) % 360;
-      let thisRoute = {
-        name: 'show'
-      }
       return (
-      <TouchableHighlight key={el.id} onPress={() => {
-          this.props.navigator.push({name: 'show', data: el, color: color})
+      <TouchableHighlight style={style.wrapper} key={el.id} onPress={() => {
+          this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
           }}>
-          <View>
-            <Decision data={el} color={color} />
+          <View style={style.wrapper} >
+            <Decision data={el} id={el.id} color={color} />
           </View>
       </TouchableHighlight>
       )
@@ -44,13 +45,8 @@ class IndexPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    items: state.binaries.items,
-    scene: state.scene
+    items: state.binaries.items
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ newScene: newScene }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
+export default connect(mapStateToProps)(IndexPage);
