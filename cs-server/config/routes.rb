@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
   root to: 'binaries#index'
-
-  get "/:id" => "binaries#show"
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :binaries, only [:index, :show]
 end

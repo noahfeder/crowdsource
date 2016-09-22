@@ -5,7 +5,7 @@ class BinariesController < ApplicationController
   end
 
   def show
-    @binary = Binary.last
+    @binary = Binary.find(params[:id])
     render json: @binary
   end
 end
