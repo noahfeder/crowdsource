@@ -55,6 +55,16 @@ const style = StyleSheet.create({
     textAlign: 'right',
     width: width,
     backgroundColor: 'transparent'
+  },
+  backButton: {
+    width: 80,
+    height: 20,
+    marginTop: 20,
+    backgroundColor: 'red'
+  },
+  backButtonText: {
+    fontWeight: 'bold',
+    fontSize: 24
   }
 })
 

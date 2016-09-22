@@ -17,7 +17,7 @@ export default class App extends Component {
   renderScene(route,navigator) {
     switch (route.name) {
       case 'index':
-        return <IndexPage navigator={navigator} renderScene={this.renderScene.bind(this)}/>
+        return <IndexPage navigator={navigator} />
       case 'show':
         return <DecisionShow navigator={navigator} data={route.data} color={route.color}/>;
       default:
