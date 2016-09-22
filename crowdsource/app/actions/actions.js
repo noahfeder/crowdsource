@@ -44,7 +44,7 @@ export function fetchBinaries() {
       .then(json => dispatch(receiveBinaries(json)));
   }
 }
-
+// TODO UPDATE NGROK ADDRESS
 export function fetchBinary(id) {
   return function (dispatch) {
     dispatch(requestBinary(id));

@@ -20,7 +20,6 @@ class IndexPage extends Component {
       }
       return (
       <TouchableHighlight key={el.id} onPress={() => {
-          console.log('click');
           this.props.navigator.push({name: 'show', data: el, color: color})
           }}>
           <View>
