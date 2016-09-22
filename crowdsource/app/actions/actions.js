@@ -23,6 +23,12 @@ export function fetchBinaries() {
       .then(response => response.json())
       .then(json => dispatch(receiveBinaries(json)));
   }
-
-
 }
+
+export function newScene(scene) {
+  return {
+   type: 'NEW_SCENE',
+   payload: scene
+  };
+}
+

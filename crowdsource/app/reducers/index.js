@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import Decisions from "./decisions"
 import { REQUEST_BINARIES, RECEIVE_BINARIES } from '../actions/actions';
+import scene from './scene';
 
 function binaries(state = {
   isFetching: false,
@@ -18,13 +18,14 @@ function binaries(state = {
           lastUpdated: action.receivedAt
         })
       default:
-        return state
+        return state;
     }
 }
 
 
 const RootReducer = combineReducers({
-  binaries
+  binaries,
+  scene: scene
 });
 
 export default RootReducer;
