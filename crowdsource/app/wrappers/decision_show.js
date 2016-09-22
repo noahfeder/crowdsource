@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
 class DecisionShow extends Component {
+
   render() {
     let hue = this.props.color;
     return (
@@ -60,9 +61,10 @@ class DecisionShow extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  let activeBinary = state.activeBinary.data || state.binaries.items[ownProps.id];
   return {
-    binary: state.binaries.items[ownProps.id],
-    breakPoint: (state.binaries.items[ownProps.id].votesA / (state.binaries.items[ownProps.id].votesA + state.binaries.items[ownProps.id].votesB))
+    binary: activeBinary,
+    breakPoint: (activeBinary.votesA / (activeBinary.votesA + activeBinary.votesB))
   };
 }
 

@@ -10,6 +10,10 @@ import Reactotron from 'reactotron-react-native';
 import '../../ReactotronConfig';
 class IndexPage extends Component {
 
+  componentWillMount() {
+    () => this.props.fetchBinaries()
+  }
+
   decisions() {
     let color = Math.floor(Math.random() * 360);
     let items = [];

@@ -1,15 +1,42 @@
 import { combineReducers } from 'redux';
 import { REQUEST_BINARIES, RECEIVE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED } from '../actions/actions';
 
+function activeBinary(state = {
+  isFetching: false,
+  currentlyFetching: null,
+  data: null
+  }, action) {
+    switch (action.type) {
+      case REQUEST_BINARY: case VOTING: {
+        return Object.assign({}, state, {
+          isFetching: true,
+          currentlyFetching: action.id
+        });
+      }
+      case RECEIVE_BINARY: case VOTED: {
+        return Object.assign({},state, {
+          isFetching: false,
+          currentlyFetching: null,
+          data: action.data
+        });
+      }
+      default:
+        return state;
+    }
+}
+
 function binaries(state = {
   isFetching: false,
+  currentlyFetching: null,
   items: {}
   }, action) {
     switch (action.type) {
-      case REQUEST_BINARIES:
+      case REQUEST_BINARIES: {
         return Object.assign({}, state, {
-          isFetching: true
+          isFetching: true,
+          currentlyFetching: -1
         })
+      }
       case RECEIVE_BINARIES: {
         let newObj = {};
         action.data.forEach( (el) => {
@@ -18,14 +45,26 @@ function binaries(state = {
         })
         return Object.assign({}, state, {
           isFetching: false,
-          items: newObj,
+          currentlyFetching: null,
+          items: newObj
         })
       }
-      case REQUEST_BINARY:
+      default:
+        return state;
+    }
+}
+
+const RootReducer = combineReducers({
+  binaries,
+  activeBinary
+});
+
+export default RootReducer;
+const dead = `case REQUEST_BINARY:
         return Object.assign({}, state, {
           isFetching: true,
           currentlyFetching: action.id
-        })
+        });
       case RECEIVE_BINARY: {
         let newObj = {
           isFetching: false,
@@ -38,8 +77,8 @@ function binaries(state = {
       }
       case VOTING:
         return Object.assign({},state,{
-          currentlyFetching: action.id,
-          isFetching: true
+          isFetching: true,
+          currentlyFetching: action.id
         })
       case VOTED: {
         let newObj = {
@@ -50,14 +89,4 @@ function binaries(state = {
         newObj.items[action.id] = action.data;
         newObj.items[action.id]["lastUpdated"] = Date.now();
         return Object.assign({},state, newObj);
-      }
-      default:
-        return state;
-    }
-}
-
-const RootReducer = combineReducers({
-  binaries
-});
-
-export default RootReducer;
+      }`

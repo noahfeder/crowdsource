@@ -29,10 +29,15 @@ export default class App extends Component {
     return store.dispatch(fetchBinary(id));
   }
 
+  fetchBinaries() {
+    return store.dispatch(fetchBinaries());
+  }
+
   renderScene(route,navigator) {
     switch (route.name) {
       case 'index':
-        return <IndexPage vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
+        this.fetchBinaries();
+        return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
         this.fetchBinary(route.id);
         return <DecisionShow vote={this.vote.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
@@ -42,7 +47,6 @@ export default class App extends Component {
   }
 
   render() {
-    debugger;
     return (
       <Provider store={store}>
         <Navigator
