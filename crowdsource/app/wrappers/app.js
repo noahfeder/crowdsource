@@ -5,7 +5,7 @@ import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import IndexPage from './index';
 import DecisionShow from './decision_show';
-import reducers from '../reducers';
+import RootReducer from '../reducers';
 import { fetchBinaries, vote, fetchBinary } from '../actions/actions';
 import { Navigator, Text } from 'react-native';
 import Reactotron from 'reactotron-react-native';
@@ -16,7 +16,7 @@ Reactotron.log('WELCOME TO THE DESERT OF THE REAL');
 
 const reactotronEnhancer = createReactotronEnhancer(Reactotron);
 
-const store = createStore(reducers, compose(reactotronEnhancer, applyMiddleware(thunkMiddleware)));
+const store = createStore(RootReducer, compose(reactotronEnhancer, applyMiddleware(thunkMiddleware)));
 
 store.dispatch(fetchBinaries());
 
@@ -32,7 +32,7 @@ export default class App extends Component {
   renderScene(route,navigator) {
     switch (route.name) {
       case 'index':
-        return <IndexPage fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
+        return <IndexPage vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
         this.fetchBinary(route.id);
         return <DecisionShow vote={this.vote.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
@@ -42,12 +42,13 @@ export default class App extends Component {
   }
 
   render() {
+    debugger;
     return (
       <Provider store={store}>
         <Navigator
           initialRoute={{name: 'index'}}
           renderScene={this.renderScene.bind(this)}
-          configureScene={(route, routeStack) =>
+          configureScene={(route) =>
           Navigator.SceneConfigs.HorizontalSwipeJump}
         />
       </Provider>

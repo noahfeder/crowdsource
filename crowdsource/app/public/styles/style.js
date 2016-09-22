@@ -42,17 +42,27 @@ const style = StyleSheet.create({
     height: 50,
     fontSize: 40
   },
-  option: {
-    fontSize: 18,
+  options: {
+    flexDirection: 'row',
     position: 'absolute',
-    top: 100,
-    marginLeft: 15,
-    width: width,
+    width: width - 30,
+    top: 50,
+    height: 100,
+    backgroundColor: 'transparent',
+    margin: 15
+  },
+  option: {
+    flex: 1,
+    backgroundColor: 'transparent'
+  },
+  optionA: {
+    fontSize: 18,
     backgroundColor: 'transparent'
   },
   optionB: {
-    textAlign: 'right',
-    marginLeft: -15
+    backgroundColor: 'transparent',
+    fontSize: 18,
+    textAlign: 'right'
   },
   backButton: {
     width: 80,
