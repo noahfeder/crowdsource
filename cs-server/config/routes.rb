@@ -10,5 +10,5 @@
 
 Rails.application.routes.draw do
   root to: 'binaries#index'
-  resources :binaries, only: [:index, :show, :update]
+  resources :binaries, only: [:index, :show, :update, :create]
 end

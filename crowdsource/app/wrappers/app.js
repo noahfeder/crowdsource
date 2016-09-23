@@ -5,6 +5,7 @@ import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import IndexPage from './index';
 import DecisionShow from './decision_show';
+import DecisionNew from './decision_new';
 import RootReducer from '../reducers';
 import { fetchBinaries, vote, fetchBinary } from '../actions/actions';
 import { Navigator, Text } from 'react-native';
@@ -41,6 +42,8 @@ export default class App extends Component {
       case 'show':
         this.fetchBinary(route.id);
         return <DecisionShow vote={this.vote.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
+      case 'new':
+        return <DecisionNew navigator={navigator} />
       default:
         return <Text>ERROR</Text>;
     }

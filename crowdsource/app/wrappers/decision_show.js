@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
-import Router from 'react-native-simple-router';
 import Header from '../components/header';
 import Decision from '../components/decision';
 import style from '../public/styles/style';
@@ -15,7 +14,7 @@ class DecisionShow extends Component {
     return (
       <View style={style.wrapper}>
         <Header />
-        <Text style={{height: 50}}>{this.props.binary.description}</Text>
+        <Text style={{height: 50}}>{this.props.binary.content}</Text>
 
         <View style={style.decision} >
 

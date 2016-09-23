@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import { SocialIcon } from 'react-native-elements';
 import Decision from '../components/decision';
 import Header from '../components/header';
 import style from '../public/styles/style';
@@ -42,6 +43,11 @@ class IndexPage extends Component {
           <ScrollView>
               {this.decisions()}
           </ScrollView>
+          <SocialIcon type="github"
+            onPress={ () => {
+              this.props.navigator.push({name: 'new'})
+            }}
+          />
         </View>
       )
   }

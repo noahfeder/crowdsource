@@ -18,4 +18,17 @@ class BinariesController < ApplicationController
     @binary.save
     render json: @binary
   end
+
+  def create
+    @user = User.last ### TODO CHANGE TO CURRENT USER
+    @binary = @user.binaries.new
+    @binary.votesA = 1
+    @binary.votesB = 1
+    @binary.choiceA = params[:choiceA]
+    @binary.choiceB = params[:choiceB]
+    @binary.name = params[:name]
+    @binary.content = params[:content]
+    @binary.save
+    render json: @binary
+  end
 end
