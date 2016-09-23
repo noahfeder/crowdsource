@@ -1,6 +1,8 @@
 # == Route Map
 #
 #   Prefix Verb  URI Pattern             Controller#Action
+#   logout GET   /logout(.:format)       sessions#destroy
+#    login GET   /login(.:format)        sessions#create
 #     root GET   /                       binaries#index
 # binaries GET   /binaries(.:format)     binaries#index
 #          POST  /binaries(.:format)     binaries#create
@@ -10,6 +12,10 @@
 #
 
 Rails.application.routes.draw do
+  post '/logout' => 'sessions#destroy'
+
+  post '/login' => 'sessions#create'
+
   root to: 'binaries#index'
   resources :binaries, only: [:index, :show, :update, :create]
 end
