@@ -12,6 +12,8 @@
     NAV
 *  http://stackoverflow.com/questions/33830493/react-native-navigator/33831700#33831700
 *  https://github.com/itzikbenh/React-Native-on-Rails/blob/master/index.ios.js
+    FETCH
+*  https://davidwalsh.name/fetch
 */
 
 'use strict';

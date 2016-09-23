@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Decision from '../components/decision';
 import style from '../public/styles/style';
 import { Button } from 'react-native-elements';
+import BackButton from '../components/back_button';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -51,9 +52,7 @@ class DecisionShow extends Component {
         </View>
       </View>
 
-        <Button onPress={ () => this.props.navigator.pop() }
-          backgroundColor="#f20"
-          small raised title='BACK' />
+        <BackButton navigator={this.props.navigator} />
       </View>
     )
   }

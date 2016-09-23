@@ -3,6 +3,7 @@
 #   Prefix Verb  URI Pattern             Controller#Action
 #     root GET   /                       binaries#index
 # binaries GET   /binaries(.:format)     binaries#index
+#          POST  /binaries(.:format)     binaries#create
 #   binary GET   /binaries/:id(.:format) binaries#show
 #          PATCH /binaries/:id(.:format) binaries#update
 #          PUT   /binaries/:id(.:format) binaries#update
