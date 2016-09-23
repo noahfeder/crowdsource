@@ -23,7 +23,10 @@ class IndexPage extends Component {
       let thisBackgroundColor = color;
       color = (color + 90) % 360;
       return (
-      <TouchableHighlight style={style.wrapper} key={el.id} onPress={() => {
+      <TouchableHighlight
+          activeOpacity={0.2}
+          underlayColor={'#eee'}
+          style={style.wrapper} key={el.id} onPress={() => {
           this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
           }}>
           <View style={style.wrapper} >

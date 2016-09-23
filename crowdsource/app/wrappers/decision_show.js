@@ -29,7 +29,9 @@ class DecisionShow extends Component {
 
         <View style={style.options}>
 
-          <TouchableHighlight style={style.option}
+          <TouchableHighlight activeOpacity={0.2}
+            underlayColor={'rgba(0,0,0,0)'}
+            style={style.option}
             onPress={ () => {
                 this.props.vote(this.props.binary.id, 'A');
                 this.forceUpdate();
@@ -40,7 +42,9 @@ class DecisionShow extends Component {
             </Text>
           </TouchableHighlight>
 
-          <TouchableHighlight  style={style.option}
+          <TouchableHighlight activeOpacity={0.2}
+            underlayColor={'rgba(0,0,0,0)'}
+            style={style.option}
             onPress={ () =>
               this.props.vote(this.props.binary.id, 'B')
           }>

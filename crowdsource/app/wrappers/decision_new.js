@@ -15,7 +15,31 @@ const Binary = t.struct({
   choiceB: t.String
 });
 
-const formOptions = {};
+const formOptions = {
+  auto: 'placeholders',
+  fields: {
+    name: {
+      autoCapitalize: 'words',
+      autoCorrect: true,
+      returnKeyType: 'next',
+      maxLength: 32
+    },
+    content: {
+      multiline: true,
+      autoCapitalize: 'sentences',
+      autoCorrect: true,
+      returnKeyType: 'next'
+    },
+    choiceA: {
+      autoCapitalize: 'words',
+      maxLength: 16
+    },
+    choiceB: {
+      autoCapitalize: 'words',
+      maxLength: 16
+    }
+  }
+};
 
 export default class DecisionNew extends Component {
 
