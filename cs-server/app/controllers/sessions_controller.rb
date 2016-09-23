@@ -2,8 +2,9 @@ class SessionsController < ApplicationController
   protect_from_forgery except: [:create, :destroy]
   def create
     @params = JSON.load request.body
-    username = @params["u"]
-    password = @params["p"]
+    puts @params
+    username = @params["username"]
+    password = @params["password"]
     @user = User.find_by_username(username).try(:authenticate, password)
     if !@user
       render json: {error: true, message: "Invalid username/password"}

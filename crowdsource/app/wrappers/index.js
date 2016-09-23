@@ -6,9 +6,7 @@ import { SocialIcon } from 'react-native-elements';
 import Decision from '../components/decision';
 import Header from '../components/header';
 import style from '../public/styles/style';
-import  { newScene } from '../actions/actions';
-import Reactotron from 'reactotron-react-native';
-import '../../ReactotronConfig';
+
 class IndexPage extends Component {
 
   componentWillMount() {

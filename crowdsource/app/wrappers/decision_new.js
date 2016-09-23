@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from '../public/styles/style';
-import { Button, FormLabel, FormInput } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { TouchableHighlight, View, Text } from 'react-native';
 import BackButton from '../components/back_button';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ export default class DecisionNew extends Component {
 
   onSubmit() {
     let val = this.refs.form.getValue()
-    fetch('https://b345028d.ngrok.io/binaries', {
+    fetch('https://6288b895.ngrok.io/binaries', {
       method: 'POST',
       body: JSON.stringify(val)
     }).then( response => response.json() )

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import IndexPage from './index';
 import DecisionShow from './decision_show';
 import DecisionNew from './decision_new';
+import Home from './home';
 import RootReducer from '../reducers';
 import { fetchBinaries, vote, fetchBinary } from '../actions/actions';
 import { Navigator, Text } from 'react-native';
@@ -36,6 +37,8 @@ export default class App extends Component {
 
   renderScene(route,navigator) {
     switch (route.name) {
+      case 'home':
+        return <Home navigator={navigator} />
       case 'index':
         this.fetchBinaries();
         return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
@@ -53,7 +56,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Navigator
-          initialRoute={{name: 'index'}}
+          initialRoute={{name: 'home'}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) =>
           Navigator.SceneConfigs.HorizontalSwipeJump}
