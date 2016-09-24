@@ -84,8 +84,8 @@ export function vote(id, choice) {
     return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}?choice=${choice}`, {
       method: 'PATCH'
     })
-    .then(response => response.json())
-    .then(json => dispatch(confirmedVote(id, choice, json)))
+    .then( response => response.json() )
+    .then( json => dispatch(confirmedVote(id, choice, json)) )
   }
 }
 
