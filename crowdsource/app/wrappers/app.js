@@ -20,8 +20,6 @@ const reactotronEnhancer = createReactotronEnhancer(Reactotron);
 
 const store = createStore(RootReducer, compose(reactotronEnhancer, applyMiddleware(thunkMiddleware)));
 
-store.dispatch(fetchBinaries());
-
 export default class App extends Component {
   vote(id, choice) {
     return store.dispatch(vote(id, choice));
@@ -40,11 +38,9 @@ export default class App extends Component {
       case 'home':
         return <Home navigator={navigator} />
       case 'index':
-        this.fetchBinaries();
         return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
-        this.fetchBinary(route.id);
-        return <DecisionShow vote={this.vote.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
+        return <DecisionShow vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
       case 'new':
         return <DecisionNew navigator={navigator} />
       default:
@@ -56,7 +52,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Navigator
-          initialRoute={{name: 'home'}}
+          initialRoute={{name: 'index'}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) =>
           Navigator.SceneConfigs.HorizontalSwipeJump}

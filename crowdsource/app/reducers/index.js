@@ -14,7 +14,8 @@ function activeBinary(state = {
         });
       }
       case RECEIVE_BINARY: case VOTED: {
-        return Object.assign({},state, {
+        console.log(action)
+        return Object.assign({}, state, {
           isFetching: false,
           currentlyFetching: null,
           data: action.data
@@ -38,6 +39,7 @@ function binaries(state = {
         })
       }
       case RECEIVE_BINARIES: {
+        console.log('got em all')
         let newObj = {};
         action.data.forEach( (el) => {
           newObj[el.id] = el;
@@ -60,33 +62,3 @@ const RootReducer = combineReducers({
 });
 
 export default RootReducer;
-const dead = `case REQUEST_BINARY:
-        return Object.assign({}, state, {
-          isFetching: true,
-          currentlyFetching: action.id
-        });
-      case RECEIVE_BINARY: {
-        let newObj = {
-          isFetching: false,
-          currentlyFetching: null,
-          items: {}
-        };
-        newObj.items[action.id] = action.data;
-        newObj.items[action.id]["lastUpdated"] = Date.now();
-        return Object.assign({},state, newObj)
-      }
-      case VOTING:
-        return Object.assign({},state,{
-          isFetching: true,
-          currentlyFetching: action.id
-        })
-      case VOTED: {
-        let newObj = {
-          isFetching: false,
-          currentlyFetching: null,
-          items: {}
-        };
-        newObj.items[action.id] = action.data;
-        newObj.items[action.id]["lastUpdated"] = Date.now();
-        return Object.assign({},state, newObj);
-      }`

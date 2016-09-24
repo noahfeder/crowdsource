@@ -10,7 +10,7 @@ import style from '../public/styles/style';
 class IndexPage extends Component {
 
   componentWillMount() {
-    () => this.props.fetchBinaries()
+    this.props.fetchBinaries()
   }
 
   decisions() {

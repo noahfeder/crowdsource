@@ -50,8 +50,12 @@ export default class DecisionNew extends Component {
       body: JSON.stringify(val)
     }).then( response => response.json() )
       .then( json => {
-        this.props.navigator.pop()
+        this.props.navigator.push({
+          name: 'show',
+          id: json.id
+        })
       })
+      .catch( error => console.error(error))
   }
 
   render() {
@@ -72,12 +76,3 @@ export default class DecisionNew extends Component {
   }
 }
 
-const trash =`<FormLabel>Short Name</FormLabel>
-          <FormInput defaultValue="Short name, please" maxLength={32} />
-          <FormLabel>Description</FormLabel>
-          <FormInput defaultValue="What's the decision to be made?" multiline={true}/>
-          <FormLabel>Choice A</FormLabel>
-          <FormInput defaultValue="Choice A"/>
-          <FormLabel>Choice B</FormLabel>
-          <FormInput defaultValue="Choice B" />
-          `
