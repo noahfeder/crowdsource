@@ -94,7 +94,8 @@ export const LOGGING_IN = 'LOGGING_IN';
 export function loggingIn(user_id) {
   return {
     type: LOGGING_IN,
-    user_id: user_id
+    id: user_id,
+    loggedIn: false
   }
 }
 
@@ -103,13 +104,14 @@ export const LOGGED_IN = 'LOGGED_IN';
 export function loggedIn(user_id) {
   return {
     type: LOGGED_IN,
-    user_id: user_id
+    id: user_id,
+    loggedIn: true
   }
 }
 
 export function logInUser(user_id) {
   return function(dispatch) {
     dispatch(loggingIn(user_id));
-    return fetch()
+    return dispatch(loggedIn(user_id))
   }
 }

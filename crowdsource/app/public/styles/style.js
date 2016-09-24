@@ -9,7 +9,7 @@ const style = StyleSheet.create({
   },
   defaultText: {
     fontFamily: 'Arial, sans-serif',
-    fontSize: 20
+    fontSize: 18
   },
   redText: {
     color: 'red'
@@ -77,19 +77,17 @@ const style = StyleSheet.create({
   greenBackground: {
     backgroundColor: 'green'
   },
-  text: {
-    small: {
+  textSmall: {
       fontSize: 18
     },
-    medium: {
-      fontSize: 24
-    },
-    large: {
-      fontSize: 40
-    },
-    huge: {
-      fontSize: 72
-    }
+  textMedium: {
+    fontSize: 24
+  },
+  textLarge: {
+    fontSize: 40
+  },
+  textHuge: {
+    fontSize: 72
   }
 })
 

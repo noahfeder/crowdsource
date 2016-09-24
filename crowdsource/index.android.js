@@ -14,12 +14,13 @@
 *  https://github.com/itzikbenh/React-Native-on-Rails/blob/master/index.ios.js
     FETCH
 *  https://davidwalsh.name/fetch
+    LOVE
+*  http://stackoverflow.com/questions/39137031/redux-global-solution-for-cannot-read-property-of-undefined-in-mapstatetoprops-i/39137395#comment66645943_39137395
 */
 
 'use strict';
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import App from './app/wrappers/app';
-import './ReactotronConfig';
 
 AppRegistry.registerComponent('crowdsource', () => App);

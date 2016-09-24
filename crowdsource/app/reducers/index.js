@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { REQUEST_BINARIES, RECEIVE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED } from '../actions/actions';
+import { REQUEST_BINARIES, RECEIVE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED, LOGGING_IN, LOGGED_IN } from '../actions/actions';
 
 function activeBinary(state = {
   isFetching: false,
@@ -56,9 +56,24 @@ function binaries(state = {
     }
 }
 
+
+function user(state = null, action) {
+  switch (action.type) {
+    case LOGGING_IN: case LOGGED_IN:
+      console.log(action);
+      return Object.assign({},state, {
+        id: action.id,
+        loggedIn: action.loggedIn
+      });
+    default:
+      return state;
+  }
+
+}
 const RootReducer = combineReducers({
   binaries,
-  activeBinary
+  activeBinary,
+  user
 });
 
 export default RootReducer;

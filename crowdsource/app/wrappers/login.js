@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
+import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Header from '../components/header';
@@ -43,7 +43,9 @@ class Login extends Component {
     }).then( response => response.json() )
       .then( json => {
         if (!json.error) {
-          this.props.navigator.push({name: 'index'})
+          AsyncStorage.setItem('user_id', String(json.id)).then( () => {
+            this.props.navigator.push({name: 'index'})
+          })
         }
       } )
       .catch( error => console.error(error) )

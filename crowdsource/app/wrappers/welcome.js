@@ -6,14 +6,15 @@ import style from '../public/styles/style';
 
 export default class Welcome extends Component {
   componentWillMount() {
-    AsyncStorage.getItem('user_id', (res) => {
-      if (!res) {
-        setTimeout( () => {
-          this.props.navigator.push({
-            name: 'login'
-          })
-        }, 1500)
-
+    console.log('let us store shit now')
+    AsyncStorage.getItem('user_id').then( (id) => {
+      console.log('wut is a promise')
+      debugger;
+      if (!id) {
+        setTimeout( () => this.props.navigator.push({ name: 'login' }), 1500)
+      } else {
+        this.props.loginAsync(id)
+        this.props.navigator.push({ name: 'index' })
       }
     })
   }
@@ -22,7 +23,7 @@ export default class Welcome extends Component {
       <View style={style.wrapper}>
         <Header />
         <View style={[style.wrapper, style.greenBackground]}>
-          <Text style={style.text.huge}> WELCOME! </Text>
+          <Text style={style.textHuge}> WELCOME! </Text>
         </View>
       </View>
     )

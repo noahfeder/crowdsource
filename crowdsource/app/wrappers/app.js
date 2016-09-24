@@ -9,17 +9,11 @@ import DecisionNew from './decision_new';
 import Login from './login';
 import Welcome from './welcome';
 import RootReducer from '../reducers';
-import { fetchBinaries, vote, fetchBinary } from '../actions/actions';
+import { fetchBinaries, vote, fetchBinary, logInUser } from '../actions/actions';
 import { Navigator, Text, AsyncStorage } from 'react-native';
-import Reactotron from 'reactotron-react-native';
-import createReactotronEnhancer from 'reactotron-redux';
-import '../../ReactotronConfig';
 
-Reactotron.log('WELCOME TO THE DESERT OF THE REAL');
 
-const reactotronEnhancer = createReactotronEnhancer(Reactotron);
-
-const store = createStore(RootReducer, compose(reactotronEnhancer, applyMiddleware(thunkMiddleware)));
+const store = createStore(RootReducer,applyMiddleware(thunkMiddleware));
 
 export default class App extends Component {
   vote(id, choice) {
@@ -34,15 +28,16 @@ export default class App extends Component {
     return store.dispatch(fetchBinaries());
   }
 
-  checkStore() {
+  loginAsync(id) {
+    return store.dispatch(logInUser(id))
   }
 
   renderScene(route,navigator) {
     switch (route.name) {
       case 'welcome':
-        return <Welcome navigator={navigator} />
+        return <Welcome navigator={navigator} loginAsync={this.loginAsync.bind(this)} />
       case 'login':
-        return <Login navigator={navigator} />
+        return <Login navigator={navigator} loginAsync={this.loginAsync.bind(this)} />
       case 'index':
         return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
