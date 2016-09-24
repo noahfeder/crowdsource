@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 import Header from '../components/header';
 import Loading from './loading';
 import t from 'tcomb-form-native';
-import { Binary, formOptions } from '../public/styles/form_style'
+import { Binary, formOptions } from '../public/styles/form_style';
 
 class DecisionNew extends Component {
 
   onSubmit() {
     let val = this.refs.form.getValue()
-    fetch('https://crowdsourcehelp.herokuapp.com/binaries', {
+    fetch('https://f2ba03b6.ngrok.io/binaries', {
       method: 'POST',
       body: JSON.stringify(val)
     }).then( response => response.json() )
@@ -38,7 +38,6 @@ class DecisionNew extends Component {
         type: 'hours'
       }
 
-
       return (
         <View style={style.wrapper}>
           <Header />
@@ -56,9 +55,8 @@ class DecisionNew extends Component {
         </View>
       )
     } else {
-      return <Loading />
+      return <Loading />;
     }
-
   }
 }
 

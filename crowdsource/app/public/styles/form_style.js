@@ -15,7 +15,8 @@ export const Binary = t.struct({
   choiceB: t.String,
   number: t.Number,
   type: TimeType,
-  id: t.String
+  id: t.String,
+  timeNow: Math.floor(Date.now() / 1000) // epoch time now in epoch seconds
 });
 
 let { height, width } = Dimensions.get('window');
@@ -52,6 +53,9 @@ export const formOptions = {
   auto: 'placeholders',
   fields: {
     id: {
+      hidden: true
+    },
+    timeNow: {
       hidden: true
     },
     name: {

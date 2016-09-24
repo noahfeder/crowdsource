@@ -19,7 +19,7 @@ export function receiveBinaries(json) {
 export function fetchBinaries() {
   return function(dispatch) {
     dispatch(requestBinaries());
-    return fetch('https://crowdsourcehelp.herokuapp.com/')
+    return fetch('https://f2ba03b6.ngrok.io/')
       .then(response => response.json())
       .then(json => dispatch(receiveBinaries(json)));
   }
@@ -51,7 +51,7 @@ export function receiveBinary(json, id) {
 export function fetchBinary(id) {
   return function(dispatch) {
     dispatch(requestBinary(id));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}`)
+    return fetch(`https://f2ba03b6.ngrok.io/binaries/${id}`)
       .then(response => response.json())
       .then(json => dispatch(receiveBinary(json, id)))
   }
@@ -81,7 +81,7 @@ export function confirmedVote(id, choice, json) {
 export function vote(id, choice) {
   return function(dispatch) {
     dispatch(sendVote(id, choice));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}?choice=${choice}`, {
+    return fetch(`https://f2ba03b6.ngrok.io/binaries/${id}?choice=${choice}`, {
       method: 'PATCH'
     })
     .then( response => response.json() )
