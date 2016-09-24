@@ -6,10 +6,11 @@ import { Provider } from 'react-redux';
 import IndexPage from './index';
 import DecisionShow from './decision_show';
 import DecisionNew from './decision_new';
-import Home from './home';
+import Login from './login';
+import Welcome from './welcome';
 import RootReducer from '../reducers';
 import { fetchBinaries, vote, fetchBinary } from '../actions/actions';
-import { Navigator, Text } from 'react-native';
+import { Navigator, Text, AsyncStorage } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import createReactotronEnhancer from 'reactotron-redux';
 import '../../ReactotronConfig';
@@ -33,10 +34,15 @@ export default class App extends Component {
     return store.dispatch(fetchBinaries());
   }
 
+  checkStore() {
+  }
+
   renderScene(route,navigator) {
     switch (route.name) {
-      case 'home':
-        return <Home navigator={navigator} />
+      case 'welcome':
+        return <Welcome navigator={navigator} />
+      case 'login':
+        return <Login navigator={navigator} />
       case 'index':
         return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
@@ -52,7 +58,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Navigator
-          initialRoute={{name: 'index'}}
+          initialRoute={{name: 'welcome'}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) =>
           Navigator.SceneConfigs.HorizontalSwipeJump}

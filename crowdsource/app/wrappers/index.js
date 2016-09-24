@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
+import { RefreshControl, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { SocialIcon } from 'react-native-elements';
 import Loading from './loading';
@@ -14,6 +14,10 @@ class IndexPage extends Component {
     this.props.fetchBinaries()
   }
 
+  _onRefresh() {
+    this.props.fetchBinaries()
+  }
+
   decisions() {
     let color = Math.floor(Math.random() * 360);
     let items = [];
@@ -21,15 +25,14 @@ class IndexPage extends Component {
       items.push(this.props.items[id])
     }
     return items.map( el => {
-      let thisBackgroundColor = color;
       color = (color + 90) % 360;
       return (
       <TouchableHighlight
-          activeOpacity={0.2}
-          underlayColor={'#eee'}
-          style={style.wrapper} key={el.id} onPress={() => {
-          this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
-          }}>
+        activeOpacity={0.2}
+        underlayColor={'#eee'}
+        style={style.wrapper} key={el.id} onPress={() => {
+        this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
+        }}>
           <View style={style.wrapper} >
             <Decision data={el} id={el.id} color={color} />
           </View>
@@ -43,7 +46,12 @@ class IndexPage extends Component {
       return (
         <View style={style.wrapper}>
           <Header />
-          <ScrollView>
+          <ScrollView refreshControl={
+            <RefreshControl
+              refreshing={this.props.isFetching}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }>
               {this.decisions()}
           </ScrollView>
           <SocialIcon type="github"
@@ -63,11 +71,13 @@ function mapStateToProps(state) {
   if (state.binaries.items) {
     return {
       loaded: true,
-      items: state.binaries.items
+      items: state.binaries.items,
+      isFetching: state.binaries.isFetching
     };
   } else {
     return {
-      loaded: false
+      loaded: false,
+      isFetching: state.binaries.isFetching
     }
   }
 }

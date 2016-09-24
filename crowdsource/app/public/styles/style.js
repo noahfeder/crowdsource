@@ -73,6 +73,23 @@ const style = StyleSheet.create({
   backButtonText: {
     fontWeight: 'bold',
     fontSize: 24
+  },
+  greenBackground: {
+    backgroundColor: 'green'
+  },
+  text: {
+    small: {
+      fontSize: 18
+    },
+    medium: {
+      fontSize: 24
+    },
+    large: {
+      fontSize: 40
+    },
+    huge: {
+      fontSize: 72
+    }
   }
 })
 

@@ -32,12 +32,12 @@ const Options = {
   }
 };
 
-class Home extends Component {
+class Login extends Component {
 
   _logIn() {
     let val = this.refs.login.getValue();
     if (val) {
-      fetch('https://6288b895.ngrok.io/login', {
+      fetch('https://crowdsourcehelp.herokuapp.com/login', {
       method: 'POST',
       body: JSON.stringify(val)
     }).then( response => response.json() )
@@ -72,4 +72,4 @@ function mapStateToProps(state) {
   return {};
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Login);

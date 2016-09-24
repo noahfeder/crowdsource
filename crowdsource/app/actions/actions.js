@@ -17,9 +17,9 @@ export function receiveBinaries(json) {
 }
 
 export function fetchBinaries() {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(requestBinaries());
-    return fetch('https://6288b895.ngrok.io/')
+    return fetch('https://crowdsourcehelp.herokuapp.com/')
       .then(response => response.json())
       .then(json => dispatch(receiveBinaries(json)));
   }
@@ -49,9 +49,9 @@ export function receiveBinary(json, id) {
 }
 
 export function fetchBinary(id) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(requestBinary(id));
-    return fetch(`https://6288b895.ngrok.io/binaries/${id}`)
+    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}`)
       .then(response => response.json())
       .then(json => dispatch(receiveBinary(json, id)))
   }
@@ -79,9 +79,9 @@ export function confirmedVote(id, choice, json) {
 }
 
 export function vote(id, choice) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(sendVote(id, choice));
-    return fetch(`https://6288b895.ngrok.io/binaries/${id}?choice=${choice}`, {
+    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}?choice=${choice}`, {
       method: 'PATCH'
     })
     .then(response => response.json())
@@ -89,3 +89,27 @@ export function vote(id, choice) {
   }
 }
 
+export const LOGGING_IN = 'LOGGING_IN';
+
+export function loggingIn(user_id) {
+  return {
+    type: LOGGING_IN,
+    user_id: user_id
+  }
+}
+
+export const LOGGED_IN = 'LOGGED_IN';
+
+export function loggedIn(user_id) {
+  return {
+    type: LOGGED_IN,
+    user_id: user_id
+  }
+}
+
+export function logInUser(user_id) {
+  return function(dispatch) {
+    dispatch(loggingIn(user_id));
+    return fetch()
+  }
+}

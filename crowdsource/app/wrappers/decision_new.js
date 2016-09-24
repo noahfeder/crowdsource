@@ -32,11 +32,13 @@ const formOptions = {
     },
     choiceA: {
       autoCapitalize: 'words',
-      maxLength: 16
+      maxLength: 16,
+      placeholder: 'Choice A'
     },
     choiceB: {
       autoCapitalize: 'words',
-      maxLength: 16
+      maxLength: 16,
+      placeholder: 'Choice B'
     }
   }
 };
@@ -45,14 +47,16 @@ export default class DecisionNew extends Component {
 
   onSubmit() {
     let val = this.refs.form.getValue()
-    fetch('https://6288b895.ngrok.io/binaries', {
+    fetch('https://crowdsourcehelp.herokuapp.com/binaries', {
       method: 'POST',
       body: JSON.stringify(val)
     }).then( response => response.json() )
       .then( json => {
-        this.props.navigator.push({
+        console.log(json)
+        this.props.navigator.replace({
           name: 'show',
-          id: json.id
+          id: json.id,
+          color: Math.floor(Math.random() * 360)
         })
       })
       .catch( error => console.error(error))
