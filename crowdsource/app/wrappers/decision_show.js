@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, TouchableHighlight, View, Text } from 'react-native';
+import { TouchableHighlight, View, Text } from 'react-native';
+import Loading from './loading';
 import Header from '../components/header';
 import Decision from '../components/decision';
 import style from '../public/styles/style';
@@ -24,59 +25,52 @@ class DecisionShow extends Component {
 
           <View style={style.decision} >
 
-          <Text style={style.binaryText}>{this.props.binary.name}</Text>
+            <Text style={style.binaryText}>{this.props.binary.name}</Text>
 
-          <LinearGradient
+            <LinearGradient
               start={[0.0,0.0]} end={[1.0,0.0]}
               locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
               colors={[`hsl(${hue},75%,75%)`,`hsl(${hue},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`]}
               style={style.binary} />
 
-          <View style={style.options}>
+            <View style={style.options}>
 
-            <TouchableHighlight activeOpacity={0.2}
-              underlayColor={'rgba(0,0,0,0)'}
-              style={style.option}
-              onPress={ () => {
-                  this.props.vote(this.props.binary.id, 'A');
-                  this.forceUpdate();
-              }
-            }>
-              <Text style={style.optionA}>
-                {this.props.binary.choiceA}
-              </Text>
-            </TouchableHighlight>
+              <TouchableHighlight activeOpacity={0.2}
+                underlayColor={'rgba(0,0,0,0)'}
+                style={style.option}
+                onPress={ () => {
+                    this.props.vote(this.props.binary.id, 'A');
+                    this.forceUpdate();
+                }
+              }>
+                <Text style={style.optionA}>
+                  {this.props.binary.choiceA}
+                </Text>
+              </TouchableHighlight>
 
-            <TouchableHighlight activeOpacity={0.2}
-              underlayColor={'rgba(0,0,0,0)'}
-              style={style.option}
-              onPress={ () =>
-                this.props.vote(this.props.binary.id, 'B')
-            }>
-              <Text style={style.optionB}>
-                {this.props.binary.choiceB}
-              </Text>
-            </TouchableHighlight>
-
+              <TouchableHighlight activeOpacity={0.2}
+                underlayColor={'rgba(0,0,0,0)'}
+                style={style.option}
+                onPress={ () =>
+                  this.props.vote(this.props.binary.id, 'B')
+              }>
+                <Text style={style.optionB}>
+                  {this.props.binary.choiceB}
+                </Text>
+              </TouchableHighlight>
+            </View>
           </View>
-        </View>
-
           <BackButton navigator={this.props.navigator} />
         </View>
         )
       } else {
-        return (
-          <View style={style.wrapper}>
-            <Header />
-            <ActivityIndicator color={'red'} size={'large'} />
-          </View>
-        )
+        return <Loading />
       }
   }
 }
 
 function mapStateToProps(state, ownProps) {
-  if (state.activeBinary.data) {
+  if (state.activeBinary.data && state.activeBinary.data.id === ownProps.id) {
     return {
       loaded: true,
       binary: state.activeBinary.data,
@@ -87,7 +81,6 @@ function mapStateToProps(state, ownProps) {
       loaded: false
     }
   }
-
 }
 
 export default connect(mapStateToProps)(DecisionShow);

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { SocialIcon } from 'react-native-elements';
+import Loading from './loading';
 import Decision from '../components/decision';
 import Header from '../components/header';
 import style from '../public/styles/style';
@@ -38,7 +39,8 @@ class IndexPage extends Component {
   }
 
   render() {
-    return (
+    if (this.props.loaded) {
+      return (
         <View style={style.wrapper}>
           <Header />
           <ScrollView>
@@ -51,13 +53,23 @@ class IndexPage extends Component {
           />
         </View>
       )
+    } else {
+      return <Loading />
+    }
   }
 };
 
 function mapStateToProps(state) {
-  return {
-    items: state.binaries.items
-  };
+  if (state.binaries.items) {
+    return {
+      loaded: true,
+      items: state.binaries.items
+    };
+  } else {
+    return {
+      loaded: false
+    }
+  }
 }
 
 export default connect(mapStateToProps)(IndexPage);
