@@ -45,7 +45,8 @@ class Login extends Component {
       body: JSON.stringify(val)
     }).then( response => response.json() )
       .then( json => {
-        AsyncStorage.setItem('user_id', String(json.id)).then( () => {
+        debugger;
+        AsyncStorage.setItem('user_id', String(json.data.id)).then( () => {
           this.props.navigator.push({name: 'index'})
         })
       } )
