@@ -47,6 +47,8 @@ halfStyle.textbox.normal.width = width / 2 - 20;
 halfStyle.textbox.error.width = width / 2 - 20;
 halfStyle.pickerTouchable.normal.width = width / 2 - 20;
 halfStyle.pickerTouchable.error.width = width / 2 - 20;
+halfStyle.select.normal.width = width / 2 - 20;
+halfStyle.select.error.width = width / 2 - 20;
 
 export const formOptions = {
   stylesheet: newStyle,
