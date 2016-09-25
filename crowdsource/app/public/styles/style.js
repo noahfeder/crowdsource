@@ -3,10 +3,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 let { height, width } = Dimensions.get('window');
 
 const style = StyleSheet.create({
-  wrapper: {
-    height: height,
-    width: width
-  },
   defaultText: {
     fontFamily: 'Arial, sans-serif',
     fontSize: 18
@@ -18,7 +14,8 @@ const style = StyleSheet.create({
     color: 'green'
   },
   wrapper: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   },
   decision: {
     height: 150,
@@ -94,6 +91,14 @@ const style = StyleSheet.create({
   },
   textHuge: {
     fontSize: 72
+  },
+  menu: {
+    paddingTop: 50,
+    backgroundColor: 'white'
+  },
+  menuItem: {
+    backgroundColor: 'rgba(100,100,100,0.6)',
+    height: 50
   }
 })
 

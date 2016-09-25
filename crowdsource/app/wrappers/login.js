@@ -1,9 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
 import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, SideMenu } from 'react-native-elements';
 import { connect } from 'react-redux';
 import style from '../public/styles/style';
+import Header from '../components/header';
+import { MenuGuts } from '../components/side_menu';
 
 import t from 'tcomb-form-native';
 
@@ -53,23 +55,26 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={[style.wrapper, {backgroundColor: 'blue'}]} >
-        <Form
-          ref="login"
-          type={User}
-          options={Options}
-        />
-        <Button backgroundColor="#2F8"
-          small raised title='LOGIN'
-          onPress={this._logIn.bind(this)}
-        />
-      </View>
+      <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+        <Header toggleMenu={this.props.toggleMenu.bind(this)} />
+        <View style={[style.wrapper, {backgroundColor: 'blue'}]} >
+          <Form
+            ref="login"
+            type={User}
+            options={Options}
+          />
+          <Button backgroundColor="#2F8"
+            small raised title='LOGIN'
+            onPress={this._logIn.bind(this)}
+          />
+        </View>
+      </SideMenu>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return {};
+  return { toggled: state.toggleMenu.toggle };
 }
 
 export default connect(mapStateToProps)(Login);

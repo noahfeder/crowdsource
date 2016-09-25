@@ -4,6 +4,7 @@ import { View, Text, AsyncStorage } from 'react-native';
 import style from '../public/styles/style';
 
 export default class Welcome extends Component {
+
   componentWillMount() {
     AsyncStorage.getItem('user_id').then( (id) => {
       if (!id) {

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import style from '../public/styles/style';
-import { Button } from 'react-native-elements';
+import { Button, SideMenu } from 'react-native-elements';
 import { TouchableHighlight, View, Text, Dimensions } from 'react-native';
 import BackButton from '../components/back_button';
 import { connect } from 'react-redux';
 import Loading from './loading';
 import t from 'tcomb-form-native';
 import { Binary, formOptions } from '../public/styles/form_style';
+import { MenuGuts } from '../components/side_menu';
+import Header from '../components/header';
 
 class DecisionNew extends Component {
 
@@ -39,19 +41,22 @@ class DecisionNew extends Component {
       }
 
       return (
-        <View style={style.wrapper}>
-          <Form
-            ref="form"
-            type={Binary}
-            value={Value}
-            options={formOptions}
-          />
-          <Button backgroundColor="#2F8"
-            small raised title='SUBMIT'
-            onPress={this.onSubmit.bind(this)}
-          />
-          <BackButton navigator={this.props.navigator} />
-        </View>
+        <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+          <Header toggleMenu={this.props.toggleMenu.bind(this)} />
+          <View style={style.wrapper}>
+            <Form
+              ref="form"
+              type={Binary}
+              value={Value}
+              options={formOptions}
+            />
+            <Button backgroundColor="#2F8"
+              small raised title='SUBMIT'
+              onPress={this.onSubmit.bind(this)}
+            />
+            <BackButton navigator={this.props.navigator} />
+          </View>
+        </SideMenu>
       )
     } else {
       return <Loading />;
@@ -63,11 +68,13 @@ function mapStateToProps(state) {
   if (state.user) {
     return {
       loaded: true,
-      id: state.user.id
+      id: state.user.id,
+      toggled: state.toggleMenu.toggle
     };
   } else {
     return {
-      loaded: false
+      loaded: false,
+      toggled: state.toggleMenu.toggle
     };
   }
 }

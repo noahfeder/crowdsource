@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { SocialIcon, SideMenu } from 'react-native-elements';
 import Loading from './loading';
 import Decision from '../components/decision';
+import Header from '../components/header';
+import { MenuGuts } from '../components/side_menu';
 import style from '../public/styles/style';
 
 class IndexPage extends Component {
@@ -43,16 +45,19 @@ class IndexPage extends Component {
   render() {
     if (this.props.loaded) {
       return (
-        <View style={style.wrapper}>
-          <ScrollView refreshControl={
-            <RefreshControl
-              refreshing={this.props.isFetching}
-              onRefresh={this._onRefresh.bind(this)}
-            />
-          }>
-              {this.decisions()}
-          </ScrollView>
-        </View>
+        <SideMenu navigator={this.props.navigator} menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+          <Header toggleMenu={this.props.toggleMenu.bind(this)} />
+          <View style={style.wrapper}>
+            <ScrollView refreshControl={
+              <RefreshControl
+                refreshing={this.props.isFetching}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+            }>
+                {this.decisions()}
+            </ScrollView>
+          </View>
+        </SideMenu>
       )
     } else {
       return <Loading />
@@ -65,12 +70,14 @@ function mapStateToProps(state) {
     return {
       loaded: true,
       items: state.binaries.items,
-      isFetching: state.binaries.isFetching
+      isFetching: state.binaries.isFetching,
+      toggled: state.toggleMenu.toggle
     };
   } else {
     return {
       loaded: false,
-      isFetching: state.binaries.isFetching
+      isFetching: state.binaries.isFetching,
+      toggled: state.toggleMenu.toggle
     }
   }
 }
