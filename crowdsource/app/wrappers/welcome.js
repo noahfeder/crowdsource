@@ -8,7 +8,7 @@ export default class Welcome extends Component {
   componentWillMount() {
     AsyncStorage.getItem('user_id').then( (id) => {
       if (!id) {
-        setTimeout( () => this.props.navigator.push({ name: 'login' }), 1500)
+        this.props.navigator.push({ name: 'login' })
       } else {
         this.props.loginAsync(id)
         this.props.navigator.push({ name: 'index' })
