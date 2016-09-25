@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED, VOTE_FAILED, LOGGING_IN, LOGGED_IN, TOGGLE_MENU } from '../actions/actions';
+import {
+  REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES,
+  REQUEST_BINARY, RECEIVE_BINARY,
+  VOTING, VOTED, VOTE_FAILED,
+  LOGGING_IN, LOGGED_IN, USER_ERROR,
+  TOGGLE_MENU
+} from '../actions/actions';
 
 function activeBinary(state = {
   isFetching: false,
@@ -77,8 +83,19 @@ function user(state = {}, action) {
       return Object.assign({},state, {
         id: action.id,
         name: action.name,
-        loggedIn: action.loggedIn
+        loggedIn: action.loggedIn,
+        error: false,
+        message: null
       });
+    case USER_ERROR: {
+      return Object.assign({}, state, {
+        id: null,
+        name: null,
+        loggedIn: action.loggedIn,
+        error: action.error,
+        message: action.message
+      })
+    }
     default:
       return state;
   }

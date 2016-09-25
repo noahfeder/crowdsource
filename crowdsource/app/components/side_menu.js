@@ -15,7 +15,7 @@ export const MenuGuts = (
       activeOpacity={0.1}
       underlayColor={'rgba(0,0,0,0)'}
       onPress={ () => {
-        AsyncStorage.removeItem('user_id').then( () => {
+        AsyncStorage.multiRemove(['user_id_csh','user_name_csh']).then( () => {
           nav.replacePreviousAndPop({name: 'login'})
         })
       }

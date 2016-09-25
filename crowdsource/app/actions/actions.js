@@ -143,6 +143,23 @@ export function loggedIn(id, name) {
   }
 }
 
+export const USER_ERROR = 'USER_ERROR'
+
+export function userError(response) {
+  return {
+    type: USER_ERROR,
+    loggedIn: false,
+    error: response.error,
+    message: response.message
+  }
+}
+
+export function alertUserError(response) {
+  return function(dispatch) {
+    return dispatch(userError(response))
+  }
+}
+
 export function logInUser(id, name) {
   return function(dispatch) {
     dispatch(loggingIn(id, name));

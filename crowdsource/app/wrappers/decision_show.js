@@ -30,6 +30,7 @@ class DecisionShow extends Component {
     let time;
     if (this.props.loaded) {
       if (!this.props.error) {
+        // ALL GOOD
         return (
           <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
             <Header toggleMenu={this.props.toggleMenu.bind(this)} />
@@ -74,6 +75,7 @@ class DecisionShow extends Component {
           </SideMenu>
           )
         } else {
+          // ERROR MESSAGE
           return (
           <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
             <Header toggleMenu={this.props.toggleMenu.bind(this)} />
@@ -81,19 +83,23 @@ class DecisionShow extends Component {
               <View style={style.decision} >
                 <Text style={style.binaryText}>{this.props.binary.name}</Text>
                 <Text style={{height: 50}}>{this.props.binary.content}</Text>
-                <TimeLeft expiration={this.props.binary.expiration} />
+                <Text style={[style.textMedium, {height: 50, color: 'red'}]}>{this.props.message}</Text>
                 <LinearGradient
                   start={[0.0,0.0]} end={[1.0,0.0]}
                   locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
                   colors={[`hsl(${hue},75%,75%)`,`hsl(${hue},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`]}
                   style={style.binary} />
                 <View style={style.options}>
+                  <View style={style.option}>
                     <Text style={style.optionA}>
                       {this.props.binary.choiceA}
                     </Text>
+                  </View>
+                  <View style={style.option}>
                     <Text style={style.optionB}>
                       {this.props.binary.choiceB}
                     </Text>
+                  </View>
                 </View>
                 <BackButton navigator={this.props.navigator} />
               </View>
@@ -116,7 +122,8 @@ function mapStateToProps(state, ownProps) {
       binary: state.activeBinary.data,
       breakPoint: (state.activeBinary.data.votesA / (state.activeBinary.data.votesA + state.activeBinary.data.votesB)),
       toggled: state.toggleMenu.toggle,
-      error: state.activeBinary.error
+      error: state.activeBinary.error,
+      message: state.activeBinary.message
     }
   } else {
     return {

@@ -15,8 +15,7 @@ export const Binary = t.struct({
   choiceB: t.String,
   number: t.Number,
   type: TimeType,
-  id: t.String,
-  timeNow: t.Number
+  id: t.String
 });
 
 let { height, width } = Dimensions.get('window');
@@ -55,9 +54,6 @@ export const formOptions = {
   auto: 'placeholders',
   fields: {
     id: {
-      hidden: true
-    },
-    timeNow: {
       hidden: true
     },
     name: {

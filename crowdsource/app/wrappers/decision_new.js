@@ -15,7 +15,6 @@ class DecisionNew extends Component {
 
   onSubmit() {
     let val = this.refs.form.getValue();
-    debugger;
     if (val) {
       dismissKeyboard();
       fetch('https://f2ba03b6.ngrok.io/binaries', {
@@ -41,8 +40,7 @@ class DecisionNew extends Component {
 
       const Value = {
         id: this.props.id,
-        type: 'hours',
-        timeNow: Math.floor(Date.now() / 1000) // epoch time now in epoch seconds
+        type: 'hours'
       }
 
       return (

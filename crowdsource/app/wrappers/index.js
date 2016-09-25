@@ -18,8 +18,10 @@ class IndexPage extends Component {
   }
 
   componentDidMount() {
-    this.setInterval( () => {
-     this.props.refreshBinaries();
+    this.setTimeout( () => {
+      this.setInterval( () => {
+        this.props.refreshBinaries();
+      }, 30000)
     }, 30000)
   }
 
@@ -42,7 +44,6 @@ class IndexPage extends Component {
       }
       return 0;
     });
-    console.log(items)
     return items.map( el => {
       color = (color + 90) % 360;
       return (
