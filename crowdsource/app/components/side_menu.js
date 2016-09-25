@@ -6,13 +6,13 @@ import {nav} from '../wrappers/app'
 export const MenuGuts = (
   <View style={[style.wrapper, style.menu]}>
     <TouchableHighlight style={style.menuItem}
-      activeOpacity={0.2}
+      activeOpacity={0.1}
       underlayColor={'rgba(0,0,0,0)'}
       onPress={ () => nav.push({name: 'new'})}>
       <Text>New decision</Text>
     </TouchableHighlight>
     <TouchableHighlight style={style.menuItem}
-      activeOpacity={0.2}
+      activeOpacity={0.1}
       underlayColor={'rgba(0,0,0,0)'}
       onPress={ () => {
         AsyncStorage.removeItem('user_id').then( () => {

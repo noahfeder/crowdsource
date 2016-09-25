@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import style from '../public/styles/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { toggle } from '../wrappers/app';
 
 export default class Header extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Header extends Component {
       <View style={style.header}>
         <Icon name="bars" size={30} onPress={() => {
           this.props.toggleMenu();
-          console.log('togglin')
+          console.log('togglin');
         }}/>
         <Text style={style.headerText}>CROWDSOURCE</Text>
       </View>

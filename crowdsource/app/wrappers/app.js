@@ -10,7 +10,7 @@ import Login from './login';
 import Welcome from './welcome';
 import Header from '../components/header';
 import RootReducer from '../reducers';
-import { fetchBinaries, vote, fetchBinary, logInUser, toggleMenu } from '../actions/actions';
+import { fetchBinaries, refreshBinaries, vote, fetchBinary, logInUser, toggleMenu } from '../actions/actions';
 import { Navigator, Text, AsyncStorage } from 'react-native';
 
 const store = createStore(RootReducer,applyMiddleware(thunkMiddleware));
@@ -29,8 +29,12 @@ export class App extends Component {
     return store.dispatch(fetchBinaries());
   }
 
-  loginAsync(id) {
-    return store.dispatch(logInUser(id))
+  refreshBinaries() {
+    return store.dispatch(refreshBinaries());
+  }
+
+  loginAsync(id, name) {
+    return store.dispatch(logInUser(id, name))
   }
 
   toggleMenu() {
@@ -45,7 +49,7 @@ export class App extends Component {
       case 'login':
         return <Login navigator={navigator} toggleMenu={this.toggleMenu.bind(this)} loginAsync={this.loginAsync.bind(this)} />
       case 'index':
-        return <IndexPage toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
+        return <IndexPage toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} refreshBinaries={this.refreshBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
         return <DecisionShow toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
       case 'new':

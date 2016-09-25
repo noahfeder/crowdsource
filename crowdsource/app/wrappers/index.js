@@ -8,6 +8,8 @@ import Decision from '../components/decision';
 import Header from '../components/header';
 import { MenuGuts } from '../components/side_menu';
 import style from '../public/styles/style';
+import reactMixin from 'react-mixin';
+import TimerMixin from 'react-timer-mixin';
 
 class IndexPage extends Component {
 
@@ -15,8 +17,14 @@ class IndexPage extends Component {
     this.props.fetchBinaries()
   }
 
+  componentDidMount() {
+    this.setInterval( () => {
+     this.props.refreshBinaries();
+    }, 30000)
+  }
+
   _onRefresh() {
-    this.props.fetchBinaries()
+    this.props.refreshBinaries()
   }
 
   decisions() {
@@ -26,10 +34,10 @@ class IndexPage extends Component {
       items.push(this.props.items[id])
     }
     items = items.sort( (a,b) => {
-      if (a.expiration < b.expiration) {
+      if (a.expiration > b.expiration) {
         return 1;
       }
-      if (a.expiration > b.expiration) {
+      if (a.expiration < b.expiration) {
         return -1;
       }
       return 0;
@@ -76,6 +84,8 @@ class IndexPage extends Component {
     }
   }
 };
+
+reactMixin(IndexPage.prototype, TimerMixin);
 
 function mapStateToProps(state) {
   if (state.binaries.items) {

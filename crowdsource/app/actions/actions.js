@@ -25,7 +25,22 @@ export function fetchBinaries() {
   }
 }
 
+export const UPDATE_BINARIES = 'UPDATE_BINARIES';
 
+export function updateBinaries() {
+  return {
+    type: UPDATE_BINARIES
+  }
+}
+
+export function refreshBinaries() {
+  return function(dispatch) {
+    dispatch(updateBinaries());
+    return fetch('https://f2ba03b6.ngrok.io/')
+      .then(response => response.json())
+      .then(json => dispatch(receiveBinaries(json)));
+  }
+}
 
 
 export const REQUEST_BINARY = 'REQUEST_BINARY';
@@ -78,6 +93,17 @@ export function confirmedVote(id, choice, json) {
   }
 }
 
+export const VOTE_FAILED = 'VOTE_FAILED';
+
+export function failedVote(json) {
+  return {
+    type: VOTE_FAILED,
+    id: null,
+    choice: null,
+    data: json
+  }
+}
+
 export function vote(id, choice) {
   return function(dispatch) {
     dispatch(sendVote(id, choice));
@@ -85,34 +111,42 @@ export function vote(id, choice) {
       method: 'PATCH'
     })
     .then( response => response.json() )
-    .then( json => dispatch(confirmedVote(id, choice, json)) )
+    .then( json => {
+      if (json.error) {
+        dispatch(failedVote(json));
+      } else {
+        dispatch(confirmedVote(id, choice, json));
+      }
+    })
   }
 }
 
 export const LOGGING_IN = 'LOGGING_IN';
 
-export function loggingIn(user_id) {
+export function loggingIn(id, name) {
   return {
     type: LOGGING_IN,
-    id: user_id,
+    id: id,
+    name: name,
     loggedIn: false
   }
 }
 
 export const LOGGED_IN = 'LOGGED_IN';
 
-export function loggedIn(user_id) {
+export function loggedIn(id, name) {
   return {
     type: LOGGED_IN,
-    id: user_id,
+    id: id,
+    name: name,
     loggedIn: true
   }
 }
 
-export function logInUser(user_id) {
+export function logInUser(id, name) {
   return function(dispatch) {
-    dispatch(loggingIn(user_id));
-    return dispatch(loggedIn(user_id))
+    dispatch(loggingIn(id, name));
+    return dispatch(loggedIn(id, name))
   }
 }
 

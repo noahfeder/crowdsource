@@ -15,19 +15,29 @@ class TimeLeft extends Component {
     let s = this.props.expiration  - Math.floor(Date.now() / 1000);
     if (s < 1) {
       return 'No time left!';
-    } else if (s < 60) {
+    }
+    if (s < 60) {
       return `${s} seconds remaining!`;
-    } else if (s < 3600) {
+    }
+    if (s < 3600) {
       let m = Math.floor(s / 60);
       s -= m * 60;
       return `${m} minutes and ${s} seconds remaining!`;
-    } else {
+    }
+    if (s < 86400) {
       let h = Math.floor(s / 3600);
       s -= h * 3600;
       let m = Math.floor(s / 60);
       s -= m * 60;
       return `${h} hours, ${m} minutes, and ${s} seconds remaining!`;
     }
+    let d = Math.floor(s / 86400);
+    s -= d * 86400;
+    let h = Math.floor(s / 3600);
+    s -= h * 3600;
+    let m = Math.floor(s / 60);
+    s -= m * 60;
+    return `${d} days, ${h} hours, ${m} minutes, and ${s} seconds remaining!`;
   }
 
   render() {

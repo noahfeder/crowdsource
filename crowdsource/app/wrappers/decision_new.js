@@ -15,6 +15,7 @@ class DecisionNew extends Component {
 
   onSubmit() {
     let val = this.refs.form.getValue();
+    debugger;
     if (val) {
       dismissKeyboard();
       fetch('https://f2ba03b6.ngrok.io/binaries', {

@@ -6,13 +6,15 @@ import style from '../public/styles/style';
 export default class Welcome extends Component {
 
   componentWillMount() {
-    AsyncStorage.getItem('user_id').then( (id) => {
-      if (!id) {
-        this.props.navigator.push({ name: 'login' })
-      } else {
-        this.props.loginAsync(id)
-        this.props.navigator.push({ name: 'index' })
-      }
+    AsyncStorage.getItem('user_id_csh').then( (id) => {
+      AsyncStorage.getItem('user_name_csh').then( (name) => {
+        if (!id || !name) {
+          this.props.navigator.push({ name: 'login' });
+        } else {
+          this.props.loginAsync(id, name);
+          this.props.navigator.push({ name: 'index' });
+        }
+      })
     })
   }
   render() {

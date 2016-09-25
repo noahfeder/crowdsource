@@ -1,11 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
 import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
-import { Button, SideMenu } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import style from '../public/styles/style';
-import Header from '../components/header';
-import { MenuGuts } from '../components/side_menu';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 import t from 'tcomb-form-native';
@@ -45,9 +43,11 @@ class Login extends Component {
       body: JSON.stringify(val)
     }).then( response => response.json() )
       .then( json => {
-        debugger;
-        AsyncStorage.setItem('user_id', String(json.data.id)).then( () => {
-          this.props.navigator.push({name: 'index'})
+        AsyncStorage.setItem('user_id_csh', String(json.data.id)).then( () => {
+          AsyncStorage.setItem('user_name_csh', String(json.data.username)).then( () => {
+            this.props.loginAsync(json.data.id, json.data.username);
+            this.props.navigator.push({name: 'index'});
+          })
         })
       } )
       .catch( error => console.error(error) )
@@ -56,9 +56,10 @@ class Login extends Component {
 
   render() {
     return (
-      <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
-        <Header toggleMenu={this.props.toggleMenu.bind(this)} />
         <View style={style.wrapper} >
+          <View style={style.header}>
+            <Text style={style.headerText}>CROWDSOURCE</Text>
+          </View>
           <Form
             ref="login"
             type={User}
@@ -69,7 +70,6 @@ class Login extends Component {
             onPress={this._logIn.bind(this)}
           />
         </View>
-      </SideMenu>
     )
   }
 }

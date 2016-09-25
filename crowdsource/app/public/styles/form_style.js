@@ -3,7 +3,7 @@ import t from 'tcomb-form-native';
 import _ from 'lodash';
 
 const TimeType = t.enums({
-  day: 'Days',
+  days: 'Days',
   hours: 'Hours',
   minutes: 'Minutes'
 });
