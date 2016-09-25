@@ -43,25 +43,33 @@ class SignUp extends Component {
 
   _signUp() {
     let val = this.refs.signup.getValue();
-    if (val && val.password_confirm === val.password) {
-      dismissKeyboard();
-      fetch('https://f2ba03b6.ngrok.io/signup', {
-        method: 'POST',
-        body: JSON.stringify(val)
-      }).then( response => response.json() )
+    if (val) {
+      if (val.password_confirm !== val.password) {
+        this.props.alertUserError({error: true, message: 'Passwords must match!'});
+      } else {
+        dismissKeyboard();
+        fetch('https://f2ba03b6.ngrok.io/signup', {
+          method: 'POST',
+          body: JSON.stringify(val)
+        })
+        .then( response => response.json() )
         .then( json => {
           if (json.error) {
             this.props.alertUserError(json);
           } else {
-            AsyncStorage.setItem('user_id_csh', String(json.data.id)).then( () => {
-              AsyncStorage.setItem('user_name_csh', String(json.data.username)).then( () => {
+            AsyncStorage.multiSet([
+              ['user_id_csh', String(json.data.id)],
+              ['user_name_csh', String(json.data.username)]
+            ]).then( () => {
                 this.props.loginAsync(json.data.id, json.data.username);
                 this.props.navigator.push({name: 'index'});
-              })
             })
           }
         })
         .catch( error => console.error(error) )
+      }
+    } else {
+      this.props.alertUserError({error: true, message: 'Invalid username/password!'});
     }
   }
 

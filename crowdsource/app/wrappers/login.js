@@ -46,15 +46,18 @@ class Login extends Component {
         if (json.error) {
           this.props.alertUserError(json);
         } else {
-          AsyncStorage.setItem('user_id_csh', String(json.data.id)).then( () => {
-            AsyncStorage.setItem('user_name_csh', String(json.data.username)).then( () => {
+          AsyncStorage.multiSet([
+            ['user_id_csh', String(json.data.id)],
+            ['user_name_csh', String(json.data.username)]
+          ]).then( () => {
               this.props.loginAsync(json.data.id, json.data.username);
               this.props.navigator.push({name: 'index'});
-            })
           })
         }
       })
       .catch( error => console.error(error) )
+    } else {
+      this.props.alertUserError({error: true, message: 'Invalid username/password!'});
     }
   }
 
@@ -76,7 +79,10 @@ class Login extends Component {
           />
           <Button backgroundColor="#938"
             small raised title='SIGNUP'
-            onPress={() => this.props.navigator.push({name: 'user'})}
+            onPress={() => {
+              this.props.alertUserError({error: false, message: null});
+              this.props.navigator.push({name: 'user'});
+            }}
           />
         </View>
     )
