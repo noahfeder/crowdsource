@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
 import Loading from './loading';
 import Decision from '../components/decision';
+import TimeLeft from '../components/time_left';
 import style from '../public/styles/style';
 import { Button, SideMenu } from 'react-native-elements';
 import BackButton from '../components/back_button';
@@ -16,13 +17,6 @@ class DecisionShow extends Component {
     this.props.fetchBinary(this.props.id)
   }
 
-  timeLeft() {
-    let s = this.props.binary.expiration  - Math.floor(Date.now() / 1000);
-    let m = Math.floor(s / 60);
-    s -= m * 60
-    return `Less than ${m} minutes and ${s} seconds remaining!`
-  }
-
   render() {
     let hue = this.props.color;
     let time;
@@ -34,7 +28,7 @@ class DecisionShow extends Component {
             <View style={style.decision} >
               <Text style={style.binaryText}>{this.props.binary.name}</Text>
               <Text style={{height: 50}}>{this.props.binary.content}</Text>
-              <Text style={{height: 50, color: 'red'}}>{this.timeLeft()}</Text>
+              <TimeLeft expiration={this.props.binary.expiration} />
               <LinearGradient
                 start={[0.0,0.0]} end={[1.0,0.0]}
                 locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
@@ -46,7 +40,6 @@ class DecisionShow extends Component {
                   style={style.option}
                   onPress={ () => {
                       this.props.vote(this.props.binary.id, 'A');
-                      this.forceUpdate();
                   }
                 }>
                   <Text style={style.optionA}>

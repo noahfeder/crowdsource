@@ -25,15 +25,27 @@ class IndexPage extends Component {
     for (var id in this.props.items) {
       items.push(this.props.items[id])
     }
+    items = items.sort( (a,b) => {
+      if (a.expiration < b.expiration) {
+        return 1;
+      }
+      if (a.expiration > b.expiration) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(items)
     return items.map( el => {
       color = (color + 90) % 360;
       return (
       <TouchableHighlight
         activeOpacity={0.2}
         underlayColor={'#eee'}
-        style={style.wrapper} key={el.id} onPress={() => {
-        this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
-        }}>
+        style={style.wrapper}
+        key={el.id}
+        onPress={() => {
+          this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
+        }} >
           <View style={style.wrapper} >
             <Decision data={el} id={el.id} color={color} />
           </View>

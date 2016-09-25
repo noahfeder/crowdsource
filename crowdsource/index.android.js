@@ -16,6 +16,9 @@
 *  https://davidwalsh.name/fetch
     LOVE
 *  http://stackoverflow.com/questions/39137031/redux-global-solution-for-cannot-read-property-of-undefined-in-mapstatetoprops-i/39137395#comment66645943_39137395
+    TIMER BS
+*  https://facebook.github.io/react-native/docs/timers.html
+*  https://github.com/brigand/react-mixin
 */
 
 'use strict';
