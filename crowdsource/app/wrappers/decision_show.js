@@ -16,12 +16,12 @@ import TimerMixin from 'react-timer-mixin';
 class DecisionShow extends Component {
 
   componentWillMount() {
-    this.props.fetchBinary(this.props.id);
+    this.props.fetchBinary(this.props.binary_id);
   }
 
   componentDidMount() {
     this.setInterval( () => {
-      this.props.fetchBinary(this.props.id);
+      this.props.fetchBinary(this.props.binary_id);
     }, 1000)
   }
 
@@ -49,7 +49,7 @@ class DecisionShow extends Component {
                     underlayColor={'rgba(0,0,0,0)'}
                     style={style.option}
                     onPress={ () => {
-                        this.props.vote(this.props.binary.id, 'A');
+                        this.props.vote(this.props.binary.id, 1, this.props.user_id);
                     }
                   }>
                     <Text style={style.optionA}>
@@ -61,7 +61,7 @@ class DecisionShow extends Component {
                     underlayColor={'rgba(0,0,0,0)'}
                     style={style.option}
                     onPress={ () =>
-                      this.props.vote(this.props.binary.id, 'B')
+                      this.props.vote(this.props.binary.id, 2, this.props.user_id)
                   }>
                     <Text style={style.optionB}>
                       {this.props.binary.choiceB}
@@ -116,14 +116,15 @@ class DecisionShow extends Component {
 reactMixin(DecisionShow.prototype, TimerMixin);
 
 function mapStateToProps(state, ownProps) {
-  if (state.activeBinary.data && state.activeBinary.data.id === ownProps.id) {
+  if (state.activeBinary.data && state.activeBinary.data.binary_id === ownProps.id) {
     return {
       loaded: true,
       binary: state.activeBinary.data,
       breakPoint: (state.activeBinary.data.votesA / (state.activeBinary.data.votesA + state.activeBinary.data.votesB)),
       toggled: state.toggleMenu.toggle,
       error: state.activeBinary.error,
-      message: state.activeBinary.message
+      message: state.activeBinary.message,
+      user_id: state.user.id
     }
   } else {
     return {

@@ -19,8 +19,8 @@ let nav;
 
 export class App extends Component {
 
-  vote(id, choice) {
-    return store.dispatch(vote(id, choice));
+  vote(binary_id, choice, user_id) {
+    return store.dispatch(vote(binary_id, choice, user_id));
   }
 
   fetchBinary(id) {
@@ -59,7 +59,7 @@ export class App extends Component {
       case 'index':
         return <IndexPage toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} refreshBinaries={this.refreshBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
-        return <DecisionShow toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
+        return <DecisionShow toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} binary_id={route.id} navigator={navigator} color={route.color}/>;
       case 'new':
         return <DecisionNew toggleMenu={this.toggleMenu.bind(this)} navigator={navigator} />;
       default:

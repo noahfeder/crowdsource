@@ -48,7 +48,7 @@ export const REQUEST_BINARY = 'REQUEST_BINARY';
 export function requestBinary(id) {
   return {
     type: REQUEST_BINARY,
-    id: id
+    binary_id: id
   }
 }
 
@@ -57,7 +57,7 @@ export const RECEIVE_BINARY = 'RECEIVE_BINARY'
 export function receiveBinary(json, id) {
   return {
     type: RECEIVE_BINARY,
-    id: id,
+    binary_id: id,
     data: json,
     receivedAt: Date.now()
   }
@@ -74,20 +74,21 @@ export function fetchBinary(id) {
 
 export const VOTING = 'VOTING';
 
-export function sendVote(id, choice) {
+export function sendVote(binary_id, choice, user_id) {
   return {
     type: VOTING,
-    id: id,
-    choice: choice
+    binary_id: binary_id,
+    choice: choice,
+    user_id: user_id
   }
 }
 
 export const VOTED = 'VOTED';
 
-export function confirmedVote(id, choice, json) {
+export function confirmedVote(binary_id, choice, json) {
   return {
     type: VOTED,
-    id: id,
+    binary_id: binary_id,
     choice: choice,
     data: json
   }
@@ -100,22 +101,28 @@ export function failedVote(json) {
     type: VOTE_FAILED,
     id: null,
     choice: null,
+    user_id: null,
     data: json
   }
 }
 
-export function vote(id, choice) {
+export function vote(binary_id, choice, user_id) {
   return function(dispatch) {
-    dispatch(sendVote(id, choice));
-    return fetch(`https://f2ba03b6.ngrok.io/binaries/${id}?choice=${choice}`, {
-      method: 'PATCH'
+    dispatch(sendVote(binary_id, choice, user_id));
+    let dataToSend = JSON.stringify({
+      choice: choice,
+      user_id: user_id
+    })
+    return fetch(`https://f2ba03b6.ngrok.io/binaries/${binary_id}`, {
+      method: 'PATCH',
+      body: dataToSend
     })
     .then( response => response.json() )
     .then( json => {
       if (json.error) {
         dispatch(failedVote(json));
       } else {
-        dispatch(confirmedVote(id, choice, json));
+        dispatch(confirmedVote(binary_id, choice, json));
       }
     })
   }

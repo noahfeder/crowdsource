@@ -18,12 +18,16 @@ function activeBinary(state = {
       case REQUEST_BINARY: case VOTING: {
         return Object.assign({}, state, {
           isFetching: true,
-          currentlyFetching: action.id
+          error: false,
+          message: null,
+          currentlyFetching: action.binary_id
         });
       }
       case RECEIVE_BINARY: case VOTED: {
         return Object.assign({}, state, {
           isFetching: false,
+          error: false,
+          message: null,
           currentlyFetching: null,
           data: action.data
         });
