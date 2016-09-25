@@ -9,24 +9,28 @@ import t from 'tcomb-form-native';
 import { Binary, formOptions } from '../public/styles/form_style';
 import { MenuGuts } from '../components/side_menu';
 import Header from '../components/header';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class DecisionNew extends Component {
 
   onSubmit() {
-    let val = this.refs.form.getValue()
-    fetch('https://f2ba03b6.ngrok.io/binaries', {
-      method: 'POST',
-      body: JSON.stringify(val)
-    }).then( response => response.json() )
-      .then( json => {
-        console.log(json)
-        this.props.navigator.replace({
-          name: 'show',
-          id: json.id,
-          color: Math.floor(Math.random() * 360)
+    let val = this.refs.form.getValue();
+    if (val) {
+      dismissKeyboard();
+      fetch('https://f2ba03b6.ngrok.io/binaries', {
+        method: 'POST',
+        body: JSON.stringify(val)
+      }).then( response => response.json() )
+        .then( json => {
+          console.log(json)
+          this.props.navigator.replace({
+            name: 'show',
+            id: json.id,
+            color: Math.floor(Math.random() * 360)
+          })
         })
-      })
-      .catch( error => console.error(error))
+        .catch( error => console.error(error))
+    }
   }
 
   render() {

@@ -62,7 +62,7 @@ export class App extends Component {
           initialRoute={{name: 'welcome'}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) =>
-          Navigator.SceneConfigs.HorizontalSwipeJump}
+          Navigator.SceneConfigs.FloatFromRight}
         />
       </Provider>
     )

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import style from '../public/styles/style';
 import Header from '../components/header';
 import { MenuGuts } from '../components/side_menu';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 import t from 'tcomb-form-native';
 
@@ -38,6 +39,7 @@ class Login extends Component {
   _logIn() {
     let val = this.refs.login.getValue();
     if (val) {
+      dismissKeyboard();
       fetch('https://f2ba03b6.ngrok.io/login', {
       method: 'POST',
       body: JSON.stringify(val)
@@ -55,7 +57,7 @@ class Login extends Component {
     return (
       <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
         <Header toggleMenu={this.props.toggleMenu.bind(this)} />
-        <View style={[style.wrapper, {backgroundColor: 'blue'}]} >
+        <View style={style.wrapper} >
           <Form
             ref="login"
             type={User}
