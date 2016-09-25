@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import Header from '../components/header';
 import style from '../public/styles/style';
 
 import t from 'tcomb-form-native';
@@ -55,17 +54,16 @@ class Login extends Component {
   render() {
     return (
       <View style={[style.wrapper, {backgroundColor: 'blue'}]} >
-          <Header />
-          <Form
-            ref="login"
-            type={User}
-            options={Options}
-          />
-          <Button backgroundColor="#2F8"
-            small raised title='LOGIN'
-            onPress={this._logIn.bind(this)}
-          />
-        </View>
+        <Form
+          ref="login"
+          type={User}
+          options={Options}
+        />
+        <Button backgroundColor="#2F8"
+          small raised title='LOGIN'
+          onPress={this._logIn.bind(this)}
+        />
+      </View>
     )
   }
 }

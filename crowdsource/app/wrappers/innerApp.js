@@ -1,0 +1,17 @@
+'use strict';
+import React, {Component} from 'react';
+import thunkMiddleware from 'redux-thunk';
+import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import IndexPage from './index';
+import DecisionShow from './decision_show';
+import DecisionNew from './decision_new';
+import Login from './login';
+import Welcome from './welcome';
+import Header from '../components/header';
+import RootReducer from '../reducers';
+import { fetchBinaries, vote, fetchBinary, logInUser, toggleMenu } from '../actions/actions';
+import { Navigator, Text, AsyncStorage } from 'react-native';
+import { SideMenu } from 'react-native-elements';
+import { MenuGuts } from '../components/side_menu';
+import style from '../public/styles/style';

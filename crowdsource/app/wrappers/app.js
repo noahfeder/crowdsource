@@ -8,10 +8,13 @@ import DecisionShow from './decision_show';
 import DecisionNew from './decision_new';
 import Login from './login';
 import Welcome from './welcome';
+import Header from '../components/header';
 import RootReducer from '../reducers';
-import { fetchBinaries, vote, fetchBinary, logInUser } from '../actions/actions';
+import { fetchBinaries, vote, fetchBinary, logInUser, toggleMenu } from '../actions/actions';
 import { Navigator, Text, AsyncStorage } from 'react-native';
-
+import { SideMenu } from 'react-native-elements';
+import { MenuGuts } from '../components/side_menu';
+import style from '../public/styles/style';
 
 const store = createStore(RootReducer,applyMiddleware(thunkMiddleware));
 
@@ -32,6 +35,10 @@ export default class App extends Component {
     return store.dispatch(logInUser(id))
   }
 
+  toggleMenu() {
+    return store.dispatch(toggleMenu());
+  }
+
   renderScene(route,navigator) {
     switch (route.name) {
       case 'welcome':
@@ -39,7 +46,7 @@ export default class App extends Component {
       case 'login':
         return <Login navigator={navigator} loginAsync={this.loginAsync.bind(this)} />
       case 'index':
-        return <IndexPage vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
+        return <IndexPage toggled={false} toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
       case 'show':
         return <DecisionShow vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} id={route.id} navigator={navigator} color={route.color}/>;
       case 'new':
@@ -52,12 +59,15 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Navigator
-          initialRoute={{name: 'welcome'}}
-          renderScene={this.renderScene.bind(this)}
-          configureScene={(route) =>
-          Navigator.SceneConfigs.HorizontalSwipeJump}
-        />
+        <SideMenu toggled={store.toggled} MenuComponent={MenuGuts}>
+          <Header toggleMenu={this.toggleMenu.bind(this)} />
+          <Navigator
+            initialRoute={{name: 'welcome'}}
+            renderScene={this.renderScene.bind(this)}
+            configureScene={(route) =>
+            Navigator.SceneConfigs.HorizontalSwipeJump}
+          />
+        </SideMenu>
       </Provider>
     )
   }

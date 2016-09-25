@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { REQUEST_BINARIES, RECEIVE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED, LOGGING_IN, LOGGED_IN } from '../actions/actions';
+import { REQUEST_BINARIES, RECEIVE_BINARIES, REQUEST_BINARY, RECEIVE_BINARY, VOTING, VOTED, LOGGING_IN, LOGGED_IN, TOGGLE_MENU } from '../actions/actions';
 
 function activeBinary(state = {
   isFetching: false,
@@ -14,7 +14,6 @@ function activeBinary(state = {
         });
       }
       case RECEIVE_BINARY: case VOTED: {
-        console.log(action)
         return Object.assign({}, state, {
           isFetching: false,
           currentlyFetching: null,
@@ -39,7 +38,6 @@ function binaries(state = {
         })
       }
       case RECEIVE_BINARIES: {
-        console.log('got em all')
         let newObj = {};
         action.data.forEach( (el) => {
           newObj[el.id] = el;
@@ -57,10 +55,9 @@ function binaries(state = {
 }
 
 
-function user(state = null, action) {
+function user(state = {}, action) {
   switch (action.type) {
     case LOGGING_IN: case LOGGED_IN:
-      console.log(action);
       return Object.assign({},state, {
         id: action.id,
         loggedIn: action.loggedIn
@@ -68,12 +65,24 @@ function user(state = null, action) {
     default:
       return state;
   }
-
 }
+
+function toggleMenu(state = {toggle: false}, action) {
+  switch (action.type) {
+    case TOGGLE_MENU:
+      return Object.assign({}, state, {
+          toggle: !state.toggle
+      });
+    default:
+      return state;
+  }
+}
+
 const RootReducer = combineReducers({
   binaries,
   activeBinary,
-  user
+  user,
+  toggleMenu
 });
 
 export default RootReducer;

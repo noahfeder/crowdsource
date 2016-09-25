@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
 import Loading from './loading';
-import Header from '../components/header';
 import Decision from '../components/decision';
 import style from '../public/styles/style';
 import { Button } from 'react-native-elements';
@@ -15,26 +14,29 @@ class DecisionShow extends Component {
     this.props.fetchBinary(this.props.id)
   }
 
+  timeLeft() {
+    let s = this.props.binary.expiration  - Math.floor(Date.now() / 1000);
+    let m = Math.floor(s / 60);
+    s -= m * 60
+    return `Less than ${m} minutes and ${s} seconds remaining!`
+  }
+
   render() {
     let hue = this.props.color;
+    let time;
     if (this.props.loaded) {
       return (
         <View style={style.wrapper}>
-          <Header />
-          <Text style={{height: 50}}>{this.props.binary.content}</Text>
-
           <View style={style.decision} >
-
             <Text style={style.binaryText}>{this.props.binary.name}</Text>
-
+            <Text style={{height: 50}}>{this.props.binary.content}</Text>
+            <Text style={{height: 50, color: 'red'}}>{this.timeLeft()}</Text>
             <LinearGradient
               start={[0.0,0.0]} end={[1.0,0.0]}
               locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
               colors={[`hsl(${hue},75%,75%)`,`hsl(${hue},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`]}
               style={style.binary} />
-
             <View style={style.options}>
-
               <TouchableHighlight activeOpacity={0.2}
                 underlayColor={'rgba(0,0,0,0)'}
                 style={style.option}
@@ -58,9 +60,10 @@ class DecisionShow extends Component {
                   {this.props.binary.choiceB}
                 </Text>
               </TouchableHighlight>
+
             </View>
+            <BackButton navigator={this.props.navigator} />
           </View>
-          <BackButton navigator={this.props.navigator} />
         </View>
         )
       } else {

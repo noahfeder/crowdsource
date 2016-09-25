@@ -26,16 +26,20 @@ const style = StyleSheet.create({
   },
   header: {
     height: 50,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    flexDirection: 'row'
   },
   headerText: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 24
+    fontSize: 24,
+    textAlign: 'center',
+    flex: 1
   },
   binary: {
     height: 100,
-    margin: 10
+    margin: 10,
+    padding: 10
   },
   binaryText: {
     textAlign: 'center',
@@ -44,9 +48,9 @@ const style = StyleSheet.create({
   },
   options: {
     flexDirection: 'row',
-    position: 'absolute',
+    position: 'relative',
     width: width - 30,
-    top: 50,
+    top: -90,
     height: 100,
     backgroundColor: 'transparent',
     margin: 15
@@ -68,7 +72,9 @@ const style = StyleSheet.create({
     width: 80,
     height: 20,
     marginTop: 20,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    position: 'absolute',
+    bottom: 0
   },
   backButtonText: {
     fontWeight: 'bold',

@@ -1,6 +1,5 @@
 'use strict';
 import React, { Component } from 'react';
-import Header from '../components/header';
 import { View, Text, AsyncStorage } from 'react-native';
 import style from '../public/styles/style';
 
@@ -18,7 +17,6 @@ export default class Welcome extends Component {
   render() {
     return (
       <View style={style.wrapper}>
-        <Header />
         <View style={[style.wrapper, style.greenBackground]}>
           <Text style={style.textHuge}> WELCOME! </Text>
         </View>

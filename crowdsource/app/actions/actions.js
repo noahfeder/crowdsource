@@ -115,3 +115,16 @@ export function logInUser(user_id) {
     return dispatch(loggedIn(user_id))
   }
 }
+
+export const TOGGLE_MENU = 'TOGGLE_MENU'
+
+export function toggler() {
+  return {
+    type: TOGGLE_MENU
+  }
+}
+export function toggleMenu() {
+  return function(dispatch) {
+    return dispatch(toggler());
+  }
+}

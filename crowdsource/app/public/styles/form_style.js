@@ -16,7 +16,7 @@ export const Binary = t.struct({
   number: t.Number,
   type: TimeType,
   id: t.String,
-  timeNow: Math.floor(Date.now() / 1000) // epoch time now in epoch seconds
+  timeNow: t.Number
 });
 
 let { height, width } = Dimensions.get('window');

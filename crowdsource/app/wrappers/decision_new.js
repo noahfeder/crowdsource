@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 import { TouchableHighlight, View, Text, Dimensions } from 'react-native';
 import BackButton from '../components/back_button';
 import { connect } from 'react-redux';
-import Header from '../components/header';
 import Loading from './loading';
 import t from 'tcomb-form-native';
 import { Binary, formOptions } from '../public/styles/form_style';
@@ -35,12 +34,12 @@ class DecisionNew extends Component {
 
       const Value = {
         id: this.props.id,
-        type: 'hours'
+        type: 'hours',
+        timeNow: Math.floor(Date.now() / 1000) // epoch time now in epoch seconds
       }
 
       return (
         <View style={style.wrapper}>
-          <Header />
           <Form
             ref="form"
             type={Binary}

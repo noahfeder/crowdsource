@@ -2,10 +2,9 @@
 import React, { Component } from 'react';
 import { RefreshControl, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { SocialIcon } from 'react-native-elements';
+import { SocialIcon, SideMenu } from 'react-native-elements';
 import Loading from './loading';
 import Decision from '../components/decision';
-import Header from '../components/header';
 import style from '../public/styles/style';
 
 class IndexPage extends Component {
@@ -45,7 +44,6 @@ class IndexPage extends Component {
     if (this.props.loaded) {
       return (
         <View style={style.wrapper}>
-          <Header />
           <ScrollView refreshControl={
             <RefreshControl
               refreshing={this.props.isFetching}
@@ -54,20 +52,6 @@ class IndexPage extends Component {
           }>
               {this.decisions()}
           </ScrollView>
-          <View style={{height: 50, flexDirection: 'row'}}>
-            <SocialIcon type="github"
-              onPress={ () => {
-                this.props.navigator.push({name: 'new'})
-              }}
-            />
-            <SocialIcon type="github"
-              onPress={ () => {
-                AsyncStorage.removeItem('user_id').then( () => {
-                  this.props.navigator.replacePreviousAndPop({name: 'welcome'})
-                })
-              }}
-            />
-          </View>
         </View>
       )
     } else {
