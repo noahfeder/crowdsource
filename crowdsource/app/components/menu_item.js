@@ -8,12 +8,12 @@ export default class MenuItem extends Component {
     return (
       <TouchableHighlight
         onPress={ () => this.props.onPress() }
-        style={style.menuItem}
-        activeOpacity={0.1}
+        style={ style.menuItem }
+        activeOpacity={ 0.1 }
         underlayColor={'rgba(0,0,0,0)'}
       >
-        <Text style={style.textMedium} >
-          {this.props.content}
+        <Text style={ style.textMedium } >
+          { this.props.content }
         </Text>
       </TouchableHighlight>
 

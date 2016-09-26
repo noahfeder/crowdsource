@@ -9,10 +9,10 @@ import { toggle } from '../wrappers/app';
 export default class Header extends Component {
   render() {
     return (
-      <View style={style.header}>
-        <Text style={style.headerText}>CrowdsourceHelp</Text>
-        <Icon name="bars" size={30}
-          style={style.headerIcon}
+      <View style={ style.header }>
+        <Text style={ style.headerText }>CrowdsourceHelp</Text>
+        <Icon name="bars" size={ 30 }
+          style={ style.headerIcon }
           onPress={ () => this.props.toggleMenu() } />
 
       </View>

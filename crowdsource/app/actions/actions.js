@@ -77,7 +77,7 @@ export function updateBinary(json, id) {
 export function refreshBinary(id) {
   return function(dispatch) {
     dispatch(requestBinary(id));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}`)
+    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id }`)
       .then(response => response.json())
       .then(json => dispatch(updateBinary(json, id)))
   }
@@ -86,7 +86,7 @@ export function refreshBinary(id) {
 export function fetchBinary(id) {
   return function(dispatch) {
     dispatch(requestBinary(id));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id}`)
+    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${id }`)
       .then(response => response.json())
       .then(json => dispatch(receiveBinary(json, id)))
   }
@@ -133,7 +133,7 @@ export function vote(binary_id, choice, user_id) {
       choice: choice,
       user_id: user_id
     })
-    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${binary_id}`, {
+    return fetch(`https://crowdsourcehelp.herokuapp.com/binaries/${binary_id }`, {
       method: 'PATCH',
       body: dataToSend
     })
@@ -260,7 +260,7 @@ export function userBinariesFailed(user_id, data) {
 export function fetchUserBinaries(user_id) {
   return function(dispatch) {
     dispatch(requestUserBinaries(user_id));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/user/${user_id}`)
+    return fetch(`https://crowdsourcehelp.herokuapp.com/user/${user_id }`)
       .then( response => response.json() )
       .then( json => {
         if (json.error) {
@@ -275,7 +275,7 @@ export function fetchUserBinaries(user_id) {
 export function refreshUserBinaries(user_id) {
   return function(dispatch) {
     dispatch(updateUserBinaries(user_id));
-    return fetch(`https://crowdsourcehelp.herokuapp.com/user/${user_id}`)
+    return fetch(`https://crowdsourcehelp.herokuapp.com/user/${user_id }`)
       .then( response => response.json() )
       .then( json => {
         if (json.error) {

@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 let { height, width } = Dimensions.get('window');
-
+const bgcolor = '#AA5585';
 const style = StyleSheet.create({
   defaultText: {
     fontFamily: 'Arial, sans-serif',
@@ -15,15 +15,15 @@ const style = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#ddd'
   },
   decision: {
-    height: 150,
-    marginBottom: 15
+    marginTop: 10,
+    height: 130
   },
   header: {
     height: 32,
-    backgroundColor: 'red',
+    backgroundColor: bgcolor,
     flexDirection: 'row'
   },
   headerIcon: {
@@ -31,7 +31,7 @@ const style = StyleSheet.create({
     left: 10
   },
   headerText: {
-    color: 'black',
+    color: '#333',
     fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
@@ -44,17 +44,24 @@ const style = StyleSheet.create({
   },
   binaryText: {
     textAlign: 'center',
-    height: 50,
-    fontSize: 40
+    height: 24,
+    fontSize: 20
+  },
+  countdownText: {
+    flex: 0,
+    color: '#f20',
+    marginVertical: 15,
+    fontSize: 24
   },
   options: {
     flexDirection: 'row',
     position: 'relative',
     width: width - 30,
     top: -90,
-    height: 100,
+    height: 50,
     backgroundColor: 'transparent',
-    margin: 15
+    marginHorizontal: 15,
+    marginTop: 15
   },
   option: {
     flex: 1,
@@ -68,6 +75,10 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
     fontSize: 18,
     textAlign: 'right'
+  },
+  welcome: {
+    backgroundColor: bgcolor,
+    justifyContent: 'center'
   },
   backButton: {
     width: 80,
@@ -83,9 +94,6 @@ const style = StyleSheet.create({
   },
   buttonTop: {
     marginBottom: 10
-  },
-  greenBackground: {
-    backgroundColor: 'green'
   },
   textSmall: {
     fontSize: 18
@@ -103,8 +111,23 @@ const style = StyleSheet.create({
     textAlign: 'center'
   },
   textError: {
-    height: 20,
-    color: 'red'
+    fontSize: 18,
+    color: '#C63131'
+  },
+  textActive: {
+    fontSize: 18,
+    color: '#333'
+  },
+  textPadded: {
+    marginHorizontal: 15
+  },
+  textPaddedMore: {
+    marginHorizontal: 30
+  },
+  alignTop: {
+    justifyContent: 'flex-start',
+    flex: 1,
+    flexDirection: 'column'
   },
   menu: {
     backgroundColor: 'rgba(100,100,100,0.6)',

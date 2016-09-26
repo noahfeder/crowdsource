@@ -1,6 +1,6 @@
 'use strict';
 // React building blocks
-  import React, {Component} from 'react';
+  import React, { Component } from 'react';
   import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
   import { Provider } from 'react-redux';
   import thunkMiddleware from 'redux-thunk';
@@ -124,7 +124,7 @@ export class App extends Component {
             fetchBinary={ this.fetchBinary.bind(this) }
             refreshBinary={ this.refreshBinary.bind(this) }
             binary_id={ route.id }
-            color={ route.color} />
+            color={ route.color } />
           );
       case 'new':
         return (
@@ -151,12 +151,12 @@ export class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <Navigator
-          initialRoute={{name: 'welcome'}}
-          renderScene={this.renderScene.bind(this)}
+          initialRoute={{ name: 'welcome'}}
+          renderScene={ this.renderScene.bind(this)}
           configureScene={(route) =>
-          Navigator.SceneConfigs.FloatFromRight}
+          Navigator.SceneConfigs.FloatFromRight }
         />
       </Provider>
     )

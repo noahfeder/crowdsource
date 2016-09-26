@@ -8,7 +8,7 @@ import { nav } from '../wrappers/app'
 export const MenuGuts = (
   <View style={[style.wrapper, style.menu]}>
 
-    <MenuItem onPress={ () => nav.resetTo({name: 'index'}) } content="Home" />
+    <MenuItem onPress={ () => nav.resetTo({ name: 'index'}) } content="Home" />
 
     <MenuItem onPress={ () => {
       AsyncStorage.multiGet( ['user_id_csh','user_name_csh'] ).then( arr =>
@@ -16,11 +16,11 @@ export const MenuGuts = (
       )
     }} content="My Decisions" />
 
-    <MenuItem onPress={ () => nav.replace({name: 'new'})} content="New Decision" />
+    <MenuItem onPress={ () => nav.replace({ name: 'new'})} content="New Decision" />
 
     <MenuItem onPress={ () => {
       AsyncStorage.multiRemove(['user_id_csh','user_name_csh']).then( () => {
-        nav.resetTo({name: 'login'})
+        nav.resetTo({ name: 'login'})
       })
     }} content="Logout" />
 

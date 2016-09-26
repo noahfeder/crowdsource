@@ -22,9 +22,9 @@ export default class Welcome extends Component {
 
   render() {
     return (
-      <View style={style.wrapper}>
-        <View style={[style.wrapper, style.greenBackground]}>
-          <Text style={style.textHuge}> WELCOME! </Text>
+      <View style={ style.wrapper }>
+        <View style={ [style.wrapper, style.welcome] }>
+          <Text style={ [style.textLarge, style.textCenter] }>CrowdsourceHelp</Text>
         </View>
       </View>
     )

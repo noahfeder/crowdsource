@@ -90,4 +90,4 @@ export const formOptions = {
   }
 };
 
-export {halfStyle, tallStyle, newStyle};
+export { halfStyle, tallStyle, newStyle };

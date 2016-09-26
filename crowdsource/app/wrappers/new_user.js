@@ -57,7 +57,7 @@ class SignUp extends Component {
     let val = this.refs.signup.getValue();
     if (val) {
       if (val.password_confirm !== val.password) {
-        this.props.alertUserError({error: true, message: 'Passwords must match!'});
+        this.props.alertUserError({ error: true, message: 'Passwords must match!'});
       } else {
         dismissKeyboard();
         fetch('https://crowdsourcehelp.herokuapp.com/signup', {
@@ -74,33 +74,33 @@ class SignUp extends Component {
               ['user_name_csh', String(json.data.username)]
             ]).then( () => {
                 this.props.loginAsync(json.data.id, json.data.username);
-                this.props.navigator.push({name: 'index'});
+                this.props.navigator.push({ name: 'index'});
             })
           }
         })
         .catch( error => console.error(error) )
       }
     } else {
-      this.props.alertUserError({error: true, message: 'Invalid username/password!'});
+      this.props.alertUserError({ error: true, message: 'Invalid username/password!'});
     }
   }
 
   render() {
     return (
-        <View style={style.wrapper} >
-          <View style={style.header}>
-            <Text style={style.headerText}>CROWDSOURCE</Text>
+        <View style={ style.wrapper } >
+          <View style={ style.header }>
+            <Text style={ style.headerText }>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, style.textError]}>{this.props.message}</Text>
+          <Text style={[style.textSmall, style.textError]}>{ this.props.message }</Text>
           <Form
             ref="signup"
-            type={NewUser}
-            options={Options}
+            type={ NewUser }
+            options={ Options }
           />
           <Button backgroundColor="#2F8"
             small raised title='SIGNUP'
-            buttonStyle={style.buttonTop}
-            onPress={this._signUp.bind(this)}
+            buttonStyle={ style.buttonTop }
+            onPress={ this._signUp.bind(this)}
           />
           <BackButton  />
         </View>

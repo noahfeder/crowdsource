@@ -153,7 +153,7 @@ function user(state = {}, action) {
   }
 }
 
-function toggleMenu(state = {toggle: false}, action) {
+function toggleMenu(state = { toggle: false }, action) {
   switch (action.type) {
     case TOGGLE_MENU:
       return Object.assign({}, state, {

@@ -45,19 +45,17 @@ class IndexPage extends Component {
     }
     items = this.sortItems(items);
     return items.map( el => {
-      color = (color + 90) % 360;
+      color = (color + 137.5) % 360;
       return (
       <TouchableHighlight
-        activeOpacity={0.2}
+        activeOpacity={ 0.2 }
         underlayColor={'#eee'}
-        style={style.wrapper}
-        key={el.id}
+        style={ style.wrapper }
+        key={ el.id }
         onPress={() => {
-          this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
+          this.props.navigator.push({ name: 'show', data: el, id: el.id, color: color })
         }} >
-          <View style={style.wrapper} >
-            <Decision data={el} id={el.id} color={color} />
-          </View>
+            <Decision data={ el } id={ el.id } color={ color } />
       </TouchableHighlight>
       )
     });
@@ -75,7 +73,7 @@ class IndexPage extends Component {
                 onRefresh={ this._onRefresh.bind(this) }
               />
             }>
-                {this.decisions()}
+                { this.decisions()}
             </ScrollView>
           </View>
         </SideMenu>

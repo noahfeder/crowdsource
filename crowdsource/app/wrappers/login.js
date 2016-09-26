@@ -56,38 +56,38 @@ class Login extends Component {
             ['user_name_csh', String(json.data.username)]
           ]).then( () => {
               this.props.loginAsync(json.data.id, json.data.username);
-              this.props.navigator.push({name: 'index'});
+              this.props.navigator.push({ name: 'index'});
           })
         }
       })
       .catch( error => console.error(error) )
     } else {
-      this.props.alertUserError({error: true, message: 'Invalid username/password!'});
+      this.props.alertUserError({ error: true, message: 'Invalid username/password!'});
     }
   }
 
   render() {
     return (
-        <View style={style.wrapper} >
-          <View style={style.header}>
-            <Text style={style.headerText}>CROWDSOURCE</Text>
+        <View style={ style.wrapper } >
+          <View style={ style.header }>
+            <Text style={ style.headerText }>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, style.textError]}>{this.props.message}</Text>
+          <Text style={[style.textSmall, style.textError]}>{ this.props.message }</Text>
           <Form
             ref="login"
-            type={User}
-            options={Options}
+            type={ User }
+            options={ Options }
           />
           <Button backgroundColor="#2F8"
             small raised title='LOGIN'
-            buttonStyle={style.buttonTop}
-            onPress={this._logIn.bind(this)}
+            buttonStyle={ style.buttonTop }
+            onPress={ this._logIn.bind(this)}
           />
           <Button backgroundColor="#938"
             small raised title='SIGNUP'
             onPress={() => {
-              this.props.alertUserError({error: false, message: null});
-              this.props.navigator.push({name: 'newuser'});
+              this.props.alertUserError({ error: false, message: null });
+              this.props.navigator.push({ name: 'newuser'});
             }}
           />
         </View>
