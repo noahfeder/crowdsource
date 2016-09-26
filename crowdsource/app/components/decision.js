@@ -12,11 +12,11 @@ export default class Decision extends Component {
     let a = this.props.data.votesA;
     let b = this.props.data.votesB;
     let breakPoint = a / (a + b);
-
+    let expiredText = this.props.expired ? style.redText : style.greenText;
     return (
       <View style={style.decision} >
 
-        <Text style={style.binaryText}>{this.props.data.name}</Text>
+        <Text style={ [style.binaryText, expiredText] }>{this.props.data.name}</Text>
 
         <LinearGradient
             start={[0.0,0.0]} end={[1.0,0.0]}

@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { RefreshControl, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView, AsyncStorage } from 'react-native';
+import { RefreshControl, TouchableHighlight, View, Text, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { SocialIcon, SideMenu } from 'react-native-elements';
 import Loading from './loading';
