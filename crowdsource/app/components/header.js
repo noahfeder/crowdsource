@@ -10,11 +10,11 @@ export default class Header extends Component {
   render() {
     return (
       <View style={style.header}>
-        <Icon name="bars" size={30} onPress={() => {
-          this.props.toggleMenu();
-          console.log('togglin');
-        }}/>
-        <Text style={style.headerText}>CROWDSOURCE</Text>
+        <Text style={style.headerText}>CrowdsourceHelp</Text>
+        <Icon name="bars" size={30}
+          style={style.headerIcon}
+          onPress={ () => this.props.toggleMenu() } />
+
       </View>
       )
   }

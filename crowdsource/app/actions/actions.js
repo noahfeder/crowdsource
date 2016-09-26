@@ -8,11 +8,11 @@ export function requestBinaries() {
 
 export const RECEIVE_BINARIES = 'RECEIVE_BINARIES'
 
-export function receiveBinaries(json) {
+export function receiveBinaries(data) {
   return {
     type: RECEIVE_BINARIES,
-    data: json,
-    receivedAt: Date.now()
+    data: data,
+    receivedAt: Math.floor(Date.now() / 1000)
   }
 }
 
@@ -52,14 +52,34 @@ export function requestBinary(id) {
   }
 }
 
-export const RECEIVE_BINARY = 'RECEIVE_BINARY'
+export const RECEIVE_BINARY = 'RECEIVE_BINARY';
 
 export function receiveBinary(json, id) {
   return {
     type: RECEIVE_BINARY,
     binary_id: id,
     data: json,
-    receivedAt: Date.now()
+    receivedAt: Math.floor(Date.now() / 1000)
+  }
+}
+
+export const UPDATE_BINARY = 'UPDATE_BINARY';
+
+export function updateBinary(json, id) {
+  return {
+    type: UPDATE_BINARY,
+    binary_id: id,
+    data: json,
+    receivedAt: Math.floor(Date.now() / 1000)
+  }
+}
+
+export function refreshBinary(id) {
+  return function(dispatch) {
+    dispatch(requestBinary(id));
+    return fetch(`https://f2ba03b6.ngrok.io/binaries/${id}`)
+      .then(response => response.json())
+      .then(json => dispatch(updateBinary(json, id)))
   }
 }
 
@@ -184,5 +204,51 @@ export function toggler() {
 export function toggleMenu() {
   return function(dispatch) {
     return dispatch(toggler());
+  }
+}
+
+export const REQUEST_USER_BINARIES = 'REQUEST_USER_BINARIES';
+
+export function requestUserBinaries(user_id) {
+  return {
+    type: REQUEST_USER_BINARIES,
+    user_id: user_id
+  }
+}
+
+export const UPDATE_USER_BINARIES = 'UPDATE_USER_BINARIES';
+
+export function updateUserBinaries(user_id) {
+  return {
+    type: UPDATE_USER_BINARIES,
+    user_id: user_id
+  }
+}
+
+export const RECEIVE_USER_BINARIES = 'RECEIVE_USER_BINARIES';
+
+export function receiveUserBinaries(user_id, data) {
+  return {
+    type: RECEIVE_USER_BINARIES,
+    user_id: user_id,
+    data: data
+  }
+}
+
+export function fetchUserBinaries(user_id) {
+  return function(dispatch) {
+    dispatch(requestUserBinaries(user_id));
+    return fetch(`https://f2ba03b6.ngrok.io/user/${user_id}`)
+      .then( response => response.json() )
+      .then( json => dispatch(receiveUserBinaries(user_id, json)) );
+  }
+}
+
+export function refreshUserBinaries(user_id) {
+  return function(dispatch) {
+    dispatch(updateUserBinaries(user_id));
+    return fetch(`https://f2ba03b6.ngrok.io/user/${user_id}`)
+      .then( response => response.json() )
+      .then( json => dispatch(receiveUserBinaries(user_id, json)) );
   }
 }

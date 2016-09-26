@@ -66,13 +66,13 @@ class IndexPage extends Component {
   render() {
     if (this.props.loaded) {
       return (
-        <SideMenu navigator={this.props.navigator} menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
-          <Header toggleMenu={this.props.toggleMenu.bind(this)} />
-          <View style={style.wrapper}>
+        <SideMenu toggled={ this.props.toggled } MenuComponent={ MenuGuts } >
+          <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
+          <View style={ style.wrapper }>
             <ScrollView refreshControl={
               <RefreshControl
-                refreshing={this.props.isFetching}
-                onRefresh={this._onRefresh.bind(this)}
+                refreshing={ this.props.isFetching }
+                onRefresh={ this._onRefresh.bind(this) }
               />
             }>
                 {this.decisions()}

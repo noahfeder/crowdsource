@@ -4,6 +4,7 @@ import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, Scroll
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import style from '../public/styles/style';
+import { newStyle } from '../public/styles/form_style';
 import BackButton from '../components/back_button';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
@@ -18,6 +19,7 @@ const NewUser = t.struct({
 });
 
 const Options = {
+  stylesheet: newStyle,
   auto: 'placeholders',
   fields: {
     username: {
@@ -79,7 +81,7 @@ class SignUp extends Component {
           <View style={style.header}>
             <Text style={style.headerText}>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, {height: 20, color: 'red'}]}>{this.props.message}</Text>
+          <Text style={[style.textSmall, style.textError]}>{this.props.message}</Text>
           <Form
             ref="signup"
             type={NewUser}
@@ -87,6 +89,7 @@ class SignUp extends Component {
           />
           <Button backgroundColor="#2F8"
             small raised title='SIGNUP'
+            buttonStyle={style.buttonTop}
             onPress={this._signUp.bind(this)}
           />
           <BackButton navigator={this.props.navigator} />

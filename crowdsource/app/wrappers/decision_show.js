@@ -1,3 +1,4 @@
+'use strict';
 import React, {Component} from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
 import Loading from './loading';
@@ -21,7 +22,7 @@ class DecisionShow extends Component {
 
   componentDidMount() {
     this.setInterval( () => {
-      this.props.fetchBinary(this.props.binary_id);
+      this.props.refreshBinary(this.props.binary_id);
     }, 1000)
   }
 
@@ -32,11 +33,12 @@ class DecisionShow extends Component {
       if (!this.props.error) {
         // ALL GOOD
         return (
-          <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+          <SideMenu  toggled={this.props.toggled} MenuComponent={MenuGuts}>
             <Header toggleMenu={this.props.toggleMenu.bind(this)} />
             <View style={style.wrapper}>
               <View style={style.decision} >
                 <Text style={style.binaryText}>{this.props.binary.name}</Text>
+                <Text style={ [style.textSmall, style.textCenter] } >by {this.props.binary.username}</Text>
                 <Text style={{height: 50}}>{this.props.binary.content}</Text>
                 <TimeLeft expiration={this.props.binary.expiration} />
                 <LinearGradient
@@ -77,12 +79,13 @@ class DecisionShow extends Component {
         } else {
           // ERROR MESSAGE
           return (
-          <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+          <SideMenu  toggled={this.props.toggled} MenuComponent={MenuGuts}>
             <Header toggleMenu={this.props.toggleMenu.bind(this)} />
             <View style={style.wrapper}>
               <View style={style.decision} >
                 <Text style={style.binaryText}>{this.props.binary.name}</Text>
                 <Text style={{height: 50}}>{this.props.binary.content}</Text>
+                <TimeLeft expiration={this.props.binary.expiration} />
                 <Text style={[style.textMedium, {height: 50, color: 'red'}]}>{this.props.message}</Text>
                 <LinearGradient
                   start={[0.0,0.0]} end={[1.0,0.0]}

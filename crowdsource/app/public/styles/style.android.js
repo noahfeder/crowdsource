@@ -22,9 +22,13 @@ const style = StyleSheet.create({
     marginBottom: 15
   },
   header: {
-    height: 50,
+    height: 32,
     backgroundColor: 'red',
     flexDirection: 'row'
+  },
+  headerIcon: {
+    position: 'absolute',
+    left: 10
   },
   headerText: {
     color: 'black',
@@ -77,12 +81,15 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24
   },
+  buttonTop: {
+    marginBottom: 10
+  },
   greenBackground: {
     backgroundColor: 'green'
   },
   textSmall: {
-      fontSize: 18
-    },
+    fontSize: 18
+  },
   textMedium: {
     fontSize: 24
   },
@@ -92,13 +99,22 @@ const style = StyleSheet.create({
   textHuge: {
     fontSize: 72
   },
+  textCenter: {
+    textAlign: 'center'
+  },
+  textError: {
+    height: 20,
+    color: 'red'
+  },
   menu: {
-    paddingTop: 50,
-    backgroundColor: 'white'
+    backgroundColor: 'rgba(100,100,100,0.6)',
+    flex: 1
   },
   menuItem: {
-    backgroundColor: 'rgba(100,100,100,0.6)',
-    height: 50
+    paddingHorizontal: 30,
+    marginBottom: 15,
+    backgroundColor: 'rgba(100,100,100,0.0)',
+    height: 30
   }
 })
 

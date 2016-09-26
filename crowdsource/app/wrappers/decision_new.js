@@ -44,7 +44,7 @@ class DecisionNew extends Component {
       }
 
       return (
-        <SideMenu menuWidth={120} toggled={this.props.toggled} MenuComponent={MenuGuts}>
+        <SideMenu  toggled={this.props.toggled} MenuComponent={MenuGuts}>
           <Header toggleMenu={this.props.toggleMenu.bind(this)} />
           <View style={style.wrapper}>
             <Form
@@ -55,6 +55,7 @@ class DecisionNew extends Component {
             />
             <Button backgroundColor="#2F8"
               small raised title='SUBMIT'
+              buttonStyle={style.buttonTop}
               onPress={this.onSubmit.bind(this)}
             />
             <BackButton navigator={this.props.navigator} />

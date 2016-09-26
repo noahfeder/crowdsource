@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import style from '../public/styles/style';
+import { newStyle } from '../public/styles/form_style';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-
 import t from 'tcomb-form-native';
 
 let Form = t.form.Form;
@@ -16,6 +16,7 @@ const User = t.struct({
 });
 
 const Options = {
+  stylesheet: newStyle,
   auto: 'placeholders',
   fields: {
     username: {
@@ -67,7 +68,7 @@ class Login extends Component {
           <View style={style.header}>
             <Text style={style.headerText}>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, {height: 20, color: 'red'}]}>{this.props.message}</Text>
+          <Text style={[style.textSmall, style.textError]}>{this.props.message}</Text>
           <Form
             ref="login"
             type={User}
@@ -75,13 +76,14 @@ class Login extends Component {
           />
           <Button backgroundColor="#2F8"
             small raised title='LOGIN'
+            buttonStyle={style.buttonTop}
             onPress={this._logIn.bind(this)}
           />
           <Button backgroundColor="#938"
             small raised title='SIGNUP'
             onPress={() => {
               this.props.alertUserError({error: false, message: null});
-              this.props.navigator.push({name: 'user'});
+              this.props.navigator.push({name: 'newuser'});
             }}
           />
         </View>

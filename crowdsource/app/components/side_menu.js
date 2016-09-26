@@ -8,8 +8,19 @@ export const MenuGuts = (
     <TouchableHighlight style={style.menuItem}
       activeOpacity={0.1}
       underlayColor={'rgba(0,0,0,0)'}
+      onPress={ () => {
+        AsyncStorage.getItem('user_id_csh').then( (id) => {
+          nav.push({ name: 'showuser', user_id: id })
+        })
+      }
+    }>
+      <Text style={style.textMedium} >My Decisions</Text>
+    </TouchableHighlight>
+    <TouchableHighlight style={style.menuItem}
+      activeOpacity={0.1}
+      underlayColor={'rgba(0,0,0,0)'}
       onPress={ () => nav.push({name: 'new'})}>
-      <Text>New decision</Text>
+      <Text style={style.textMedium} >New decision</Text>
     </TouchableHighlight>
     <TouchableHighlight style={style.menuItem}
       activeOpacity={0.1}
@@ -20,7 +31,7 @@ export const MenuGuts = (
         })
       }
     }>
-      <Text>Logout</Text>
+      <Text style={style.textMedium} >Logout</Text>
     </TouchableHighlight>
   </View>
 );
