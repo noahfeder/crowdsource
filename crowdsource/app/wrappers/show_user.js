@@ -102,7 +102,6 @@ function mapStateToProps(state) {
       error: state.userBinaries.error,
       items: state.userBinaries.items,
       toggled: state.toggleMenu.toggle,
-      error: state.userBinaries.error,
       isFetching: state.userBinaries.isFetching,
       message: state.userBinaries.message
     };
