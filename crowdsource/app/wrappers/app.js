@@ -163,4 +163,12 @@ export class App extends Component {
   }
 }
 
-export { nav };
+const backButton = function() {
+  if (nav.getCurrentRoutes().length > 1) {
+    nav.pop();
+    return true;
+  }
+  return false;
+}
+
+export { nav, backButton };

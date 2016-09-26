@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import style from '../public/styles/style';
 import { Button, SideMenu } from 'react-native-elements';
-import { TouchableHighlight, View, Text, Dimensions } from 'react-native';
+import { TouchableHighlight, View, Text, Dimensions, BackAndroid } from 'react-native';
 import BackButton from '../components/back_button';
+import { backButton } from './app';
 import { connect } from 'react-redux';
 import Loading from './loading';
 import t from 'tcomb-form-native';
@@ -14,7 +15,12 @@ import dismissKeyboard from 'react-native-dismiss-keyboard';
 class DecisionNew extends Component {
 
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', backButton);
     this.props.hideMenu();
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', backButton);
   }
 
   onSubmit() {
@@ -62,7 +68,7 @@ class DecisionNew extends Component {
               buttonStyle={style.buttonTop}
               onPress={this.onSubmit.bind(this)}
             />
-            <BackButton navigator={this.props.navigator} />
+            <BackButton  />
           </View>
         </SideMenu>
       )

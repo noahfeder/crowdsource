@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import { TouchableHighlight, View, Text } from 'react-native';
+import { BackAndroid, TouchableHighlight, View, Text } from 'react-native';
 import Loading from './loading';
 import Decision from '../components/decision';
 import TimeLeft from '../components/time_left';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/header';
 import { MenuGuts } from '../components/side_menu';
+import { backButton } from './app';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 
@@ -20,16 +21,21 @@ class DecisionShow extends Component {
     this.props.fetchBinary(this.props.binary_id);
   }
 
+
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', backButton);
     this.props.hideMenu();
-    this.setInterval( () => {
+    this.timer = this.setInterval( () => {
       this.props.refreshBinary(this.props.binary_id);
     }, 1000)
   }
 
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', backButton);
+  }
+
   render() {
     let hue = this.props.color;
-    let time;
     if (this.props.loaded) {
       if (!this.props.error) {
         // ALL GOOD
@@ -45,11 +51,14 @@ class DecisionShow extends Component {
                 <TouchableHighlight activeOpacity={0.2}
                   underlayColor={ '#eee' }
                   style={{height: 50}}
-                  onPress={ () => this.props.navigator.push({
-                    name: 'showuser',
-                    user_id: this.props.binary.user_id,
-                    username: this.props.binary.username
-                  })} >
+                  onPress={ () => {
+                    this.clearInterval(this.timer);
+                    this.props.navigator.push({
+                      name: 'showuser',
+                      user_id: this.props.binary.user_id,
+                      username: this.props.binary.username
+                    });
+                  }} >
                   <Text style={ [style.textSmall, style.textCenter] } >
                     by {this.props.binary.username}
                   </Text>
@@ -93,7 +102,7 @@ class DecisionShow extends Component {
 
                 </View>
 
-                <BackButton navigator={this.props.navigator} />
+                <BackButton  />
 
               </View>
             </View>
@@ -127,7 +136,7 @@ class DecisionShow extends Component {
                     </Text>
                   </View>
                 </View>
-                <BackButton navigator={this.props.navigator} />
+                <BackButton  />
               </View>
             </View>
           </SideMenu>

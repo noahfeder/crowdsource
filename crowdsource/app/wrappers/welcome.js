@@ -9,10 +9,12 @@ export default class Welcome extends Component {
     AsyncStorage.getItem('user_id_csh').then( (id) => {
       AsyncStorage.getItem('user_name_csh').then( (name) => {
         if (!id || !name) {
-          this.props.navigator.push({ name: 'login' });
+          setTimeout( () => this.props.navigator.resetTo({ name: 'login' }), 2000 )
         } else {
-          this.props.loginAsync(id, name);
-          this.props.navigator.push({ name: 'index' });
+          setTimeout( () => {
+            this.props.loginAsync(id, name);
+            this.props.navigator.resetTo({ name: 'index' });
+          }, 2000)
         }
       })
     })

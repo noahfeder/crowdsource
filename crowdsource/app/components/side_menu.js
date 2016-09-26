@@ -7,17 +7,22 @@ import { nav } from '../wrappers/app'
 
 export const MenuGuts = (
   <View style={[style.wrapper, style.menu]}>
-    <MenuItem onPress={ () => nav.push({name: 'index'}) } content="Home" />
+
+    <MenuItem onPress={ () => nav.resetTo({name: 'index'}) } content="Home" />
+
     <MenuItem onPress={ () => {
-      AsyncStorage.multiGet( ['user_id_csh','user_name_csh'] ).then( arr => {
-        nav.push({ name: 'showuser', user_id: arr[0][1], username: arr[1][1] })
-      })
+      AsyncStorage.multiGet( ['user_id_csh','user_name_csh'] ).then( arr =>
+        nav.replace({ name: 'showuser', user_id: arr[0][1], username: arr[1][1] })
+      )
     }} content="My Decisions" />
-    <MenuItem onPress={ () => nav.push({name: 'new'})} content="New Decision" />
+
+    <MenuItem onPress={ () => nav.replace({name: 'new'})} content="New Decision" />
+
     <MenuItem onPress={ () => {
       AsyncStorage.multiRemove(['user_id_csh','user_name_csh']).then( () => {
-        nav.replacePreviousAndPop({name: 'login'})
+        nav.resetTo({name: 'login'})
       })
     }} content="Logout" />
+
   </View>
 );

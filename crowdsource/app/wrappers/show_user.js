@@ -1,14 +1,18 @@
 'use strict';
 import React, {Component} from 'react';
-import { TouchableHighlight, ScrollView, RefreshControl, View, Text } from 'react-native';
-import Loading from './loading';
-import style from '../public/styles/style';
+import { connect } from 'react-redux';
+import { TouchableHighlight, ScrollView, RefreshControl, View, Text, BackAndroid } from 'react-native';
 import { Button, SideMenu } from 'react-native-elements';
+
+import Loading from './loading';
+
+import { backButton } from './app';
 import BackButton from '../components/back_button';
 import Header from '../components/header';
 import Decision from '../components/decision';
-import { connect } from 'react-redux';
 import { MenuGuts } from '../components/side_menu';
+import style from '../public/styles/style';
+
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 
@@ -19,7 +23,12 @@ class UserShow extends Component {
   }
 
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', backButton);
     this.props.hideMenu();
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', backButton);
   }
 
   _onRefresh() {
@@ -84,6 +93,7 @@ class UserShow extends Component {
               </Text>
               {this.allItems()}
             </ScrollView>
+            <BackButton />
           </View>
 
         </SideMenu>

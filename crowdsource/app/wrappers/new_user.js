@@ -1,10 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
-import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
+import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView, BackAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import style from '../public/styles/style';
 import { newStyle } from '../public/styles/form_style';
+import { backButton } from './app';
 import BackButton from '../components/back_button';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
@@ -44,7 +45,12 @@ const Options = {
 class SignUp extends Component {
 
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', backButton);
     this.props.hideMenu();
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', backButton);
   }
 
   _signUp() {
@@ -96,7 +102,7 @@ class SignUp extends Component {
             buttonStyle={style.buttonTop}
             onPress={this._signUp.bind(this)}
           />
-          <BackButton navigator={this.props.navigator} />
+          <BackButton  />
         </View>
     )
   }
