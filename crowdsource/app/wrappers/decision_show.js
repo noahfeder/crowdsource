@@ -21,6 +21,7 @@ class DecisionShow extends Component {
   }
 
   componentDidMount() {
+    this.props.hideMenu();
     this.setInterval( () => {
       this.props.refreshBinary(this.props.binary_id);
     }, 1000)
@@ -33,23 +34,43 @@ class DecisionShow extends Component {
       if (!this.props.error) {
         // ALL GOOD
         return (
-          <SideMenu  toggled={this.props.toggled} MenuComponent={MenuGuts}>
-            <Header toggleMenu={this.props.toggleMenu.bind(this)} />
-            <View style={style.wrapper}>
-              <View style={style.decision} >
-                <Text style={style.binaryText}>{this.props.binary.name}</Text>
-                <Text style={ [style.textSmall, style.textCenter] } >by {this.props.binary.username}</Text>
-                <Text style={{height: 50}}>{this.props.binary.content}</Text>
+          <SideMenu  toggled={ this.props.toggled } MenuComponent={ MenuGuts }>
+            <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
+            <View style={ style.wrapper }>
+              <View style={ style.decision } >
+
+                <Text style={ style.binaryText }>
+                  {this.props.binary.name}
+                </Text>
+                <TouchableHighlight activeOpacity={0.2}
+                  underlayColor={ '#eee' }
+                  style={{height: 50}}
+                  onPress={ () => this.props.navigator.push({
+                    name: 'showuser',
+                    user_id: this.props.binary.user_id,
+                    username: this.props.binary.username
+                  })} >
+                  <Text style={ [style.textSmall, style.textCenter] } >
+                    by {this.props.binary.username}
+                  </Text>
+                </TouchableHighlight>
+
+                <Text style={{height: 50}}>
+                  {this.props.binary.content}
+                </Text>
+
                 <TimeLeft expiration={this.props.binary.expiration} />
+
                 <LinearGradient
                   start={[0.0,0.0]} end={[1.0,0.0]}
                   locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
                   colors={[`hsl(${hue},75%,75%)`,`hsl(${hue},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`,`hsl(${(hue + 60) % 360},75%,75%)`]}
                   style={style.binary} />
+
                 <View style={style.options}>
                   <TouchableHighlight activeOpacity={0.2}
-                    underlayColor={'rgba(0,0,0,0)'}
-                    style={style.option}
+                    underlayColor={ '#eee' }
+                    style={ style.option }
                     onPress={ () => {
                         this.props.vote(this.props.binary.id, 1, this.props.user_id);
                     }
@@ -71,7 +92,9 @@ class DecisionShow extends Component {
                   </TouchableHighlight>
 
                 </View>
+
                 <BackButton navigator={this.props.navigator} />
+
               </View>
             </View>
           </SideMenu>

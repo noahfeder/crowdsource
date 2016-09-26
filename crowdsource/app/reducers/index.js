@@ -2,15 +2,16 @@ import { combineReducers } from 'redux';
 import {
   REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES,
   REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY,
-  REQUEST_USER_BINARIES, RECEIVE_USER_BINARIES, UPDATE_USER_BINARIES,
+  REQUEST_USER_BINARIES, RECEIVE_USER_BINARIES,
+  UPDATE_USER_BINARIES, USER_BINARIES_FAILED,
   VOTING, VOTED, VOTE_FAILED,
   LOGGING_IN, LOGGED_IN, USER_ERROR,
-  TOGGLE_MENU
+  TOGGLE_MENU, HIDE_MENU
 } from '../actions/actions';
 
 function userBinaries(state = {
-  isFetching: false,
-  data: null,
+  isFetching: true,
+  items: null,
   error: false,
   currentlyFetching: null
   }, action) {
@@ -29,9 +30,19 @@ function userBinaries(state = {
       }
       case RECEIVE_USER_BINARIES: {
         return Object.assign({}, state, {
+          error: false,
           isFetching: false,
           currentlyFetching: null,
           items: action.data
+        })
+      }
+      case USER_BINARIES_FAILED: {
+        return Object.assign({}, state, {
+          isFetching: false,
+          currentlyFetching: null,
+          items: null,
+          error: true,
+          message: action.data.message
         })
       }
       default:
@@ -146,8 +157,12 @@ function toggleMenu(state = {toggle: false}, action) {
   switch (action.type) {
     case TOGGLE_MENU:
       return Object.assign({}, state, {
-          toggle: !state.toggle
+        toggle: !state.toggle
       });
+    case HIDE_MENU:
+      return Object.assign({}, state, {
+        toggle: false
+      })
     default:
       return state;
   }

@@ -23,7 +23,7 @@
     vote, fetchBinary, refreshBinary, // for binary show scene
     fetchUserBinaries, refreshUserBinaries, // for user show scene
     logInUser, alertUserError, // for login and signup pages
-    toggleMenu // for most scenes' side menu
+    toggleMenu, hideMenu // for most scenes' side menu
   } from '../actions/actions';
 
 // setup redux store, happens once per session
@@ -74,24 +74,76 @@ export class App extends Component {
     return store.dispatch(toggleMenu());
   }
 
+  hideMenu() {
+    return store.dispatch(hideMenu());
+  }
+
   // the navigator, aka the router, for the entire app
   renderScene(route,navigator) {
     nav = navigator;
     switch (route.name) {
       case 'welcome':
-        return <Welcome navigator={navigator} loginAsync={this.loginAsync.bind(this)} />;
+        return (
+          <Welcome
+            navigator={ navigator }
+            hideMenu={ this.hideMenu.bind(this) }
+            loginAsync={ this.loginAsync.bind(this) } />
+          );
       case 'login':
-        return <Login navigator={navigator} alertUserError={this.alertUserError.bind(this)} loginAsync={this.loginAsync.bind(this)} />;
+        return (
+          <Login
+            navigator={ navigator }
+            hideMenu={ this.hideMenu.bind(this) }
+            alertUserError={ this.alertUserError.bind(this) }
+            loginAsync={ this.loginAsync.bind(this) } />
+          );
       case 'newuser':
-        return <SignUp navigator={navigator} alertUserError={this.alertUserError.bind(this)} loginAsync={this.loginAsync.bind(this)} />;
+        return (
+          <SignUp
+            navigator={ navigator }
+            hideMenu={ this.hideMenu.bind(this) }
+            alertUserError={ this.alertUserError.bind(this) }
+            loginAsync={ this.loginAsync.bind(this) } />
+          );
       case 'index':
-        return <IndexPage toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinaries={this.fetchBinaries.bind(this)} refreshBinaries={this.refreshBinaries.bind(this)} fetchBinary={this.fetchBinary.bind(this)} navigator={navigator} />
+        return (
+          <IndexPage
+            navigator={ navigator }
+            toggleMenu={ this.toggleMenu.bind(this) }
+            hideMenu={ this.hideMenu.bind(this) }
+            fetchBinaries={ this.fetchBinaries.bind(this) }
+            refreshBinaries={ this.refreshBinaries.bind(this) } />
+          );
       case 'show':
-        return <DecisionShow toggleMenu={this.toggleMenu.bind(this)} vote={this.vote.bind(this)} fetchBinary={this.fetchBinary.bind(this)} refreshBinary={this.refreshBinary.bind(this)} binary_id={route.id} navigator={navigator} color={route.color}/>;
+        return (
+          <DecisionShow
+            navigator={ navigator }
+            toggleMenu={ this.toggleMenu.bind(this) }
+            hideMenu={ this.hideMenu.bind(this) }
+            vote={ this.vote.bind(this) }
+            fetchBinary={ this.fetchBinary.bind(this) }
+            refreshBinary={ this.refreshBinary.bind(this) }
+            binary_id={ route.id }
+            color={ route.color} />
+          );
       case 'new':
-        return <DecisionNew toggleMenu={this.toggleMenu.bind(this)} navigator={navigator} />;
+        return (
+          <DecisionNew
+            navigator={ navigator }
+            toggleMenu={ this.toggleMenu.bind(this) }
+            hideMenu={ this.hideMenu.bind(this) } />
+          );
       case 'showuser':
-        return <UserShow user_id={route.user_id} fetchUserBinaries={this.fetchUserBinaries.bind(this)} refreshUserBinaries={this.refreshUserBinaries.bind(this)} toggleMenu={this.toggleMenu.bind(this)} navigator={navigator} />
+        return (
+          <UserShow
+            navigator={ navigator }
+            hideMenu={ this.hideMenu.bind(this) }
+            toggleMenu={ this.toggleMenu.bind(this) }
+            user_id={ route.user_id }
+            username={ route.username }
+            fetchUserBinaries={ this.fetchUserBinaries.bind(this) }
+            refreshUserBinaries={ this.refreshUserBinaries.bind(this) } />
+          );
       default:
         return <Text>ERROR</Text>;
     }

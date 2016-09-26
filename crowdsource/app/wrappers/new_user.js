@@ -43,6 +43,10 @@ const Options = {
 
 class SignUp extends Component {
 
+  componentDidMount() {
+    this.props.hideMenu();
+  }
+
   _signUp() {
     let val = this.refs.signup.getValue();
     if (val) {

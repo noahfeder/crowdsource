@@ -18,14 +18,16 @@ class UserShow extends Component {
     this.props.fetchUserBinaries(this.props.user_id)
   }
 
+  componentDidMount() {
+    this.props.hideMenu();
+  }
+
   _onRefresh() {
     this.props.refreshUserBinaries(this.props.user_id)
   }
 
-  allItems() {
-    let color = Math.floor(Math.random() * 360);
-    let items = this.props.items;
-    items = items.sort( (a,b) => {
+  sortByExpiration(arr) {
+    return arr.sort( (a,b) => {
       if (a.expiration < b.expiration) {
         return 1;
       }
@@ -34,24 +36,33 @@ class UserShow extends Component {
       }
       return 0;
     });
-    return items.map( el => {
-      let expired = Math.floor( Date.now() / 1000 ) > el.expiration
-      color = (color + 90) % 360;
-      return (
-      <TouchableHighlight
-        activeOpacity={0.2}
-        underlayColor={'#eee'}
-        style={style.wrapper}
-        key={el.id}
-        onPress={() => {
-          this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
-        }} >
-          <View style={style.wrapper} >
-            <Decision expired={expired} data={el} id={el.id} color={color} />
-          </View>
-      </TouchableHighlight>
-      )
-    });
+  }
+
+  allItems() {
+    if (this.props.error) {
+      return <Text style={style.textError}>{this.props.message}</Text>
+    } else {
+      let color = Math.floor(Math.random() * 360);
+      let sortedItems = this.sortByExpiration(this.props.items);
+      return sortedItems.map( el => {
+        let expired = Math.floor( Date.now() / 1000 ) > el.expiration
+        color = (color + 90) % 360;
+        return (
+        <TouchableHighlight
+          activeOpacity={0.2}
+          underlayColor={'#eee'}
+          style={style.wrapper}
+          key={el.id}
+          onPress={() => {
+            this.props.navigator.push({name: 'show', data: el, id: el.id, color: color})
+          }} >
+            <View style={style.wrapper} >
+              <Decision expired={expired} data={el} id={el.id} color={color} />
+            </View>
+        </TouchableHighlight>
+        )
+      });
+    }
   }
 
   render() {
@@ -85,19 +96,21 @@ class UserShow extends Component {
 reactMixin(UserShow.prototype, TimerMixin);
 
 function mapStateToProps(state) {
-  if (state.userBinaries.items) {
+  if (!state.userBinaries.isFetching) {
     return {
       loaded: true,
+      error: state.userBinaries.error,
       items: state.userBinaries.items,
-      isFetching: state.userBinaries.isFetching,
       toggled: state.toggleMenu.toggle,
-      username: state.userBinaries.items[0].username
+      error: state.userBinaries.error,
+      isFetching: state.userBinaries.isFetching,
+      message: state.userBinaries.message
     };
   } else {
     return {
       loaded: false,
-      isFetching: state.userBinaries.isFetching,
-      toggled: state.toggleMenu.toggle
+      toggled: state.toggleMenu.toggle,
+      isFetching: state.userBinaries.isFetching
     }
   }
 }

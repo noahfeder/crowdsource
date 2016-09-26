@@ -35,6 +35,10 @@ const Options = {
 
 class Login extends Component {
 
+  componentDidMount() {
+    this.props.hideMenu();
+  }
+
   _logIn() {
     let val = this.refs.login.getValue();
     if (val) {

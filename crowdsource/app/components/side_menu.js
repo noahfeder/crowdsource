@@ -1,37 +1,23 @@
+'use strict';
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, AsyncStorage } from 'react-native';
-import { SideMenu } from 'react-native-elements';
+import { View, AsyncStorage } from 'react-native';
 import style from '../public/styles/style';
-import {nav} from '../wrappers/app'
+import MenuItem from './menu_item';
+import { nav } from '../wrappers/app'
+
 export const MenuGuts = (
   <View style={[style.wrapper, style.menu]}>
-    <TouchableHighlight style={style.menuItem}
-      activeOpacity={0.1}
-      underlayColor={'rgba(0,0,0,0)'}
-      onPress={ () => {
-        AsyncStorage.getItem('user_id_csh').then( (id) => {
-          nav.push({ name: 'showuser', user_id: id })
-        })
-      }
-    }>
-      <Text style={style.textMedium} >My Decisions</Text>
-    </TouchableHighlight>
-    <TouchableHighlight style={style.menuItem}
-      activeOpacity={0.1}
-      underlayColor={'rgba(0,0,0,0)'}
-      onPress={ () => nav.push({name: 'new'})}>
-      <Text style={style.textMedium} >New decision</Text>
-    </TouchableHighlight>
-    <TouchableHighlight style={style.menuItem}
-      activeOpacity={0.1}
-      underlayColor={'rgba(0,0,0,0)'}
-      onPress={ () => {
-        AsyncStorage.multiRemove(['user_id_csh','user_name_csh']).then( () => {
-          nav.replacePreviousAndPop({name: 'login'})
-        })
-      }
-    }>
-      <Text style={style.textMedium} >Logout</Text>
-    </TouchableHighlight>
+    <MenuItem onPress={ () => nav.push({name: 'index'}) } content="Home" />
+    <MenuItem onPress={ () => {
+      AsyncStorage.multiGet( ['user_id_csh','user_name_csh'] ).then( arr => {
+        nav.push({ name: 'showuser', user_id: arr[0][1], username: arr[1][1] })
+      })
+    }} content="My Decisions" />
+    <MenuItem onPress={ () => nav.push({name: 'new'})} content="New Decision" />
+    <MenuItem onPress={ () => {
+      AsyncStorage.multiRemove(['user_id_csh','user_name_csh']).then( () => {
+        nav.replacePreviousAndPop({name: 'login'})
+      })
+    }} content="Logout" />
   </View>
 );

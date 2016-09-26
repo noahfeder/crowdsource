@@ -13,6 +13,10 @@ import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class DecisionNew extends Component {
 
+  componentDidMount() {
+    this.props.hideMenu();
+  }
+
   onSubmit() {
     let val = this.refs.form.getValue();
     if (val) {

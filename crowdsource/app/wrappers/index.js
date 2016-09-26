@@ -18,24 +18,15 @@ class IndexPage extends Component {
   }
 
   componentDidMount() {
-    this.setTimeout( () => {
-      this.setInterval( () => {
-        this.props.refreshBinaries();
-      }, 30000)
-    }, 30000)
+    this.props.hideMenu();
   }
 
   _onRefresh() {
     this.props.refreshBinaries()
   }
 
-  decisions() {
-    let color = Math.floor(Math.random() * 360);
-    let items = [];
-    for (var id in this.props.items) {
-      items.push(this.props.items[id])
-    }
-    items = items.sort( (a,b) => {
+  sortItems(arr) {
+    return arr.sort( (a,b) => {
       if (a.expiration > b.expiration) {
         return 1;
       }
@@ -43,7 +34,16 @@ class IndexPage extends Component {
         return -1;
       }
       return 0;
-    });
+    })
+  }
+
+  decisions() {
+    let color = Math.floor(Math.random() * 360);
+    let items = [];
+    for (let id in this.props.items) {
+      items.push(this.props.items[id])
+    }
+    items = this.sortItems(items);
     return items.map( el => {
       color = (color + 90) % 360;
       return (

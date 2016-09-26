@@ -207,6 +207,19 @@ export function toggleMenu() {
   }
 }
 
+export const HIDE_MENU = 'HIDE_MENU';
+
+export function hider() {
+  return {
+    type: HIDE_MENU
+  }
+}
+
+export function hideMenu() {
+  return function(dispatch) {
+    return dispatch(hider());
+  }
+}
 export const REQUEST_USER_BINARIES = 'REQUEST_USER_BINARIES';
 
 export function requestUserBinaries(user_id) {
@@ -235,12 +248,27 @@ export function receiveUserBinaries(user_id, data) {
   }
 }
 
+export const USER_BINARIES_FAILED = 'USER_BINARIES_FAILED';
+
+export function userBinariesFailed(user_id, data) {
+  return {
+    type: USER_BINARIES_FAILED,
+    user_id: user_id,
+    data: data
+  }
+}
 export function fetchUserBinaries(user_id) {
   return function(dispatch) {
     dispatch(requestUserBinaries(user_id));
     return fetch(`https://f2ba03b6.ngrok.io/user/${user_id}`)
       .then( response => response.json() )
-      .then( json => dispatch(receiveUserBinaries(user_id, json)) );
+      .then( json => {
+        if (json.error) {
+          dispatch(userBinariesFailed(user_id, json));
+        } else {
+          dispatch(receiveUserBinaries(user_id, json));
+        }
+      });
   }
 }
 
@@ -249,6 +277,12 @@ export function refreshUserBinaries(user_id) {
     dispatch(updateUserBinaries(user_id));
     return fetch(`https://f2ba03b6.ngrok.io/user/${user_id}`)
       .then( response => response.json() )
-      .then( json => dispatch(receiveUserBinaries(user_id, json)) );
+      .then( json => {
+        if (json.error) {
+          dispatch(userBinariesFailed(user_id, json));
+        } else {
+          dispatch(receiveUserBinaries(user_id, json));
+        }
+      });
   }
 }
