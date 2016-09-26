@@ -15,7 +15,7 @@ export const Binary = t.struct({
   choiceB: t.String,
   number: t.Number,
   type: TimeType,
-  id: t.String
+  id: t.Number
 });
 
 let { height, width } = Dimensions.get('window');
