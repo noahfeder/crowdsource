@@ -21,7 +21,7 @@ class DecisionNew extends Component {
     let val = this.refs.form.getValue();
     if (val) {
       dismissKeyboard();
-      fetch('https://f2ba03b6.ngrok.io/binaries', {
+      fetch('https://crowdsourcehelp.herokuapp.com/binaries', {
         method: 'POST',
         body: JSON.stringify(val)
       }).then( response => response.json() )

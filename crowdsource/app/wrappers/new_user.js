@@ -54,7 +54,7 @@ class SignUp extends Component {
         this.props.alertUserError({error: true, message: 'Passwords must match!'});
       } else {
         dismissKeyboard();
-        fetch('https://f2ba03b6.ngrok.io/signup', {
+        fetch('https://crowdsourcehelp.herokuapp.com/signup', {
           method: 'POST',
           body: JSON.stringify(val)
         })

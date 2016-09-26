@@ -43,7 +43,7 @@ class Login extends Component {
     let val = this.refs.login.getValue();
     if (val) {
       dismissKeyboard();
-      fetch('https://f2ba03b6.ngrok.io/login', {
+      fetch('https://crowdsourcehelp.herokuapp.com/login', {
       method: 'POST',
       body: JSON.stringify(val)
     }).then( response => response.json() )
