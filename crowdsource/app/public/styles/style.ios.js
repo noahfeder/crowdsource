@@ -2,7 +2,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 let { height, width } = Dimensions.get('window');
-const bgcolor = '#AA5585'
+const bgcolor = '#AA5585';
+
 const style = StyleSheet.create({
   defaultText: {
     fontFamily: 'Arial, sans-serif',
@@ -158,6 +159,12 @@ const style = StyleSheet.create({
     top: 0,
     left: 0,
     backgroundColor: 'rgba(100,100,100,0.4)'
+  },
+  contentText: {
+    margin: 10,
+    backgroundColor: 'rgba(100,100,100,0.3)',
+    padding: 10,
+    color: '#222'
   }
 })
 

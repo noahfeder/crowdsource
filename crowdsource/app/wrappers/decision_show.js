@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BackAndroid, TouchableHighlight, View, Text } from 'react-native';
+import { BackAndroid, TouchableHighlight, View, ScrollView, Text } from 'react-native';
 import { Button, SideMenu } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -28,7 +28,7 @@ class DecisionShow extends Component {
 
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
+    BackAndroid.addEventListener('hardwareBackPress', this.goBack.bind(this));
     this.props.hideMenu();
     this.timer = this.setInterval( () => {
       this.props.refreshBinary(this.props.binary_id);
@@ -36,7 +36,7 @@ class DecisionShow extends Component {
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+    BackAndroid.removeEventListener('hardwareBackPress', this.goBack.bind(this));
   }
 
   goBack() {
@@ -74,7 +74,7 @@ class DecisionShow extends Component {
 
             <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
 
-            <View style={ [style.wrapper] }>
+            <ScrollView style={ [style.wrapper] }>
                 <ShowHeader
                   binary={ this.props.binary }
                   onPress={ () => {
@@ -88,7 +88,7 @@ class DecisionShow extends Component {
                   expiredText={ this.props.expiredText }
                 />
 
-                <Text style={ [{ margin: 10, backgroundColor: 'rgba(100,100,100,0.3)', padding: 10, color: '#222' }] }>
+                <Text style={ [style.contentText] }>
                   { this.props.binary.content }
                 </Text>
 
@@ -130,7 +130,7 @@ class DecisionShow extends Component {
                   backgroundColor='#f20'
                   small raised title='BACK'/>
 
-            </View>
+            </ScrollView>
           </SideMenu>
           )
         } else {
@@ -155,7 +155,7 @@ class DecisionShow extends Component {
                   expiredText={ this.props.expiredText }
                 />
 
-                <Text style={ [style.textPadded, { backgroundColor: '#333', color: '#eee', flex: 100 }] }>
+                <Text style={ [style.contentText] }>
                   { this.props.binary.content }
                 </Text>
 

@@ -157,6 +157,12 @@ const style = StyleSheet.create({
     top: 0,
     left: 0,
     backgroundColor: 'rgba(100,100,100,0.4)'
+  },
+  contentText: {
+    margin: 10,
+    backgroundColor: 'rgba(100,100,100,0.3)',
+    padding: 10,
+    color: '#222'
   }
 })
 
