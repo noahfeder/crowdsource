@@ -28,7 +28,7 @@ class DecisionShow extends Component {
 
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', backButton);
+    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
     this.props.hideMenu();
     this.timer = this.setInterval( () => {
       this.props.refreshBinary(this.props.binary_id);
@@ -36,8 +36,20 @@ class DecisionShow extends Component {
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', backButton);
+    BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+  }
+
+  goBack() {
     this.clearInterval(this.timer);
+    let routes = this.props.navigator.getCurrentRoutes();
+    if (routes.length > 1) {
+      this.props.navigator.pop();
+      return true;
+    }
+    if (routes.length === 1) {
+      this.props.navigator.replace({ name: 'index' });
+      return true;
+    }
   }
 
   countdown(expired) {
@@ -114,7 +126,9 @@ class DecisionShow extends Component {
 
                 </View>
 
-                <BackButton style={ style.wrapper } />
+                <Button onPress={ () => this.goBack() }
+                  backgroundColor='#f20'
+                  small raised title='BACK'/>
 
             </View>
           </SideMenu>
@@ -177,7 +191,9 @@ class DecisionShow extends Component {
                   { this.props.message }
                 </Text>
 
-                <BackButton  />
+                <Button onPress={ () => this.goBack() }
+                  backgroundColor='#f20'
+                  small raised title='BACK'/>
 
             </View>
           </SideMenu>

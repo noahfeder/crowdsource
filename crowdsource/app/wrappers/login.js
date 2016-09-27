@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
+import { AsyncStorage, ActivityIndicator, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
@@ -41,28 +41,22 @@ class Login extends Component {
     this.props.hideMenu();
   }
 
+  working() {
+    if (this.props.working) {
+      return (
+        <View style={ style.fullScreen }>
+          <ActivityIndicator style={ style.working } color={'#AA5585'} size={'large'} />
+        </View>
+      )
+    }
+    return true;
+  }
+
   _logIn() {
     let val = this.refs.login.getValue();
     if (val) {
       dismissKeyboard();
-      fetch('https://crowdsourcehelp.herokuapp.com/login', {
-      method: 'POST',
-      body: JSON.stringify(val)
-    }).then( response => response.json() )
-      .then( json => {
-        if (json.error) {
-          this.props.alertUserError(json);
-        } else {
-          AsyncStorage.multiSet([
-            ['user_id_csh', String(json.data.id)],
-            ['user_name_csh', String(json.data.username)]
-          ]).then( () => {
-              this.props.loginAsync(json.data.id, json.data.username);
-              this.props.navigator.push({ name: 'index'});
-          })
-        }
-      })
-      .catch( error => console.error(error) )
+      this.props.logInRemote(val);
     } else {
       this.props.alertUserError({ error: true, message: 'Invalid username/password!'});
     }
@@ -73,7 +67,7 @@ class Login extends Component {
         <View style={ style.wrapper } >
 
           <View style={ style.header }>
-            <Text style={ style.headerText }>CROWDSOURCE</Text>
+            <Text style={ style.headerText }>CrowdsourceHelp</Text>
           </View>
 
           <Text style={ [style.textSmall, style.textError, style.textCenter] }>
@@ -93,12 +87,14 @@ class Login extends Component {
           />
 
           <Button backgroundColor='#938'
-            small raised title='No account? Tap to sign up!'
+            small raised title='No account? Sign up here!'
             onPress={() => {
               this.props.alertUserError({ error: false, message: null });
               this.props.navigator.push({ name: 'newuser'});
             }}
           />
+
+          { this.working() }
 
         </View>
     )
@@ -108,7 +104,8 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     error: state.user.error,
-    message: state.user.message
+    message: state.user.message,
+    working: state.user.working
   }
 }
 

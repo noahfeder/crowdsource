@@ -142,6 +142,21 @@ const style = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: 'rgba(100,100,100,0.0)',
     height: 30
+  },
+  working: {
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    top: height / 2 - 140,
+    left: width / 2 - 40
+  },
+  fullScreen: {
+    position: 'absolute',
+    width: width,
+    height: height,
+    top: 0,
+    left: 0,
+    backgroundColor: 'rgba(100,100,100,0.4)'
   }
 })
 

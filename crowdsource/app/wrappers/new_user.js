@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AsyncStorage, View, Text, BackAndroid } from 'react-native';
+import { AsyncStorage, ActivityIndicator, View, Text, BackAndroid } from 'react-native';
 import { Button } from 'react-native-elements';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
@@ -60,6 +60,17 @@ class SignUp extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', backButton);
   }
 
+  working() {
+    if (this.props.working) {
+      return (
+        <View style={ style.fullScreen }>
+          <ActivityIndicator style={ style.working } color={'#AA5585'} size={'large'} />
+        </View>
+      )
+    }
+    return true;
+  }
+
   _signUp() {
     let val = this.refs.signup.getValue();
     if (val) {
@@ -67,25 +78,7 @@ class SignUp extends Component {
         this.props.alertUserError({ error: true, message: 'Passwords must match!'});
       } else {
         dismissKeyboard();
-        fetch('https://crowdsourcehelp.herokuapp.com/signup', {
-          method: 'POST',
-          body: JSON.stringify(val)
-        })
-        .then( response => response.json() )
-        .then( json => {
-          if (json.error) {
-            this.props.alertUserError(json);
-          } else {
-            AsyncStorage.multiSet([
-              ['user_id_csh', String(json.data.id)],
-              ['user_name_csh', String(json.data.username)]
-            ]).then( () => {
-                this.props.loginAsync(json.data.id, json.data.username);
-                this.props.navigator.push({ name: 'index'});
-            })
-          }
-        })
-        .catch( error => console.error(error) )
+        this.props.signIn(val);
       }
     } else {
       this.props.alertUserError({ error: true, message: 'Invalid username/password!'});
@@ -97,7 +90,7 @@ class SignUp extends Component {
         <View style={ style.wrapper } >
 
           <View style={ style.header }>
-            <Text style={ style.headerText }>CROWDSOURCE</Text>
+            <Text style={ style.headerText }>CrowdsourceHelp</Text>
           </View>
 
           <Text style={ [style.textSmall, style.textError, style.textCenter] }>
@@ -118,6 +111,8 @@ class SignUp extends Component {
 
           <BackButton  />
 
+          { this.working() }
+
         </View>
     )
   }
@@ -126,7 +121,8 @@ class SignUp extends Component {
 function mapStateToProps(state) {
   return {
     error: state.user.error,
-    message: state.user.message
+    message: state.user.message,
+    working: state.user.working
   }
 }
 

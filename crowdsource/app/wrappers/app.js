@@ -20,9 +20,9 @@
   import RootReducer from '../reducers';
   import {
     fetchBinaries, refreshBinaries, // for index scene
-    vote, fetchBinary, refreshBinary, // for binary show scene
+    vote, createBinary, fetchBinary, refreshBinary, // for binary show scene
     fetchUserBinaries, refreshUserBinaries, // for user show scene
-    logInUser, alertUserError, // for login and signup pages
+    logInLocal, logInRemote, signIn, alertUserError, // for login and signup pages
     toggleMenu, hideMenu // for most scenes' side menu
   } from '../actions/actions';
 
@@ -54,6 +54,10 @@ export class App extends Component {
     return store.dispatch(refreshBinary(id));
   }
 
+  createBinary(form) {
+    return store.dispatch(createBinary(form));
+  }
+
   fetchBinaries() {
     return store.dispatch(fetchBinaries());
   }
@@ -62,8 +66,16 @@ export class App extends Component {
     return store.dispatch(refreshBinaries());
   }
 
-  loginAsync(id, name) {
-    return store.dispatch(logInUser(id, name))
+  logInLocal(id, name) {
+    return store.dispatch(logInLocal(id, name));
+  }
+
+  logInRemote(form) {
+    return store.dispatch(logInRemote(form));
+  }
+
+  signIn(form) {
+    return store.dispatch(signIn(form));
   }
 
   alertUserError(response) {
@@ -87,7 +99,7 @@ export class App extends Component {
           <Welcome
             navigator={ navigator }
             hideMenu={ this.hideMenu.bind(this) }
-            loginAsync={ this.loginAsync.bind(this) } />
+            logInLocal={ this.logInLocal.bind(this) } />
           );
       case 'login':
         return (
@@ -95,7 +107,7 @@ export class App extends Component {
             navigator={ navigator }
             hideMenu={ this.hideMenu.bind(this) }
             alertUserError={ this.alertUserError.bind(this) }
-            loginAsync={ this.loginAsync.bind(this) } />
+            logInRemote={ this.logInRemote.bind(this) } />
           );
       case 'newuser':
         return (
@@ -103,7 +115,7 @@ export class App extends Component {
             navigator={ navigator }
             hideMenu={ this.hideMenu.bind(this) }
             alertUserError={ this.alertUserError.bind(this) }
-            loginAsync={ this.loginAsync.bind(this) } />
+            signIn={ this.signIn.bind(this) } />
           );
       case 'index':
         return (
@@ -131,7 +143,8 @@ export class App extends Component {
           <DecisionNew
             navigator={ navigator }
             toggleMenu={ this.toggleMenu.bind(this) }
-            hideMenu={ this.hideMenu.bind(this) } />
+            hideMenu={ this.hideMenu.bind(this) }
+            createBinary={ this.createBinary.bind(this) } />
           );
       case 'showuser':
         return (

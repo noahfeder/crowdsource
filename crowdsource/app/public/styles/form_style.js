@@ -8,7 +8,7 @@ const TimeType = t.enums({
   minutes: 'Minutes'
 });
 
-export const Binary = t.struct({
+const Binary = t.struct({
   name: t.String,
   content: t.String,
   choiceA: t.String,
@@ -49,7 +49,7 @@ halfStyle.pickerTouchable.error.width = width / 2 - 20;
 halfStyle.select.normal.width = width / 2 - 20;
 halfStyle.select.error.width = width / 2 - 20;
 
-export const formOptions = {
+const formOptions = {
   stylesheet: newStyle,
   auto: 'placeholders',
   fields: {
@@ -92,4 +92,4 @@ export const formOptions = {
   }
 };
 
-export { halfStyle, tallStyle, newStyle };
+export { Binary, formOptions, halfStyle, tallStyle, newStyle };

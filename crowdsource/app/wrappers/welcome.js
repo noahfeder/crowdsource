@@ -13,7 +13,7 @@ export default class Welcome extends Component {
           setTimeout( () => this.props.navigator.resetTo({ name: 'login' }), 2000 )
         } else {
           setTimeout( () => {
-            this.props.loginAsync(id, name);
+            this.props.logInLocal(id, name);
             this.props.navigator.resetTo({ name: 'index' });
           }, 2000)
         }

@@ -3,11 +3,11 @@ import { combineReducers } from 'redux';
 
 import {
   REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES,
-  REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY,
+  REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY, CREATE_BINARY,
   REQUEST_USER_BINARIES, RECEIVE_USER_BINARIES,
   UPDATE_USER_BINARIES, USER_BINARIES_FAILED,
   VOTING, VOTED, VOTE_FAILED,
-  LOGGING_IN, LOGGED_IN, USER_ERROR,
+  LOGGING_IN_LOCAL, LOGGING_IN_REMOTE, LOGGED_IN, USER_ERROR,
   TOGGLE_MENU, HIDE_MENU
 } from '../actions/actions';
 
@@ -57,7 +57,8 @@ function activeBinary(state = {
   currentlyFetching: null,
   data: null,
   error: false,
-  message: null
+  message: null,
+  creating: false
 }, action) {
   switch (action.type) {
     case REQUEST_BINARY: case VOTING: {
@@ -72,7 +73,8 @@ function activeBinary(state = {
         error: false,
         message: null,
         currentlyFetching: null,
-        data: action.data
+        data: action.data,
+        creating: false
       });
     }
     case UPDATE_BINARY: {
@@ -82,12 +84,21 @@ function activeBinary(state = {
         data: action.data
       });
     }
+    case CREATE_BINARY: {
+      return Object.assign({}, state, {
+        isFetching: false,
+        currentlyFetching: null,
+        data: null,
+        creating: true
+      })
+    }
     case VOTE_FAILED: {
       return Object.assign({}, state, {
         isFetching: false,
         currentlyFetching: null,
         error: true,
-        message: action.data.message
+        message: action.data.message,
+        creating: false
       })
     }
     default:
@@ -133,21 +144,44 @@ function binaries(state = {
 
 function user(state = {}, action) {
   switch (action.type) {
-    case LOGGING_IN: case LOGGED_IN:
+    case LOGGING_IN_LOCAL: {
+      return Object.assign({}, state, {
+        id: action.id,
+        name: action.name,
+        loggedIn: action.loggedIn,
+        error: false,
+        message: null,
+        working: action.working
+      });
+    }
+    case LOGGING_IN_REMOTE: {
+      return Object.assign({}, state, {
+        id: null,
+        name: action.name,
+        loggedIn: action.loggedIn,
+        error: false,
+        message: null,
+        working: action.working
+      });
+    }
+    case LOGGED_IN: {
       return Object.assign({},state, {
         id: action.id,
         name: action.name,
         loggedIn: action.loggedIn,
         error: false,
-        message: null
+        message: null,
+        working: action.working
       });
+    }
     case USER_ERROR: {
       return Object.assign({}, state, {
         id: null,
         name: null,
         loggedIn: action.loggedIn,
         error: action.error,
-        message: action.message
+        message: action.message,
+        working: action.working
       })
     }
     default:

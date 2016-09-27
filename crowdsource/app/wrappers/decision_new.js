@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TouchableHighlight, View, Text, Dimensions, BackAndroid } from 'react-native';
+import { TouchableHighlight, View, Text, Dimensions, BackAndroid, ActivityIndicator } from 'react-native';
 import { Button, SideMenu } from 'react-native-elements';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
@@ -32,19 +32,19 @@ class DecisionNew extends Component {
     let val = this.refs.form.getValue();
     if (val) {
       dismissKeyboard();
-      fetch('https://crowdsourcehelp.herokuapp.com/binaries', {
-        method: 'POST',
-        body: JSON.stringify(val)
-      }).then( response => response.json() )
-        .then( json => {
-          this.props.navigator.replace({
-            name: 'show',
-            id: json.id,
-            color: Math.floor(Math.random() * 360)
-          })
-        })
-        .catch( error => console.error(error))
+      this.props.createBinary(val);
     }
+  }
+
+  working() {
+    if (this.props.working) {
+      return (
+        <View style={ style.fullScreen }>
+          <ActivityIndicator style={ style.working } color={'#AA5585'} size={'large'} />
+        </View>
+      )
+    }
+    return true;
   }
 
   render() {
@@ -59,20 +59,28 @@ class DecisionNew extends Component {
 
       return (
         <SideMenu  toggled={ this.props.toggled } MenuComponent={ MenuGuts }>
+
           <Header toggleMenu={ this.props.toggleMenu.bind(this)} />
+
           <View style={ style.wrapper }>
+
             <Form
               ref='form'
               type={ Binary }
               value={ Value }
               options={ formOptions }
             />
+
             <Button backgroundColor='#2F8'
               small raised title='SUBMIT'
               buttonStyle={ style.buttonTop }
-              onPress={ this.onSubmit.bind(this)}
+              onPress={ this.onSubmit.bind(this) }
             />
+
             <BackButton  />
+
+            { this.working() }
+
           </View>
         </SideMenu>
       )
@@ -87,12 +95,14 @@ function mapStateToProps(state) {
     return {
       loaded: true,
       id: state.user.id,
-      toggled: state.toggleMenu.toggle
+      toggled: state.toggleMenu.toggle,
+      working: state.activeBinary.creating
     };
   } else {
     return {
       loaded: false,
-      toggled: state.toggleMenu.toggle
+      toggled: state.toggleMenu.toggle,
+      working: state.activeBinary.creating
     };
   }
 }

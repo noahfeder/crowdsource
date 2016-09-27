@@ -1,3 +1,7 @@
+'use strict';
+import { AsyncStorage } from 'react-native';
+import { nav } from '../wrappers/app';
+
 export const REQUEST_BINARIES = 'REQUEST_BINARIES';
 
 export function requestBinaries() {
@@ -71,6 +75,33 @@ export function updateBinary(json, id) {
     binary_id: id,
     data: json,
     receivedAt: Math.floor(Date.now() / 1000)
+  }
+}
+
+export const CREATE_BINARY = 'CREATE_BINARY';
+
+export function creatingBinary() {
+  return {
+    type: CREATE_BINARY
+  }
+}
+
+export function createBinary(form) {
+  return function(dispatch) {
+    dispatch(requestBinary(null));
+    return fetch('https://crowdsourcehelp.herokuapp.com/binaries', {
+        method: 'POST',
+        body: JSON.stringify(form)
+      }).then( response => response.json() )
+        .then( json => {
+          dispatch(receiveBinary(json, json.id));
+          nav.replace({
+            name: 'show',
+            id: json.id,
+            color: Math.floor(Math.random() * 360)
+          });
+        })
+        .catch( error => console.error(error));
   }
 }
 
@@ -148,14 +179,26 @@ export function vote(binary_id, choice, user_id) {
   }
 }
 
-export const LOGGING_IN = 'LOGGING_IN';
+export const LOGGING_IN_REMOTE = 'LOGGING_IN_REMOTE';
 
-export function loggingIn(id, name) {
+export function loggingInRemote(name) {
   return {
-    type: LOGGING_IN,
+    type: LOGGING_IN_REMOTE,
+    name: name,
+    loggedIn: false,
+    working: true
+  }
+}
+
+export const LOGGING_IN_LOCAL = 'LOGGING_IN_LOCAL';
+
+export function loggingInLocal(id, name) {
+  return {
+    type: LOGGING_IN_LOCAL,
     id: id,
     name: name,
-    loggedIn: false
+    loggedIn: false,
+    working: true
   }
 }
 
@@ -166,7 +209,8 @@ export function loggedIn(id, name) {
     type: LOGGED_IN,
     id: id,
     name: name,
-    loggedIn: true
+    loggedIn: true,
+    working: false
   }
 }
 
@@ -177,7 +221,8 @@ export function userError(response) {
     type: USER_ERROR,
     loggedIn: false,
     error: response.error,
-    message: response.message
+    message: response.message,
+    working: false
   }
 }
 
@@ -187,10 +232,59 @@ export function alertUserError(response) {
   }
 }
 
-export function logInUser(id, name) {
+export function logInRemote(form) {
   return function(dispatch) {
-    dispatch(loggingIn(id, name));
+    dispatch(loggingInRemote(form.username));
+    return fetch('https://crowdsourcehelp.herokuapp.com/login', {
+        method: 'POST',
+        body: JSON.stringify(form)
+      }).then( response => response.json() )
+        .then( json => {
+          if (json.error) {
+            dispatch(alertUserError(json));
+          } else {
+            AsyncStorage.multiSet([
+              ['user_id_csh', String(json.data.id)],
+              ['user_name_csh', String(json.data.username)]
+            ]).then( () => {
+                dispatch(loggedIn(json.data.id, json.data.username));
+                nav.push({ name: 'index'});
+            })
+          }
+        })
+        .catch( error => dispatch(userError(error)) );
+  }
+}
+
+export function logInLocal(id, name) {
+  return function(dispatch) {
+    dispatch(loggingInLocal(id, name));
     return dispatch(loggedIn(id, name))
+  }
+}
+
+export function signIn(form) {
+  return function(dispatch) {
+    dispatch(loggingInRemote(form.username));
+    return fetch('https://crowdsourcehelp.herokuapp.com/signup', {
+          method: 'POST',
+          body: JSON.stringify(form)
+        })
+        .then( response => response.json() )
+        .then( json => {
+          if (json.error) {
+            dispatch(alertUserError(json));
+          } else {
+            AsyncStorage.multiSet([
+              ['user_id_csh', String(json.data.id)],
+              ['user_name_csh', String(json.data.username)]
+            ]).then( () => {
+                dispatch(loggingInRemote(json.data.id, json.data.username));
+                nav.push({ name: 'index'});
+            })
+          }
+        })
+        .catch( error => dispatch(alertUserError(error)) );
   }
 }
 

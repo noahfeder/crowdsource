@@ -1,9 +1,19 @@
 'use strict';
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, View, Text } from 'react-native';
+
+import Header from '../components/header';
+import style from '../public/styles/style';
 
 export default class Loading extends Component {
   render() {
-    return <ActivityIndicator color={'#333'} size={'large'} />
+    return (
+      <View style={ style.fullScreen }>
+        <View style={ style.header }>
+          <Text style={ style.headerText }>CrowdsourceHelp</Text>
+        </View>
+        <ActivityIndicator color={'#AA5585'} size={'large'} style={ style.working }/>
+      </View>
+    )
   }
 }
