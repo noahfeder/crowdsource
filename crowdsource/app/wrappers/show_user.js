@@ -68,9 +68,9 @@ class UserShow extends Component {
     if (this.props.error) {
       return (
         <Button
-          small raised title="Ask for help!"
+          small raised title='Ask for help!'
           onPress={ () => this.props.navigator.push({ name: 'new' }) }
-          backgroundColor={"#938"} />
+          backgroundColor={'#938'} />
       )
     } else {
       let color = Math.floor(Math.random() * 360);

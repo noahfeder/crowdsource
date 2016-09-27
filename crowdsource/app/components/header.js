@@ -12,7 +12,7 @@ export default class Header extends Component {
     return (
       <View style={ style.header }>
         <Text style={ style.headerText }>CrowdsourceHelp</Text>
-        <Icon name="bars" size={ 30 }
+        <Icon name='bars' size={ 30 }
           style={ style.headerIcon }
           onPress={ () => this.props.toggleMenu() } />
 

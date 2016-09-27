@@ -81,18 +81,18 @@ class Login extends Component {
           </Text>
 
           <Form
-            ref="login"
+            ref='login'
             type={ User }
             options={ Options }
           />
 
-          <Button backgroundColor="hsl(110, 33%, 50%)"
+          <Button backgroundColor='hsl(110, 33%, 50%)'
             small raised title='LOGIN'
             buttonStyle={ style.buttonTop }
             onPress={ this._logIn.bind(this)}
           />
 
-          <Button backgroundColor="#938"
+          <Button backgroundColor='#938'
             small raised title='No account? Tap to sign up!'
             onPress={() => {
               this.props.alertUserError({ error: false, message: null });

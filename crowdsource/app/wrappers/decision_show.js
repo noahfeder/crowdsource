@@ -141,7 +141,7 @@ class DecisionShow extends Component {
                   expiredText={ this.props.expiredText }
                 />
 
-                <Text style={ [style.textPadded, { backgroundColor: "#333", color: "#eee", flex: 100 }] }>
+                <Text style={ [style.textPadded, { backgroundColor: '#333', color: '#eee', flex: 100 }] }>
                   { this.props.binary.content }
                 </Text>
 

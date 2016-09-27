@@ -105,12 +105,12 @@ class SignUp extends Component {
           </Text>
 
           <Form
-            ref="signup"
+            ref='signup'
             type={ NewUser }
             options={ Options }
           />
 
-          <Button backgroundColor="#2F8"
+          <Button backgroundColor='#2F8'
             small raised title='SIGNUP'
             buttonStyle={ style.buttonTop }
             onPress={ this._signUp.bind(this)}

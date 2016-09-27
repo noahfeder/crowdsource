@@ -1,3 +1,4 @@
+'use strict';
 import { combineReducers } from 'redux';
 
 import {
@@ -116,7 +117,7 @@ function binaries(state = {
       let newObj = {};
       action.data.forEach( (el) => {
         newObj[el.id] = el;
-        newObj[el.id]["lastUpdated"] = action.receivedAt;
+        newObj[el.id]['lastUpdated'] = action.receivedAt;
       })
       return Object.assign({}, state, {
         isFetching: false,

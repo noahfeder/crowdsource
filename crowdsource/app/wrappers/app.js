@@ -6,7 +6,7 @@
   import thunkMiddleware from 'redux-thunk';
   import { Navigator, Text, AsyncStorage } from 'react-native';
 
-// "Smart" wrapper components, created by me
+// 'Smart' wrapper components, created by me
   import IndexPage from './index';
   import DecisionShow from './decision_show';
   import DecisionNew from './decision_new';

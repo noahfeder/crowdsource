@@ -21,8 +21,8 @@ export default class BackButton extends Component {
   render() {
     return (
       <Button onPress={ () => this.goBack() }
-        backgroundColor="#f20"
-        small raised title="BACK"/>
+        backgroundColor='#f20'
+        small raised title='BACK'/>
       )
   }
 }

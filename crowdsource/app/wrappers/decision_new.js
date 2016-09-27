@@ -62,12 +62,12 @@ class DecisionNew extends Component {
           <Header toggleMenu={ this.props.toggleMenu.bind(this)} />
           <View style={ style.wrapper }>
             <Form
-              ref="form"
+              ref='form'
               type={ Binary }
               value={ Value }
               options={ formOptions }
             />
-            <Button backgroundColor="#2F8"
+            <Button backgroundColor='#2F8'
               small raised title='SUBMIT'
               buttonStyle={ style.buttonTop }
               onPress={ this.onSubmit.bind(this)}
