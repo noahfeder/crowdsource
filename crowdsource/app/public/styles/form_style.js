@@ -82,10 +82,12 @@ export const formOptions = {
       stylesheet: halfStyle
     },
     type: {
-      stylesheet: halfStyle
+      stylesheet: halfStyle,
+      nullOption: false
     },
     number: {
-      stylesheet: halfStyle
+      stylesheet: halfStyle,
+      maxLength: 3
     }
   }
 };

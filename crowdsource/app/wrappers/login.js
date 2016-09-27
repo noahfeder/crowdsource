@@ -86,14 +86,14 @@ class Login extends Component {
             options={ Options }
           />
 
-          <Button backgroundColor="#2F8"
+          <Button backgroundColor="hsl(110, 33%, 50%)"
             small raised title='LOGIN'
             buttonStyle={ style.buttonTop }
             onPress={ this._logIn.bind(this)}
           />
 
           <Button backgroundColor="#938"
-            small raised title='SIGNUP'
+            small raised title='No account? Tap to sign up!'
             onPress={() => {
               this.props.alertUserError({ error: false, message: null });
               this.props.navigator.push({ name: 'newuser'});

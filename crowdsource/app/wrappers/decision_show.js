@@ -76,7 +76,7 @@ class DecisionShow extends Component {
                   expiredText={ this.props.expiredText }
                 />
 
-                <Text style={ [style.textPadded] }>
+                <Text style={ [{ margin: 10, backgroundColor: 'rgba(100,100,100,0.3)', padding: 10, color: '#222' }] }>
                   { this.props.binary.content }
                 </Text>
 
@@ -97,7 +97,7 @@ class DecisionShow extends Component {
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
                       {'\n'}
-                      { this.props.binary.votesA } Votes
+                      { this.props.binary.votesA - 1 } Votes
                     </Text>
                   </TouchableHighlight>
 
@@ -108,7 +108,7 @@ class DecisionShow extends Component {
                     <Text style={ style.optionB }>
                       { this.props.binary.choiceB }
                       {'\n'}
-                      { this.props.binary.votesB } Votes
+                      { this.props.binary.votesB - 1 } Votes
                     </Text>
                   </TouchableHighlight>
 
@@ -141,7 +141,7 @@ class DecisionShow extends Component {
                   expiredText={ this.props.expiredText }
                 />
 
-                <Text style={ [style.textPadded] }>
+                <Text style={ [style.textPadded, { backgroundColor: "#333", color: "#eee", flex: 100 }] }>
                   { this.props.binary.content }
                 </Text>
 
@@ -159,7 +159,7 @@ class DecisionShow extends Component {
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
                       {'\n'}
-                      { this.props.binary.votesA } Votes
+                      { this.props.binary.votesA - 1 } Votes
                     </Text>
                   </View>
 
@@ -167,7 +167,7 @@ class DecisionShow extends Component {
                     <Text style={ style.optionB }>
                       { this.props.binary.choiceB }
                       {'\n'}
-                      { this.props.binary.votesB } Votes
+                      { this.props.binary.votesB - 1} Votes
                     </Text>
                   </View>
 
