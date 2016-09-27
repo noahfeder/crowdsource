@@ -116,6 +116,9 @@ class UserShow extends Component {
               { this.header() }
 
               { this.allItems() }
+
+              <View style={ style.spacer } />
+
             </ScrollView>
           </View>
 

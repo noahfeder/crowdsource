@@ -79,6 +79,8 @@ class DecisionNew extends Component {
 
             <BackButton  />
 
+            <View style={ style.spacer } />
+
             { this.working() }
 
           </View>

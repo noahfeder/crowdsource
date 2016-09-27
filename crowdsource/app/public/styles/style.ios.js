@@ -165,6 +165,10 @@ const style = StyleSheet.create({
     backgroundColor: 'rgba(100,100,100,0.3)',
     padding: 10,
     color: '#222'
+  },
+  spacer: {
+    height: 10,
+    backgroundColor: '#ddd'
   }
 })
 

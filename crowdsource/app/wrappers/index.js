@@ -78,6 +78,7 @@ class IndexPage extends Component {
               />
             }>
                 { this.decisions()}
+              <View style={ style.spacer } />
             </ScrollView>
           </View>
         </SideMenu>

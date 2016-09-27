@@ -70,7 +70,7 @@ class DecisionShow extends Component {
       if (!this.props.error) {
         // ALL GOOD
         return (
-          <SideMenu toggled={ this.props.toggled } style={ [style.wrapper, style.alignTop] } MenuComponent={ MenuGuts }>
+          <SideMenu toggled={ this.props.toggled } MenuComponent={ MenuGuts }>
 
             <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
 
@@ -96,9 +96,9 @@ class DecisionShow extends Component {
 
 
                 <LinearGradient
-                  start={[0.0,0.0]} end={[1.0,0.0]}
-                  locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
-                  colors={[`hsl(${ hue },33%,50%)`,`hsl(${ hue },33%,50%)`,`hsl(${ ( hue + 120 ) % 360 },33%,50%)`,`hsl(${( hue + 120 ) % 360 },33%,50%)`]}
+                  start={ [0.0, 0.0] } end={ [1.0, 0.0] }
+                  locations={ [ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ] }
+                  colors={ [`hsl(${ hue },33%,50%)`, `hsl(${ hue },33%,50%)`, `hsl(${ ( hue + 120 ) % 360 },33%,50%)`, `hsl(${( hue + 120 ) % 360 },33%,50%)`] }
                   style={ [style.binary] } />
 
                 <View style={ style.options }>
@@ -108,7 +108,7 @@ class DecisionShow extends Component {
                     onPress={ () => this.props.vote(this.props.binary.id, 1, this.props.user_id) }>
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
-                      {'\n'}
+                      { '\n' }
                       { this.props.binary.votesA - 1 } Votes
                     </Text>
                   </TouchableHighlight>
@@ -119,7 +119,7 @@ class DecisionShow extends Component {
                     onPress={ () => this.props.vote(this.props.binary.id, 2, this.props.user_id) }>
                     <Text style={ style.optionB }>
                       { this.props.binary.choiceB }
-                      {'\n'}
+                      { '\n' }
                       { this.props.binary.votesB - 1 } Votes
                     </Text>
                   </TouchableHighlight>
@@ -129,6 +129,8 @@ class DecisionShow extends Component {
                 <Button onPress={ () => this.goBack() }
                   backgroundColor='#f20'
                   small raised title='BACK'/>
+
+                <View style={ style.spacer } />
 
             </ScrollView>
           </SideMenu>
@@ -140,7 +142,7 @@ class DecisionShow extends Component {
 
             <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
 
-            <View style={ style.wrapper }>
+            <ScrollView style={ style.wrapper }>
 
                 <ShowHeader
                   binary={ this.props.binary }
@@ -162,7 +164,7 @@ class DecisionShow extends Component {
                 { this.countdown.bind(this)(expired) }
 
                 <LinearGradient
-                  start={[0.0,0.0]} end={[1.0,0.0]}
+                  start={ [0.0, 0.0] } end={ [1.0, 0.0] }
                   locations={ [0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1] }
                   colors={ [`hsl(${ hue },33%,50%)`, `hsl(${ hue },33%,50%)`, `hsl(${ ( hue + 60 ) % 360 },33%,50%)`, `hsl(${ ( hue + 60 ) % 360 },33%,50%)`] }
                   style={ style.binary } />
@@ -172,7 +174,7 @@ class DecisionShow extends Component {
                   <View style={ style.option }>
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
-                      {'\n'}
+                      { '\n' }
                       { this.props.binary.votesA - 1 } Votes
                     </Text>
                   </View>
@@ -187,7 +189,7 @@ class DecisionShow extends Component {
 
                 </View>
 
-                <Text style={ [style.countdownText, style.textCenter ] }>
+                <Text style={ [style.countdownText, style.textCenter] }>
                   { this.props.message }
                 </Text>
 
@@ -195,7 +197,9 @@ class DecisionShow extends Component {
                   backgroundColor='#f20'
                   small raised title='BACK'/>
 
-            </View>
+                <View style={ style.spacer } />
+
+            </ScrollView>
           </SideMenu>
           )
         }
