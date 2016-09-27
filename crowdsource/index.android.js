@@ -19,6 +19,8 @@
     TIMER BS
 *  https://facebook.github.io/react-native/docs/timers.html
 *  https://github.com/brigand/react-mixin
+    ICONS
+*  http://makeappicon.com/
 */
 
 'use strict';

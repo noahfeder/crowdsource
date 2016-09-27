@@ -37,7 +37,6 @@ class DecisionNew extends Component {
         body: JSON.stringify(val)
       }).then( response => response.json() )
         .then( json => {
-          console.log(json)
           this.props.navigator.replace({
             name: 'show',
             id: json.id,

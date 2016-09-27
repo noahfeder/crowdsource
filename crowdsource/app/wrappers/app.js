@@ -164,7 +164,6 @@ export class App extends Component {
 }
 
 const backButton = function() {
-  debugger;
   let routes = nav.getCurrentRoutes();
   if (routes.length > 1) {
     nav.pop();

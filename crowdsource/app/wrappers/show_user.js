@@ -105,7 +105,7 @@ class UserShow extends Component {
           <Header toggleMenu={ this.props.toggleMenu.bind(this) } />
           <View style={ style.wrapper }>
             <ScrollView refreshControl={
-              <RefreshControl
+              <RefreshControl colors={ ['#AA5585'] } tintColor={ '#AA5585' }
                 refreshing={ this.props.isFetching }
                 onRefresh={ this._onRefresh.bind(this) }
               />
