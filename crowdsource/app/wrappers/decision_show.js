@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Loading from './loading';
 import { backButton } from './app';
 
+import Decision from '../components/decision';
 import TimeLeft from '../components/time_left';
 import BackButton from '../components/back_button';
 import Header from '../components/header';
@@ -43,7 +44,7 @@ class DecisionShow extends Component {
     if (expired) {
       return <Text style={ [style.countdownText, style.textCenter] } >No time left!</Text>;
     }
-    return <TimeLeft expiration={ this.props.binary.expiration } />;
+    return <TimeLeft hue={ this.props.color } expiration={ this.props.binary.expiration } />;
   }
 
   render() {
@@ -51,6 +52,9 @@ class DecisionShow extends Component {
     if (this.props.loaded) {
       let expired = Math.floor( Date.now() / 1000 ) > this.props.binary.expiration;
       let expiredText = expired ? style.textError : style.textActive;
+      if (this.timer && expired) {
+        this.clearInterval(this.timer)
+      }
       if (!this.props.error) {
         // ALL GOOD
         return (
