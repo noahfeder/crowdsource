@@ -1,7 +1,9 @@
+'use strict';
 import { StyleSheet, Dimensions } from 'react-native';
 
 let { height, width } = Dimensions.get('window');
 const bgcolor = '#AA5585';
+
 const style = StyleSheet.create({
   defaultText: {
     fontFamily: 'Arial, sans-serif',
@@ -133,8 +135,7 @@ const style = StyleSheet.create({
     flexDirection: 'column'
   },
   menu: {
-    backgroundColor: 'rgba(100,100,100,0.6)',
-    flex: 1
+    backgroundColor: 'rgba(100,100,100,0.6)'
   },
   menuItem: {
     paddingHorizontal: 30,

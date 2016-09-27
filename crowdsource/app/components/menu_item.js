@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { TouchableHighlight, Text } from 'react-native';
+
 import style from '../public/styles/style';
 
 export default class MenuItem extends Component {

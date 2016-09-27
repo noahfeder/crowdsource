@@ -8,12 +8,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import Loading from './loading';
 import { backButton } from './app';
 
-import Decision from '../components/decision';
 import TimeLeft from '../components/time_left';
 import BackButton from '../components/back_button';
 import Header from '../components/header';
 import { MenuGuts } from '../components/side_menu';
 import ShowHeader from '../components/show_header';
+
 import style from '../public/styles/style';
 
 import reactMixin from 'react-mixin';
@@ -89,23 +89,22 @@ class DecisionShow extends Component {
                   <TouchableHighlight activeOpacity={ 0.2 }
                     underlayColor={ '#eee' }
                     style={ style.option }
-                    onPress={ () => {
-                        this.props.vote(this.props.binary.id, 1, this.props.user_id);
-                    }
-                  }>
+                    onPress={ () => this.props.vote(this.props.binary.id, 1, this.props.user_id) }>
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
+                      {'\n'}
+                      { this.props.binary.votesA } Votes
                     </Text>
                   </TouchableHighlight>
 
                   <TouchableHighlight activeOpacity={ 0.2 }
-                    underlayColor={'rgba(0,0,0,0)'}
+                    underlayColor={ '#333' }
                     style={ style.option }
-                    onPress={ () =>
-                      this.props.vote(this.props.binary.id, 2, this.props.user_id)
-                  }>
+                    onPress={ () => this.props.vote(this.props.binary.id, 2, this.props.user_id) }>
                     <Text style={ style.optionB }>
                       { this.props.binary.choiceB }
+                      {'\n'}
+                      { this.props.binary.votesB } Votes
                     </Text>
                   </TouchableHighlight>
 
@@ -146,8 +145,8 @@ class DecisionShow extends Component {
 
                 <LinearGradient
                   start={[0.0,0.0]} end={[1.0,0.0]}
-                  locations={[ 0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1 ]}
-                  colors={ [`hsl(${ hue },33%,50%)`,`hsl(${ hue },33%,50%)`,`hsl(${ ( hue + 60 ) % 360 },33%,50%)`,`hsl(${ ( hue + 60 ) % 360 },33%,50%)`] }
+                  locations={ [0, (this.props.breakPoint - 0.05), (this.props.breakPoint + 0.05), 1] }
+                  colors={ [`hsl(${ hue },33%,50%)`, `hsl(${ hue },33%,50%)`, `hsl(${ ( hue + 60 ) % 360 },33%,50%)`, `hsl(${ ( hue + 60 ) % 360 },33%,50%)`] }
                   style={ style.binary } />
 
                 <View style={ style.options }>
@@ -155,12 +154,16 @@ class DecisionShow extends Component {
                   <View style={ style.option }>
                     <Text style={ style.optionA }>
                       { this.props.binary.choiceA }
+                      {'\n'}
+                      { this.props.binary.votesA } Votes
                     </Text>
                   </View>
 
                   <View style={ style.option }>
                     <Text style={ style.optionB }>
                       { this.props.binary.choiceB }
+                      {'\n'}
+                      { this.props.binary.votesB } Votes
                     </Text>
                   </View>
 

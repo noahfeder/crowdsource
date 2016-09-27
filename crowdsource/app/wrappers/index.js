@@ -1,13 +1,17 @@
 'use strict';
 import React, { Component } from 'react';
-import { RefreshControl, TouchableHighlight, View, Text, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import { RefreshControl, TouchableHighlight, View, Text, ScrollView, AsyncStorage } from 'react-native';
 import { SocialIcon, SideMenu } from 'react-native-elements';
+
 import Loading from './loading';
+
 import Decision from '../components/decision';
 import Header from '../components/header';
 import { MenuGuts } from '../components/side_menu';
+
 import style from '../public/styles/style';
+
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 

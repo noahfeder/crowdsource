@@ -1,8 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
 import { TouchableHighlight, Image, View, Text } from 'react-native';
-import style from '../public/styles/style';
 import LinearGradient from 'react-native-linear-gradient';
+
+import style from '../public/styles/style';
 
 export default class Decision extends Component {
 

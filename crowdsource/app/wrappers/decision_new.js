@@ -1,16 +1,21 @@
+'use strict';
 import React, { Component } from 'react';
-import style from '../public/styles/style';
-import { Button, SideMenu } from 'react-native-elements';
-import { TouchableHighlight, View, Text, Dimensions, BackAndroid } from 'react-native';
-import BackButton from '../components/back_button';
-import { backButton } from './app';
 import { connect } from 'react-redux';
+import { TouchableHighlight, View, Text, Dimensions, BackAndroid } from 'react-native';
+import { Button, SideMenu } from 'react-native-elements';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
+
+import { backButton } from './app';
 import Loading from './loading';
-import t from 'tcomb-form-native';
-import { Binary, formOptions } from '../public/styles/form_style';
+
+import BackButton from '../components/back_button';
 import { MenuGuts } from '../components/side_menu';
 import Header from '../components/header';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+
+import style from '../public/styles/style';
+
+import t from 'tcomb-form-native';
+import { Binary, formOptions } from '../public/styles/form_style';
 
 class DecisionNew extends Component {
 

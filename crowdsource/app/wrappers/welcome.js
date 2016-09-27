@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
+
 import style from '../public/styles/style';
 
 export default class Welcome extends Component {

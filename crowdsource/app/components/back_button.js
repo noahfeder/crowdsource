@@ -1,5 +1,7 @@
+'use strict';
 import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
+
 import { nav } from '../wrappers/app';
 
 export default class BackButton extends Component {

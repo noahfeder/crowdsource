@@ -1,13 +1,16 @@
 'use strict';
 import React, { Component } from 'react';
-import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView, BackAndroid } from 'react-native';
 import { connect } from 'react-redux';
+import { AsyncStorage, View, Text, BackAndroid } from 'react-native';
 import { Button } from 'react-native-elements';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
+
+import { backButton } from './app';
+
+import BackButton from '../components/back_button';
+
 import style from '../public/styles/style';
 import { newStyle } from '../public/styles/form_style';
-import { backButton } from './app';
-import BackButton from '../components/back_button';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 import t from 'tcomb-form-native';
 
@@ -92,21 +95,29 @@ class SignUp extends Component {
   render() {
     return (
         <View style={ style.wrapper } >
+
           <View style={ style.header }>
             <Text style={ style.headerText }>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, style.textError]}>{ this.props.message }</Text>
+
+          <Text style={ [style.textSmall, style.textError, style.textCenter] }>
+            { this.props.message }
+          </Text>
+
           <Form
             ref="signup"
             type={ NewUser }
             options={ Options }
           />
+
           <Button backgroundColor="#2F8"
             small raised title='SIGNUP'
             buttonStyle={ style.buttonTop }
             onPress={ this._signUp.bind(this)}
           />
+
           <BackButton  />
+
         </View>
     )
   }

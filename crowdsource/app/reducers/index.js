@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import {
   REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES,
   REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY,

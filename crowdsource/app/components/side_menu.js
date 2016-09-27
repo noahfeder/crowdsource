@@ -1,9 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, AsyncStorage } from 'react-native';
-import style from '../public/styles/style';
-import MenuItem from './menu_item';
+
 import { nav } from '../wrappers/app'
+import MenuItem from './menu_item';
+
+import style from '../public/styles/style';
 
 export const MenuGuts = (
   <View style={[style.wrapper, style.menu]}>

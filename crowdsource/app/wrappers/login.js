@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AsyncStorage, TouchableHighlight, Stylesheet, Image, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
+
 import style from '../public/styles/style';
 import { newStyle } from '../public/styles/form_style';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+
 import t from 'tcomb-form-native';
 
 let Form = t.form.Form;
@@ -69,20 +71,27 @@ class Login extends Component {
   render() {
     return (
         <View style={ style.wrapper } >
+
           <View style={ style.header }>
             <Text style={ style.headerText }>CROWDSOURCE</Text>
           </View>
-          <Text style={[style.textSmall, style.textError]}>{ this.props.message }</Text>
+
+          <Text style={ [style.textSmall, style.textError, style.textCenter] }>
+            { this.props.message }
+          </Text>
+
           <Form
             ref="login"
             type={ User }
             options={ Options }
           />
+
           <Button backgroundColor="#2F8"
             small raised title='LOGIN'
             buttonStyle={ style.buttonTop }
             onPress={ this._logIn.bind(this)}
           />
+
           <Button backgroundColor="#938"
             small raised title='SIGNUP'
             onPress={() => {
@@ -90,6 +99,7 @@ class Login extends Component {
               this.props.navigator.push({ name: 'newuser'});
             }}
           />
+
         </View>
     )
   }
