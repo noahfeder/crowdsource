@@ -110,6 +110,9 @@ const style = StyleSheet.create({
   textCenter: {
     textAlign: 'center'
   },
+  textRight: {
+    textAlign: 'right'
+  },
   textError: {
     fontSize: 18,
     color: '#C63131'

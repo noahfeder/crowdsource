@@ -26,18 +26,22 @@ const Options = {
     username: {
       autoCapitalize: 'none',
       autoCorrect: false,
-      returnKeyType: 'next'
+      returnKeyType: 'next',
+      help: '    Maximum length 20, NOT case sensitive'
     },
     password: {
       secureTextEntry: true,
       autoCapitalize: 'none',
-      autoCorrect: false
+      autoCorrect: false,
+      help: '    Minimum length 8, case sensitive'
     },
     password_confirm: {
       secureTextEntry: true,
       autoCapitalize: 'none',
       autoCorrect: false,
-      returnKeyType: 'send'
+      returnKeyType: 'send',
+      placeholder: 'Confirm password',
+      help: '    Must match password'
     }
   }
 };

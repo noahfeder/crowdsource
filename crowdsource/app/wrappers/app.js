@@ -164,8 +164,14 @@ export class App extends Component {
 }
 
 const backButton = function() {
-  if (nav.getCurrentRoutes().length > 1) {
+  debugger;
+  let routes = nav.getCurrentRoutes();
+  if (routes.length > 1) {
     nav.pop();
+    return true;
+  }
+  if (routes.length === 1 && routes[0].name !== 'index') {
+    nav.push({ name: 'index' });
     return true;
   }
   return false;
