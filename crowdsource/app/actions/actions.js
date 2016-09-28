@@ -24,8 +24,8 @@ export function fetchBinaries() {
   return function(dispatch) {
     dispatch(requestBinaries());
     return fetch('https://crowdsourcehelp.herokuapp.com/')
-      .then(response => response.json())
-      .then(json => dispatch(receiveBinaries(json)));
+      .then( response => response.json() )
+      .then( json => dispatch(receiveBinaries(json)) );
   }
 }
 
