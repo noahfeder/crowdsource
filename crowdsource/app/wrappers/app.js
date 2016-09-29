@@ -18,13 +18,12 @@
 
 // Reducers and Actions for redux store
   import RootReducer from '../reducers';
-  import {
-    fetchBinaries, refreshBinaries, // for index scene
-    vote, createBinary, fetchBinary, refreshBinary, // for binary show scene
-    fetchUserBinaries, refreshUserBinaries, // for user show scene
-    logInLocal, logInRemote, signIn, alertUserError, // for login and signup pages
-    toggleMenu, hideMenu // for most scenes' side menu
-  } from '../actions/actions';
+  import { fetchBinaries, refreshBinaries } from '../actions/binaries'; // for index scene
+  import { vote, createBinary, fetchBinary, refreshBinary } from '../actions/active_binary'; // for binary show scene
+  import { fetchUserBinaries, refreshUserBinaries } from '../actions/user_binaries'; // for user show scene
+  import { logInLocal, logInRemote, signIn, alertUserError } from '../actions/user'; // for login and signup pages
+  import { toggleMenu, hideMenu } from '../actions/toggle_menu'; // for most scenes' side menu
+
 
 // setup redux store, happens once per session
 const store = createStore(RootReducer,applyMiddleware(thunkMiddleware));

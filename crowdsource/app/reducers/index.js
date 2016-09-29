@@ -1,15 +1,13 @@
 'use strict';
 import { combineReducers } from 'redux';
 
-import {
-  REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES,
-  REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY, CREATE_BINARY,
-  REQUEST_USER_BINARIES, RECEIVE_USER_BINARIES,
-  UPDATE_USER_BINARIES, USER_BINARIES_FAILED,
-  VOTING, VOTED, VOTE_FAILED,
-  LOGGING_IN_LOCAL, LOGGING_IN_REMOTE, LOGGED_IN, USER_ERROR,
-  TOGGLE_MENU, HIDE_MENU
-} from '../actions/actions';
+import { REQUEST_BINARIES, RECEIVE_BINARIES, UPDATE_BINARIES } from '../actions/binaries';
+import { REQUEST_BINARY, RECEIVE_BINARY, UPDATE_BINARY, CREATE_BINARY,
+  VOTING, VOTED, VOTE_FAILED } from '../actions/active_binary';
+import { REQUEST_USER_BINARIES, RECEIVE_USER_BINARIES,
+  UPDATE_USER_BINARIES, USER_BINARIES_FAILED } from '../actions/user_binaries';
+import { LOGGING_IN_LOCAL, LOGGING_IN_REMOTE, LOGGED_IN, USER_ERROR } from '../actions/user';
+import { TOGGLE_MENU, HIDE_MENU } from '../actions/toggle_menu';
 
 function userBinaries(state = {
   isFetching: true,

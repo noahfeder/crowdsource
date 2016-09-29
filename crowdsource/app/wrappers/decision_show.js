@@ -102,8 +102,8 @@ class DecisionShow extends Component {
                   style={ [style.binary] } />
 
                 <View style={ style.options }>
-                  <TouchableHighlight activeOpacity={ 0.2 }
-                    underlayColor={ '#eee' }
+                  <TouchableHighlight activeOpacity={ 0.5 }
+                    underlayColor={ `hsl(${ hue },33%,50%)` }
                     style={ style.option }
                     onPress={ () => this.props.vote(this.props.binary.id, 1, this.props.user_id) }>
                     <Text style={ style.optionA }>
@@ -113,8 +113,8 @@ class DecisionShow extends Component {
                     </Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight activeOpacity={ 0.2 }
-                    underlayColor={ '#333' }
+                  <TouchableHighlight activeOpacity={ 0.5 }
+                    underlayColor={ `hsl(${ ( hue + 120 ) % 360 },33%,50%)` }
                     style={ style.option }
                     onPress={ () => this.props.vote(this.props.binary.id, 2, this.props.user_id) }>
                     <Text style={ style.optionB }>

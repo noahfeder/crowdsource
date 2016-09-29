@@ -41,7 +41,7 @@ const style = StyleSheet.create({
   },
   binary: {
     height: 100,
-    margin: 10,
+    marginVertical: 10,
     padding: 10
   },
   binaryText: {
@@ -55,28 +55,37 @@ const style = StyleSheet.create({
     marginVertical: 15,
     fontSize: 24
   },
+  countdownGradient: {
+    height: 5,
+    marginBottom: 5,
+    borderRadius: 5
+  },
   options: {
     flexDirection: 'row',
     position: 'relative',
-    width: width - 30,
-    top: -90,
-    height: 50,
-    backgroundColor: 'transparent',
-    marginHorizontal: 15,
-    marginTop: 15
+    width: width,
+    top: -100,
+    height: 100,
+    backgroundColor: 'transparent'
   },
   option: {
     flex: 1,
+    top: -10,
+    height: 100,
     backgroundColor: 'transparent'
   },
   optionA: {
     fontSize: 18,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15,
+    paddingVertical: 30
   },
   optionB: {
     backgroundColor: 'transparent',
     fontSize: 18,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingHorizontal: 15,
+    paddingVertical: 30
   },
   welcome: {
     backgroundColor: bgcolor,

@@ -18,15 +18,15 @@ class TimeLeft extends Component {
   timeLeft(breakpoint, num, str) {
     if (breakpoint !== undefined) {
       return(
-        <View style={ { marginHorizontal: 10 } }>
-          <Text style={ [style.textCenter, style.textSmall, { marginVertical: 5 }] }>
+        <View>
+          <Text style={ [style.textCenter, style.textSmall] }>
             {`${ num } ${ str }`}
           </Text>
           <LinearGradient
             start={[0.0,0.0]} end={[1.0,0.0]}
             locations={[ 0, (breakpoint - 0.1), (breakpoint + 0.1), 1 ]}
             colors={[`hsl(${ this.props.hue },33%,50%)`,`hsl(${ this.props.hue },33%,50%)`,`hsl(${ ( this.props.hue + 120 ) % 360 },33%,50%)`,`hsl(${( this.props.hue + 120 ) % 360 },33%,50%)`]}
-            style={ { height: 5, marginBottom: 5 } }
+            style={ style.countdownGradient }
           />
         </View>
       )
